@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PROOF — Evidence-Based Pipeline, Without the Admin</title>
+  <link rel="canonical" href="https://www.proofhq.io/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <meta name="description" content="PROOF assembles the evidence behind every deal and flags what’s missing — so reps fix exceptions and leaders can trust the pipeline." />
+
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+.mobile-overlay { display: none; }
+.mobile-overlay.active { display: block; }
+.role-tab { padding: 10px 22px; border-radius: 6px; border: 2px solid #E5E7EB; background: white; color: #4B5563; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+.role-tab.active { border-color: #EA580C; background: #EA580C; color: white; }
+.exc-flow { display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap; gap: 0; margin-top: 32px; }
+.exc-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 24px; background: white; border: 1px solid rgba(17,24,39,0.08); border-radius: 12px; min-width: 150px; flex: 1; max-width: 190px; align-self: stretch; }
+.exc-step-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; font-size: 1.1em; }
+.exc-step-label { font-size: 0.82em; font-weight: 700; color: #0B1220; line-height: 1.3; margin-bottom: 4px; }
+.exc-step-sub { font-size: 0.75em; color: #6B7280; line-height: 1.4; }
+.exc-arrow { font-size: 1.4em; color: #CBD5E1; padding: 0 6px; flex-shrink: 0; }
+.exc-highlight { border-color: rgba(234,88,12,0.3); background: rgba(234,88,12,0.04); }
+.exc-highlight .exc-step-label { color: #EA580C; }
+.tax-callout { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
+.tax-item { padding: 20px 24px; background: white; border: 1px solid rgba(17,24,39,0.08); border-radius: 12px; border-top: 3px solid #EA580C; }
+.tax-time { font-family: 'Fraunces', Georgia, serif; font-size: 2em; font-weight: 900; color: #EA580C; line-height: 1; margin-bottom: 6px; }
+.tax-label { font-size: 0.85em; font-weight: 700; color: #0B1220; margin-bottom: 4px; }
+.tax-desc { font-size: 0.8em; color: #6B7280; line-height: 1.4; }
+.trust-point { display: flex; gap: 16px; align-items: flex-start; }
+.trust-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(234,88,12,0.08); display: flex; align-items: center; justify-content: center; color: #EA580C; font-weight: 900; flex-shrink: 0; font-size: 1em; }
+@media (max-width: 720px) {
+  .tax-callout { grid-template-columns: 1fr; }
+  .exc-flow { flex-direction: column; gap: 4px; }
+  .exc-arrow { transform: rotate(90deg); }
+  .exc-step { max-width: 100%; width: 100%; }
+}
+</style>
+  <meta property="og:site_name" content="PROOF" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="PROOF — Evidence-Based Pipeline, Without the Admin" />
+  <meta property="og:description" content="PROOF assembles the evidence behind every deal and flags what’s missing — so reps fix exceptions and leaders can trust the pipeline." />
+  <meta property="og:url" content="https://www.proofhq.io/" />
+  <meta property="og:image" content="https://www.proofhq.io/og/home.png" />
+  <meta name="twitter:title" content="PROOF — Evidence-Based Pipeline, Without the Admin" />
+  <meta name="twitter:description" content="PROOF assembles the evidence behind every deal and flags what’s missing — so reps fix exceptions and leaders can trust the pipeline." />
+  <meta name="twitter:image" content="https://www.proofhq.io/og/home.png" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="PROOF Home"><img class="logo-img" src="logo.svg" alt="PROOF" /></a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/" class="active">Home</a><span class="nav-separator">|</span>
+      <a href="/the-real-problem">The Problem</a><span class="nav-separator">|</span>
+      <a href="/how-it-works">How It Works</a><span class="nav-separator">|</span>
+      <a href="/platform">Platform</a><span class="nav-separator">|</span>
+      <a href="/ai-trust">AI Trust</a>
+    </nav>
+    <a class="btn btn-primary" href="#join">Get Early Access</a>
+    <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-menu">
+  <nav>
+    <a href="/">Home</a><a href="/the-real-problem">The Problem</a><a href="/how-it-works">How It Works</a><a href="/platform">Platform</a><a href="/ai-trust">AI Trust</a>
+    <a href="#join" class="btn btn-primary" style="margin-top: 24px;">Get Early Access</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="position: relative; overflow: hidden;">
+  <!-- Subtle radial glow behind headline -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(234,88,12,0.07) 0%, transparent 70%); pointer-events: none; z-index: 0;"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="hero-inner anim-up" style="text-align: center; max-width: 860px; margin: 0 auto;">
+
+      <!-- Kicker — once only -->
+      <div class="hero-kicker" style="display: inline-flex; margin-bottom: 32px;">
+        <span class="hero-kicker-dot"></span>
+        <span>Launching May 2026</span>
+      </div>
+
+      <!-- Setup lines: slightly smaller -->
+      <p style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; color: #0B1220; line-height: 1.25; letter-spacing: -0.5px; margin: 0;">
+        Reviews run on memory.<br>Forecasts run on belief.
+      </p>
+
+      <!-- Payoff line: larger, with selective underline highlights -->
+      <h1 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 4.2vw, 54px); font-weight: 800; color: #0B1220; line-height: 1.2; letter-spacing: -1px; margin: 12px 0 0;">
+        <span style="color: #EA580C;">PROOF</span> runs on evidence<br>and flags what's missing.
+      </h1>
+
+      <!-- Subhead -->
+      <p style="font-size: 1.1em; margin-top: 1.5em; color: #4B5563; line-height: 1.6; max-width: 580px; margin-left: auto; margin-right: auto;">
+        PROOF assembles deal evidence as reps sell — they only fix exceptions. Leaders get a pipeline they can trust.
+      </p>
+
+
+
+      <!-- CTAs -->
+      <div style="margin-top: 2em; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <a class="btn btn-primary" href="#join" style="padding: 16px 32px; font-size: 1em;">Get Early Access</a>
+        <a class="btn btn-ghost" href="/how-it-works" style="padding: 16px 28px; font-size: 1em; opacity: 0.75;">See How It Works</a>
+      </div>
+
+      <!-- Micro-trust line -->
+      <p style="margin-top: 1em; color: #9CA3AF; font-size: 0.82em;">
+        Fast setup. Connect your CRM. Works with MEDDIC/MEDDPICC — or your existing stages and fields.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE HIDDEN TAX (compressed) -->
+<section class="section section-raised">
+  <div class="container">
+    <div class="label">The hidden tax</div>
+    <h2 class="title title-xl">Why deal reviews take so long — and why it keeps repeating.</h2>
+    <p class="desc" style="max-width: 820px;">Reps re-prep. Managers re-check. Everyone re-explains the same deals — every week. Not incompetence. A structural problem: evidence isn't captured as work happens, so everyone chases it instead of closing.</p>
+    <div style="margin-top: 24px; padding: 20px 28px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px; max-width: 620px; margin-left: auto; margin-right: auto; text-align: center;">
+      <p style="font-size: 1em; font-weight: 700; color: #0B1220; line-height: 1.6;">PROOF eliminates the hidden tax — for everyone.<br><span style="font-weight: 400; font-size: 0.92em; color: #6B7280;">Evidence captured as reps sell. Reviews focus on exceptions.</span></p>
+    </div>
+    <div style="margin-top: 20px; text-align: center;"><a class="btn btn-ghost" href="/the-real-problem">Read the full argument →</a></div>
+  </div>
+</section>
+
+<!-- EVIDENCE CARDS — "What PROOF surfaces" -->
+<section class="section section-raised">
+  <div class="container">
+    <div class="label">PROOF in action</div>
+    <h2 class="title">What PROOF highlights — before every review.</h2>
+    <p class="desc" style="max-width: 780px;">Two real scenarios. One early-stage deal that needs strengthening. One late-stage deal with a hidden timing risk. This is what your reps and managers see inside PROOF.</p>
+
+    <div class="grid grid-2 cards-equal" style="margin-top: 40px;">
+
+      <!-- Card A — Stage 2 (Solution) -->
+      <div class="card card-tall" style="border-top: 3px solid #1D4ED8; padding: 32px 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <p style="font-size: 0.78em; font-weight: 600; color: #1D4ED8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Stage 2 — Solution</p>
+            <h3 style="margin: 0; font-size: 1.15em;">ACME Corp</h3>
+          </div>
+          <span style="font-size: 0.78em; font-weight: 600; color: #D97706; background: rgba(217,119,6,0.08); padding: 4px 12px; border-radius: 20px;">Needs attention</span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">Problem confirmed (call notes)</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">ICP match (firmographics verified)</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">Champion identified</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #D97706; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">Business impact not yet quantified</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #D97706; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">Single-threaded (1 active stakeholder)</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #D97706; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">Decision process undefined</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px;"><span style="color: #D97706; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">No customer-owned next step</span></div>
+        </div>
+
+        <div style="background: rgba(17,24,39,0.03); border-radius: 8px; padding: 16px 18px; margin-bottom: 18px;">
+          <p style="font-size: 0.8em; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;">What PROOF is seeing</p>
+          <p style="font-size: 0.86em; color: #4B5563; line-height: 1.6; margin: 0;">Financial impact undefined. Buying group not mapped. Decision path unclear. Momentum rep-driven.</p>
+          <p style="font-size: 0.84em; color: #6B7280; margin-top: 10px; font-style: italic;">Strengthening these areas may improve progression confidence.</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(29,78,216,0.06); color: #1D4ED8; border-radius: 6px; font-weight: 500;">Quantify impact</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(29,78,216,0.06); color: #1D4ED8; border-radius: 6px; font-weight: 500;">Add stakeholder</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(29,78,216,0.06); color: #1D4ED8; border-radius: 6px; font-weight: 500;">Confirm decision process</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(29,78,216,0.06); color: #1D4ED8; border-radius: 6px; font-weight: 500;">Schedule mutual next step</span>
+        </div>
+      </div>
+
+      <!-- Card B — Stage 4 (Commit) -->
+      <div class="card card-tall" style="border-top: 3px solid #DC2626; padding: 32px 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <p style="font-size: 0.78em; font-weight: 600; color: #DC2626; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Stage 4 — Commit</p>
+            <h3 style="margin: 0; font-size: 1.15em;">ACME Corp</h3>
+          </div>
+          <span style="font-size: 0.78em; font-weight: 600; color: #DC2626; background: rgba(220,38,38,0.08); padding: 4px 12px; border-radius: 20px;">Needs review</span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">Economic Buyer identified</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">Business impact quantified (£1.2m)</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #059669; flex-shrink: 0;">✓</span><span style="font-size: 0.88em; color: #374151;">Mutual plan exists (attached)</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #DC2626; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">Close date changed 3× in 21 days</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #DC2626; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">No IT resources until July</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;"><span style="color: #DC2626; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">InfoSec review not completed</span></div>
+          <div style="display: flex; align-items: baseline; gap: 8px;"><span style="color: #DC2626; flex-shrink: 0;">⚠</span><span style="font-size: 0.88em; color: #374151;">Next step not customer-owned</span></div>
+        </div>
+
+        <div style="background: rgba(220,38,38,0.03); border-radius: 8px; padding: 16px 18px; margin-bottom: 18px;">
+          <p style="font-size: 0.8em; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;">What PROOF is seeing</p>
+          <p style="font-size: 0.86em; color: #4B5563; line-height: 1.6; margin: 0;">Close date: <strong>April 30</strong>. Implementation can't begin until <strong>July</strong>. Security approval not initiated.</p>
+          <p style="font-size: 0.84em; color: #DC2626; margin-top: 10px; font-style: italic;">Signature timing may be misaligned with operational readiness.</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(220,38,38,0.06); color: #DC2626; border-radius: 6px; font-weight: 500;">Validate IT timeline</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(220,38,38,0.06); color: #DC2626; border-radius: 6px; font-weight: 500;">Add InfoSec status</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(220,38,38,0.06); color: #DC2626; border-radius: 6px; font-weight: 500;">Align close date</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(220,38,38,0.06); color: #DC2626; border-radius: 6px; font-weight: 500;">Confirm milestone</span>
+          <span style="font-size: 0.78em; padding: 5px 12px; background: rgba(17,24,39,0.06); color: #6B7280; border-radius: 6px; font-weight: 500;">Log override</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align: center; margin-top: 28px; font-size: 0.9em; color: #6B7280;">Stage 2 = strengthen before advancing. Stage 4 = validate before committing.</p>
+    <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center;">
+      <a class="btn btn-ghost" href="/how-it-works">See the full exceptions flow →</a>
+      <a class="btn btn-ghost" href="/platform">Explore the platform →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ROLE TOGGLE — rep default -->
+<section class="section">
+  <div class="container">
+    <div class="label">What you get</div>
+    <h2 class="title">Evidence in the workflow. Exceptions in the review.</h2>
+    <p class="desc" style="max-width: 680px;">Same system. Different benefits — depending on your role.</p>
+    <div style="margin-top: 32px;">
+      <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;">
+        <button class="role-tab active" onclick="showRole('rep', this)">Rep</button>
+        <button class="role-tab" onclick="showRole('manager', this)">Manager</button>
+        <button class="role-tab" onclick="showRole('cro', this)">CRO</button>
+        <button class="role-tab" onclick="showRole('revops', this)">RevOps</button>
+      </div>
+      <div id="role-rep" class="role-panel" style="max-width: 620px; margin: 0 auto; padding: 28px 32px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px;">
+        <h3 style="margin-bottom: 6px; color: #0B1220;">For Reps</h3>
+        <p style="font-size: 0.88em; color: #6B7280; margin-bottom: 20px;">Evidence assembles as you sell. You only see what's missing.</p>
+        <ul class="list">
+          <li class="li"><span class="check">✓</span><div><strong>Stop updating fields. Fix exceptions.</strong><br/><span class="small">PROOF assembles evidence from CRM updates plus the notes, transcripts and docs you add. You only touch what's genuinely missing.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Know what's missing before reviews.</strong><br/><span class="small">No more surprise forecast questions. Evidence gaps are visible before your manager asks.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Clear stage criteria — no guessing.</strong><br/><span class="small">Know exactly what must be true to progress each deal. Written down. Consistent. No interpretation required.</span></div></li>
+        </ul>
+      </div>
+      <div id="role-manager" class="role-panel" style="display:none; max-width: 620px; margin: 0 auto; padding: 28px 32px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px;">
+        <h3 style="margin-bottom: 6px; color: #0B1220;">For Sales Managers</h3>
+        <p style="font-size: 0.88em; color: #6B7280; margin-bottom: 20px;">Know what's real in every deal — without a long meeting to find out.</p>
+        <ul class="list">
+          <li class="li"><span class="check">✓</span><div><strong>Reviews focus on exceptions — coach, don't interrogate.</strong><br/><span class="small">Evidence gaps are visible before you walk in. You spend time on decisions, not discovery.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>One standard across all reps — consistently applied.</strong><br/><span class="small">No more "what does Stage 3 mean for this rep." Same bar. Every deal. Every time.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Earlier risk signals — while there's still time to act.</strong><br/><span class="small">Slippage patterns, stalled stages, and stakeholder gaps flagged before they become quarter-end surprises.</span></div></li>
+        </ul>
+      </div>
+      <div id="role-cro" class="role-panel" style="display:none; max-width: 620px; margin: 0 auto; padding: 28px 32px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px;">
+        <h3 style="margin-bottom: 6px; color: #0B1220;">For CROs</h3>
+        <p style="font-size: 0.88em; color: #6B7280; margin-bottom: 20px;">Walk into forecast calls with evidence, not narrative.</p>
+        <ul class="list">
+          <li class="li"><span class="check">✓</span><div><strong>Evidence-led forecast conversations.</strong><br/><span class="small">Evidence discipline runs inside the workflow your reps already use. No new rituals. No new meetings.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Portfolio view you can trace to facts — not scores.</strong><br/><span class="small">See what's real across committed deals — without relying on a confidence % you can't explain.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Patterns of what actually closes — improve standards.</strong><br/><span class="small">Learn from every deal. Identify evidence patterns that correlate with closed-won and embed them next quarter.</span></div></li>
+        </ul>
+      </div>
+      <div id="role-revops" class="role-panel" style="display:none; max-width: 620px; margin: 0 auto; padding: 28px 32px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px;">
+        <h3 style="margin-bottom: 6px; color: #0B1220;">For RevOps</h3>
+        <p style="font-size: 0.88em; color: #6B7280; margin-bottom: 20px;">Evidence standards that live inside the workflow — not in a spreadsheet.</p>
+        <ul class="list">
+          <li class="li"><span class="check">✓</span><div><strong>Standards that get followed — because reps benefit.</strong><br/><span class="small">Reps adopt PROOF because it reduces their prep. You get standard adherence as a byproduct.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Controlled write-back — suggest → confirm → log.</strong><br/><span class="small">Every CRM update is suggested, confirmed, and logged. No silent overwrites. No AI hallucination risk.</span></div></li>
+          <li class="li"><span class="check">✓</span><div><strong>Methodology-agnostic — aligned to your process.</strong><br/><span class="small">Works with MEDDIC/MEDDPICC — or your existing stages and fields. No new methodology to license or enforce.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE TRUST POINTS -->
+<section class="section section-raised">
+  <div class="container">
+    <div class="label">Why PROOF is different</div>
+    <h2 class="title">Not another call summary tool.<br>A system that requires evidence.</h2>
+    <div class="grid grid-3" style="margin-top: 40px;">
+      <div class="card card-tall">
+        <div class="trust-point" style="margin-bottom: 16px;">
+          <div class="trust-icon">⚖</div>
+          <h3 style="margin: 0; align-self: center;">System, not score</h3>
+        </div>
+        <p>PROOF doesn't give you a confidence percentage you can't explain. It enforces an evidence standard you define — and flags what's missing against it. Stages are earned with evidence — so you're never surprised.</p>
+        <ul class="list" style="margin-top: auto;">
+          <li class="li"><span class="check">✓</span><div>Evidence gates, not confidence %</div></li>
+          <li class="li"><span class="check">✓</span><div>Criteria you set — not an algorithm's</div></li>
+        </ul>
+      </div>
+      <div class="card card-tall">
+        <div class="trust-point" style="margin-bottom: 16px;">
+          <div class="trust-icon">🔒</div>
+          <h3 style="margin: 0; align-self: center;">No silent CRM mutation</h3>
+        </div>
+        <p>Other AI tools infer from calls and auto-update your CRM — making optimistic pipeline look well-documented. PROOF's rule: suggest, you confirm, then it writes. Human in the loop. Every time.</p>
+        <ul class="list" style="margin-top: auto;">
+          <li class="li"><span class="check">✓</span><div>Suggest → Confirm → Write Back</div></li>
+          <li class="li"><span class="check">✓</span><div>You confirm before anything changes</div></li>
+        </ul>
+      </div>
+      <div class="card card-tall">
+        <div class="trust-point" style="margin-bottom: 16px;">
+          <div class="trust-icon">📌</div>
+          <h3 style="margin: 0; align-self: center;">Audit trail by default</h3>
+        </div>
+        <p>Every deal update — confirmed or overridden — is logged with who, what, when and why. When a deal slips, you don't rely on memory. The record already exists. It's always been there.</p>
+        <ul class="list" style="margin-top: auto;">
+          <li class="li"><span class="check">✓</span><div>Deal movements — logged</div></li>
+          <li class="li"><span class="check">✓</span><div>Proven deal patterns — not sentiment</div></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 36px; padding: 24px 32px; background: rgba(234,88,12,0.04); border-left: 3px solid #EA580C; border-radius: 8px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center;">
+      <p style="font-size: 1.05em; font-weight: 700; color: #0B1220; line-height: 1.6;">Most tools capture and predict.<br>PROOF requires evidence — before deals move forward.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="section">
+  <div class="container">
+    <div class="label">Built by a revenue leader</div>
+    <h2 class="title title-xl">Built by someone who ran the reviews — and carried the number.</h2>
+    <div class="grid grid-3" style="margin-top: 32px;">
+      <div class="card"><h3>Both sides of the desk</h3><p>16 years carrying quota. 14 leading teams. Built because the problem never got solved — and still exists today.</p></div>
+      <div class="card"><h3>Built for coaching, not chasing</h3><p>The goal wasn't more fields. It was a deal picture that updates itself — so reviews focus on decisions.</p></div>
+      <div class="card"><h3>160+ confirmed the problem</h3><p>Reps and revenue leaders across SaaS, enterprise, and mid-market confirmed the same pain: the prep tax is still costing teams every week.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="join">
+  <div class="container">
+    <div class="cta-box">
+      <div class="kicker" style="margin-bottom: 24px;"><span class="pulse"></span>Launching May 2026</div>
+      <h2 class="title" style="margin-bottom: 16px;">Get Early Access</h2>
+      <p class="desc" style="margin-bottom: 8px; max-width: 580px; margin-left: auto; margin-right: auto;">Stop updating deals. Just fix exceptions.</p>
+      <p class="desc" style="margin-bottom: 12px; max-width: 580px; margin-left: auto; margin-right: auto; font-size: 0.95em; color: #6B7280;">We'll invite you to the first wave and ask which CRM you use.</p>
+      <p class="desc" style="margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; font-size: 0.95em; color: #6B7280;">Connect your CRM, choose your process (MEDDIC/MEDDPICC or your own), and start with exceptions.</p>
+      <iframe data-tally-src="https://tally.so/embed/XxD0B4?hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" title="Get Early Access to PROOF"></iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+      <p class="small" style="margin-top: 20px; color: #6B7280;">No spam. Just tool releases and launch updates.</p>
+      <p class="small" style="margin-top: 6px; color: #9CA3AF; font-size: 0.82em;">We'll reply with onboarding steps and ask which CRM you use.</p>
+      <div style="margin-top: 40px; text-align: center; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <p style="font-size: 14px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">18 months of research</p>
+        <p style="font-size: 13px; color: #6B7280; line-height: 1.6;">Built from conversations with reps and revenue leaders across SaaS, enterprise &amp; mid-market</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">© 2026 PROOFHQ</div>
+      <div class="footer-right">
+        <span id="em-index"></span>
+        <script>(function(){var e="hello";var d="proofhq.io";document.getElementById("em-index").innerHTML='<a href="mailto:'+e+'@'+d+'">'+e+'@'+d+'</a>';}());</script>
+        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/how-it-works">How It Works</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#join">Get Early Access</a>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 10px; font-size: 0.78em; color: #9CA3AF;">PROOFHQ is a deal intelligence platform for sales teams (not the Workfront proofing product).</div>
+  </div>
+</footer>
+
+<script>
+function showRole(role, btn) {
+  document.querySelectorAll('.role-panel').forEach(function(p) { p.style.display = 'none'; });
+  document.querySelectorAll('.role-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('role-' + role).style.display = 'block';
+  if (btn) btn.classList.add('active');
+}
+</script>
+<script src="menu.js"></script>
+</body>
+</html>

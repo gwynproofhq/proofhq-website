@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/roi",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/roi.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "proofhq.io"
+        }
+      ],
+      "destination": "https://www.proofhq.io/:path*",
+      "permanent": true
+    }
+  ]
+}

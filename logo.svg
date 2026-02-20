@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="240" viewBox="0 0 880 240">
+  <style>
+    .wordmark {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 112px;
+      letter-spacing: -4px;
+      fill: #0f172a;
+    }
+  </style>
+  <text x="0" y="160" class="wordmark">PROOF<tspan fill="#f97316">.</tspan></text>
+</svg>
