@@ -10,11 +10,9 @@ function toggleMobileMenu() {
   const isOpening = !mobileMenu.classList.contains('active');
   
   if (isOpening) {
-    // Opening menu - save scroll position
     scrollPosition = window.pageYOffset;
     body.style.top = `-${scrollPosition}px`;
   } else {
-    // Closing menu - restore scroll position
     body.style.top = '';
     window.scrollTo(0, scrollPosition);
   }
@@ -24,3 +22,21 @@ function toggleMobileMenu() {
   hamburger.classList.toggle('active');
   body.classList.toggle('menu-open');
 }
+
+// Demos dropdown — click toggle (works alongside CSS hover)
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.querySelector('.nav-dropdown-toggle');
+  var dropdown = document.querySelector('.nav-dropdown');
+  if (toggle && dropdown) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      dropdown.classList.toggle('open');
+    });
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+      if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+  }
+});
