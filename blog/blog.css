@@ -5,6 +5,10 @@
 .blog-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
 
 .blog-card { display: block; text-decoration: none; color: inherit; border-bottom: 1px solid var(--border); transition: background .2s; }
+.blog-card:visited { color: inherit; }
+.blog-card:visited .blog-card-title { color: var(--text); }
+.blog-card:visited .blog-card-excerpt { color: var(--text-mid); }
+.blog-card:visited .blog-read-more { color: var(--accent); }
 .blog-card:first-child { border-top: 1px solid var(--border); }
 .blog-card:hover { background: rgba(234,88,12,.02); }
 .blog-card-inner { padding: 32px 0; }
@@ -45,6 +49,9 @@
 .blog-related-link-tag { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; color: var(--text-faint); margin-bottom: 4px; }
 .blog-related-link-title { font-size: 16px; font-weight: 800; color: var(--text); line-height: 1.3; }
 .blog-related-link:hover .blog-related-link-title { color: var(--accent); }
+.blog-related-link:visited { color: inherit; }
+.blog-related-link:visited .blog-related-link-tag { color: var(--text-faint); }
+.blog-related-link:visited .blog-related-link-title { color: var(--text); }
 
 .blog-engage { margin-top: 32px; padding: 16px 20px; background: rgba(17,24,39,.02); border-radius: 12px; font-size: 14px; color: var(--text-dim); line-height: 1.6; }
 .blog-engage a { color: var(--accent); font-weight: 700; text-decoration: none; }
