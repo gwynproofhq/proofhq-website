@@ -384,6 +384,55 @@
 </head>
 <body style="background:#F6F7FA;padding:40px 16px;">
 
+<style>
+.demo-nav {
+  max-width: 960px; margin: 0 auto 24px; padding: 0 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(17,24,39,.08);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  flex-wrap: wrap; gap: 10px;
+}
+.demo-nav-left {
+  display: flex; align-items: center; gap: 16px;
+}
+.demo-nav-logo {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 800; font-size: 18px; color: #0B1220;
+  text-decoration: none; letter-spacing: -.4px;
+}
+.demo-nav-logo .dot { color: #EA580C; }
+.demo-nav-back {
+  font-size: 13px; font-weight: 600; color: #6B7280;
+  text-decoration: none; transition: color .2s;
+}
+.demo-nav-back:hover { color: #EA580C; }
+.demo-nav-right {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #9CA3AF;
+}
+.demo-nav-link {
+  font-size: 13px; font-weight: 700; color: #4B5563;
+  text-decoration: none; padding: 5px 10px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-nav-link:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
+@media (max-width: 600px) {
+  .demo-nav { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="demo-nav">
+  <div class="demo-nav-left">
+    <a href="/" class="demo-nav-logo">PROOF<span class="dot">.</span></a>
+    <a href="/" class="demo-nav-back">&larr; Back to site</a>
+  </div>
+  <div class="demo-nav-right">
+    <span>Also see:</span>
+    <a href="/walkthrough" class="demo-nav-link">Deal Walkthrough</a><a href="/system-flow" class="demo-nav-link">System Flow</a>
+  </div>
+</div>
+
+
 <div class="ba-container" id="baContainer">
   <!-- Top bar -->
   <div class="ba-topbar">
@@ -773,9 +822,30 @@ document.querySelectorAll('.ba-prog-seg, .ba-prog-label').forEach(el => {
 startBA();
 </script>
 
+
+<style>
+.demo-cross-links {
+  max-width: 960px; margin: 20px auto 0; padding: 14px 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
+  font-size: 13px; color: #9CA3AF;
+}
+.demo-cross-links a {
+  font-weight: 700; color: #4B5563; text-decoration: none;
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-cross-links a:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
+.demo-cross-links a.current { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.04); pointer-events: none; }
+</style>
+<div class="demo-cross-links">
+  Demo suite: <a href="/walkthrough">Deal Walkthrough</a>
+  <a href="/before-after" class="current">Before &amp; After</a>
+  <a href="/system-flow">System Flow</a>
+</div>
 <!-- Conversion footer -->
 <div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background:rgba(234,88,12,0.06);border:1px solid rgba(234,88,12,0.15);border-radius:12px;text-align:center;font-family:'DM Sans',system-ui,sans-serif;">
-  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">Want this on your pipeline?</p>
+  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
   <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching May 2026.</p>
   <a href="/#join" style="display:inline-block;padding:10px 20px;background:#EA580C;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
   <span style="margin:0 12px;color:#D1D5DB;">|</span>

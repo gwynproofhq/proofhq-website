@@ -10,10 +10,15 @@
 <style>
 :root {
   --bg: #F6F7FA;
-  --bg-dark: #1B1D24;
   --bg-card: #FFFFFF;
   --border: rgba(17,24,39,.08);
   --border-md: rgba(17,24,39,.14);
+  --border-accent: rgba(249,115,22,.28);
+  --bg-raised: #FFFFFF;
+  --accent-bg: rgba(234,88,12,.06);
+  --accent-text: #9A3412;
+  --sh: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  --r: 16px;
   --text: #0B1220;
   --text-mid: #4B5563;
   --text-dim: #6B7280;
@@ -25,7 +30,7 @@
   --amber: #D97706;
   --red: #B91C1C;
   --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', -apple-system, system-ui, sans-serif;
   --font-mono: 'DM Mono', monospace;
 }
 
@@ -33,13 +38,14 @@
 
 .walkthrough-container {
   font-family: var(--font-body);
-  background: var(--bg-dark);
-  border-radius: 16px;
+  background: var(--bg);
+  border-radius: var(--r);
   overflow: hidden;
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
   position: relative;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  box-shadow: var(--sh);
 }
 
 /* Top bar */
@@ -47,9 +53,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: rgba(255,255,255,0.03);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 24px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
 }
 .wt-topbar-left {
   display: flex;
@@ -59,20 +65,27 @@
 .wt-logo {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 18px;
-  color: #F3F4F6;
-  letter-spacing: -0.5px;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.6px;
 }
 .wt-logo-dot { color: var(--accent-light); }
+.wt-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
 .wt-badge {
-  font-size: 10px;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-accent);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--accent-light);
-  background: rgba(234,88,12,0.12);
-  padding: 3px 8px;
-  border-radius: 4px;
+  letter-spacing: 0.6px;
 }
 .wt-topbar-right {
   display: flex;
@@ -92,8 +105,8 @@
 
 /* Sidebar */
 .wt-sidebar {
-  background: rgba(255,255,255,0.02);
-  border-right: 1px solid rgba(255,255,255,0.06);
+  background: rgba(17,24,39,0.02);
+  border-right: 1px solid var(--border);
   padding: 16px 0;
 }
 .wt-sidebar-label {
@@ -101,7 +114,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: rgba(255,255,255,0.3);
+  color: var(--text-faint);
   padding: 0 16px;
   margin-bottom: 8px;
 }
@@ -118,11 +131,11 @@
 .wt-deal-name {
   font-size: 13px;
   font-weight: 700;
-  color: #E5E7EB;
+  color: var(--text);
 }
 .wt-deal-meta {
   font-size: 11px;
-  color: rgba(255,255,255,0.35);
+  color: var(--text-faint);
   margin-top: 2px;
 }
 .wt-deal-status {
@@ -133,9 +146,9 @@
   border-radius: 3px;
   margin-top: 4px;
 }
-.wt-status-ok { background: rgba(16,185,129,0.12); color: #34D399; }
-.wt-status-warn { background: rgba(245,158,11,0.12); color: #FBBF24; }
-.wt-status-risk { background: rgba(239,68,68,0.12); color: #F87171; }
+.wt-status-ok { background: rgba(16,185,129,0.12); color: #047857; }
+.wt-status-warn { background: rgba(245,158,11,0.10); color: #D97706; }
+.wt-status-risk { background: rgba(239,68,68,0.08); color: #B91C1C; }
 
 /* Main panel */
 .wt-main {
@@ -173,14 +186,14 @@
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 800;
-  color: #F3F4F6;
+  color: var(--text);
   margin-bottom: 16px;
 }
 
 /* Deal card inside main */
 .wt-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 12px;
@@ -194,7 +207,7 @@
 .wt-card-deal {
   font-size: 15px;
   font-weight: 700;
-  color: #E5E7EB;
+  color: var(--text);
 }
 .wt-card-stage {
   font-size: 11px;
@@ -214,8 +227,8 @@
   gap: 8px;
   padding: 6px 0;
   font-size: 13px;
-  color: #D1D5DB;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-mid);
+  border-top: 1px solid var(--border);
   opacity: 0;
   transform: translateX(-8px);
 }
@@ -235,9 +248,9 @@
   font-weight: 900;
   flex-shrink: 0;
 }
-.wt-ev-ok { background: rgba(16,185,129,0.15); color: #34D399; }
-.wt-ev-warn { background: rgba(245,158,11,0.15); color: #FBBF24; }
-.wt-ev-miss { background: rgba(239,68,68,0.15); color: #F87171; }
+.wt-ev-ok { background: rgba(16,185,129,0.15); color: #047857; }
+.wt-ev-warn { background: rgba(245,158,11,0.10); color: #D97706; }
+.wt-ev-miss { background: rgba(239,68,68,0.08); color: #B91C1C; }
 
 /* Diagnostic code */
 .wt-diag {
@@ -256,12 +269,12 @@
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  color: #F87171;
+  color: #B91C1C;
   margin-bottom: 4px;
 }
 .wt-diag-text {
   font-size: 12px;
-  color: #D1D5DB;
+  color: var(--text-mid);
   line-height: 1.5;
 }
 
@@ -287,7 +300,7 @@
   gap: 10px;
   padding: 6px 0;
   font-size: 12px;
-  color: #D1D5DB;
+  color: var(--text-mid);
   line-height: 1.5;
   opacity: 0;
 }
@@ -323,7 +336,7 @@
 .wt-btn-confirm {
   padding: 8px 16px;
   background: var(--accent);
-  color: #fff;
+  color: #FFFFFF;
   border: none;
   border-radius: 6px;
   font-size: 12px;
@@ -338,7 +351,7 @@
   padding: 8px 16px;
   background: transparent;
   color: #9CA3AF;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-md);
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
@@ -359,7 +372,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: #34D399;
+  color: #047857;
   margin-bottom: 8px;
 }
 .wt-writeback-row {
@@ -368,14 +381,14 @@
   gap: 8px;
   padding: 5px 0;
   font-size: 12px;
-  color: #D1D5DB;
+  color: var(--text-mid);
   opacity: 0;
 }
 .wt-writeback-row.show {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
-.wt-wb-check { color: #34D399; font-weight: 700; }
+.wt-wb-check { color: #047857; font-weight: 700; }
 
 /* Audit log */
 .wt-audit {
@@ -384,9 +397,9 @@
   color: #6B7280;
   margin-top: 10px;
   padding: 8px 12px;
-  background: rgba(255,255,255,0.02);
+  background: rgba(17,24,39,0.02);
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
   opacity: 0;
 }
 .wt-audit.show {
@@ -399,14 +412,14 @@
   display: flex;
   align-items: center;
   gap: 0;
-  padding: 10px 20px 14px;
-  background: rgba(255,255,255,0.02);
-  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 24px 6px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
 }
 .wt-prog-step {
   flex: 1;
-  height: 3px;
-  background: rgba(255,255,255,0.06);
+  height: 4px;
+  background: rgba(17,24,39,.06);
   border-radius: 2px;
   margin: 0 2px;
   position: relative;
@@ -433,33 +446,33 @@
 .wt-prog-labels {
   display: flex;
   justify-content: space-between;
-  padding: 4px 20px 0;
-  background: rgba(255,255,255,0.02);
+  padding: 6px 24px 0;
+  background: var(--bg-raised);
 }
 .wt-prog-label {
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: rgba(255,255,255,0.2);
+  color: var(--text-faint);
   cursor: pointer;
   transition: color 0.2s;
 }
 .wt-prog-label.active { color: var(--accent-light); }
-.wt-prog-label.done { color: rgba(255,255,255,0.4); }
+.wt-prog-label.done { color: var(--text-mid); }
 
 /* Replay button */
 .wt-replay {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-light);
-  background: rgba(234,88,12,0.1);
-  border: 1px solid rgba(234,88,12,0.2);
-  padding: 6px 12px;
-  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 10px;
   cursor: pointer;
   font-family: var(--font-body);
   opacity: 0;
@@ -476,7 +489,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px 24px;
-  background: var(--bg);
+  background: var(--bg-raised);
   border-top: 1px solid var(--border);
   gap: 10px;
 }
@@ -489,14 +502,63 @@
 }
 </style>
 </head>
-<body style="background: #F6F7FA; padding: 40px 20px;">
+<body style="background:#F6F7FA;padding:40px 16px;">
+
+<style>
+.demo-nav {
+  max-width: 960px; margin: 0 auto 24px; padding: 0 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(17,24,39,.08);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  flex-wrap: wrap; gap: 10px;
+}
+.demo-nav-left {
+  display: flex; align-items: center; gap: 16px;
+}
+.demo-nav-logo {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 800; font-size: 18px; color: #0B1220;
+  text-decoration: none; letter-spacing: -.4px;
+}
+.demo-nav-logo .dot { color: #EA580C; }
+.demo-nav-back {
+  font-size: 13px; font-weight: 600; color: #6B7280;
+  text-decoration: none; transition: color .2s;
+}
+.demo-nav-back:hover { color: #EA580C; }
+.demo-nav-right {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #9CA3AF;
+}
+.demo-nav-link {
+  font-size: 13px; font-weight: 700; color: #4B5563;
+  text-decoration: none; padding: 5px 10px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-nav-link:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
+@media (max-width: 600px) {
+  .demo-nav { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="demo-nav">
+  <div class="demo-nav-left">
+    <a href="/" class="demo-nav-logo">PROOF<span class="dot">.</span></a>
+    <a href="/" class="demo-nav-back">&larr; Back to site</a>
+  </div>
+  <div class="demo-nav-right">
+    <span>Also see:</span>
+    <a href="/before-after" class="demo-nav-link">Before &amp; After</a><a href="/system-flow" class="demo-nav-link">System Flow</a>
+  </div>
+</div>
+
 
 <div class="walkthrough-container" id="walkthrough">
   <!-- Top bar -->
   <div class="wt-topbar">
     <div class="wt-topbar-left">
       <span class="wt-logo">PROOF<span class="wt-logo-dot">.</span></span>
-      <span class="wt-badge">Walkthrough</span>
+      <span class="wt-badge"><span class="wt-badge-dot"></span> Deal Walkthrough</span>
     </div>
     <div class="wt-topbar-right">
       <div class="wt-dot wt-dot-r"></div>
@@ -584,19 +646,19 @@
           <div class="wt-suggest-label">Suggested CRM Updates</div>
           <div class="wt-suggest-item" data-delay="500">
             <span class="wt-suggest-arrow">→</span>
-            <div>Add next step: <strong style="color:#E5E7EB;">"Map buying group — identify economic buyer + procurement contact"</strong>
+            <div>Add next step: <strong style="color:#0B1220;">"Map buying group — identify economic buyer + procurement contact"</strong>
               <div class="wt-suggest-field">Field: Next_Step__c · Source: DL-09 diagnostic</div>
             </div>
           </div>
           <div class="wt-suggest-item" data-delay="1000">
             <span class="wt-suggest-arrow">→</span>
-            <div>Flag: <strong style="color:#E5E7EB;">"Decision process — requires documentation before Stage 4 advancement"</strong>
+            <div>Flag: <strong style="color:#0B1220;">"Decision process — requires documentation before Stage 4 advancement"</strong>
               <div class="wt-suggest-field">Field: Evidence_Gap__c · Source: DL-14 diagnostic</div>
             </div>
           </div>
           <div class="wt-suggest-item" data-delay="1500">
             <span class="wt-suggest-arrow">→</span>
-            <div>Hold stage at: <strong style="color:#E5E7EB;">Stage 3 — Validation</strong> (2 criteria unmet)
+            <div>Hold stage at: <strong style="color:#0B1220;">Stage 3 — Validation</strong> (2 criteria unmet)
               <div class="wt-suggest-field">Field: StageName · Reason: evidence gate not passed</div>
             </div>
           </div>
@@ -624,9 +686,9 @@
           Audit ID: PRF-2026-00847
         </div>
         <div class="wt-audit" style="margin-top:12px;padding:12px 14px;background:rgba(29,78,216,0.10);border:1px solid rgba(29,78,216,0.22);border-radius:8px;" id="forecastImpact" data-delay="2100">
-  <p style="font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#93C5FD;">Forecast impact</p>
-  <p style="margin-top:6px;font-size:12px;color:#D1D5DB;line-height:1.5;">
-    Evidence-backed coverage: <strong style="color:#E5E7EB;">78%</strong> · Exceptions routed: <strong style="color:#FBBF24;">22%</strong>
+  <p style="font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#1D4ED8;">Forecast impact</p>
+  <p style="margin-top:6px;font-size:12px;color:#4B5563;line-height:1.5;">
+    Evidence-backed coverage: <strong style="color:#0B1220;">78%</strong> · Exceptions routed: <strong style="color:#D97706;">22%</strong>
   </p>
 </div>
 <div style="margin-top: 16px; padding: 12px 14px; background: rgba(234,88,12,0.06); border: 1px solid rgba(234,88,12,0.15); border-radius: 8px; opacity:0;" id="nextDeal" data-delay="2400">
@@ -792,9 +854,30 @@ document.querySelectorAll('.wt-prog-step, .wt-prog-label').forEach(el => {
 startWalkthrough();
 </script>
 
+
+<style>
+.demo-cross-links {
+  max-width: 960px; margin: 20px auto 0; padding: 14px 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
+  font-size: 13px; color: #9CA3AF;
+}
+.demo-cross-links a {
+  font-weight: 700; color: #4B5563; text-decoration: none;
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-cross-links a:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
+.demo-cross-links a.current { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.04); pointer-events: none; }
+</style>
+<div class="demo-cross-links">
+  Demo suite: <a href="/walkthrough" class="current">Deal Walkthrough</a>
+  <a href="/before-after">Before &amp; After</a>
+  <a href="/system-flow">System Flow</a>
+</div>
 <!-- Conversion footer -->
 <div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background:rgba(234,88,12,0.06);border:1px solid rgba(234,88,12,0.15);border-radius:12px;text-align:center;font-family:'DM Sans',system-ui,sans-serif;">
-  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">Want this on your pipeline?</p>
+  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
   <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching May 2026.</p>
   <a href="/#join" style="display:inline-block;padding:10px 20px;background:#EA580C;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
   <span style="margin:0 12px;color:#D1D5DB;">|</span>
