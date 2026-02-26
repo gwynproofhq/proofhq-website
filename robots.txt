@@ -1,0 +1,10 @@
+# robots.txt for PROOFHQ
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.proofhq.io/sitemap.xml
+
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/

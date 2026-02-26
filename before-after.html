@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROOF — Before & After Pipeline Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F6F7FA;
+  --bg-raised: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F3F4F6;
+  --border: rgba(17,24,39,.08);
+  --border-md: rgba(17,24,39,.14);
+  --border-accent: rgba(249,115,22,.28);
+  --text: #0B1220;
+  --text-mid: #4B5563;
+  --text-dim: #6B7280;
+  --text-faint: #9CA3AF;
+  --accent: #EA580C;
+  --accent-light: #F97316;
+  --accent-bg: rgba(234,88,12,.06);
+  --accent-text: #9A3412;
+  --blue: #1D4ED8;
+  --blue-bg: rgba(29,78,216,.06);
+  --green: #047857;
+  --green-bg: rgba(4,120,87,.06);
+  --red: #B91C1C;
+  --red-bg: rgba(185,28,28,.06);
+  --amber: #B45309;
+  --amber-bg: rgba(180,83,9,.06);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --r: 16px;
+  --sh: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  --sh-h: 0 2px 8px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.ba-container {
+  font-family: var(--font-body);
+  background: var(--bg);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-width: 960px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  box-shadow: var(--sh);
+  position: relative;
+}
+
+/* Top bar */
+.ba-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
+}
+.ba-topbar-left { display: flex; align-items: center; gap: 10px; }
+.ba-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.6px;
+}
+.ba-logo-dot { color: var(--accent-light); }
+.ba-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-accent);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+.ba-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: baPulse 2.5s infinite;
+}
+@keyframes baPulse { 0%,100%{opacity:.4;} 50%{opacity:1;} }
+
+/* Deal header */
+.ba-deal-header {
+  padding: 20px 28px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.ba-deal-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+.ba-deal-meta {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* Split view */
+.ba-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+
+/* Before / After panels */
+.ba-panel {
+  padding: 24px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.ba-panel-before {
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+}
+.ba-panel-after {
+  background: var(--bg-raised);
+}
+
+.ba-panel-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 14px;
+}
+.ba-tag-before {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid rgba(185,28,28,.12);
+}
+.ba-tag-after {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(4,120,87,.12);
+}
+
+/* Animated rows */
+.ba-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.ba-row.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.ba-row:first-of-type { border-top: none; }
+.ba-row-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ba-icon-pain { background: var(--red-bg); color: var(--red); font-weight: 900; }
+.ba-icon-ok { background: var(--green-bg); color: var(--green); font-weight: 900; }
+.ba-icon-time { background: var(--amber-bg); color: var(--amber); font-weight: 900; }
+.ba-icon-proof { background: var(--accent-bg); color: var(--accent); font-weight: 900; }
+
+.ba-row-content { flex: 1; }
+.ba-row-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+}
+.ba-row-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.ba-row-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 3px;
+}
+
+/* Timer comparison */
+.ba-timer {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.ba-timer.show { opacity: 1; }
+.ba-timer-before {
+  background: var(--red-bg);
+  border: 1px solid rgba(185,28,28,.12);
+}
+.ba-timer-after {
+  background: var(--green-bg);
+  border: 1px solid rgba(4,120,87,.12);
+}
+.ba-timer-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+}
+.ba-timer-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  margin-top: 2px;
+}
+
+/* Outcome quote */
+.ba-outcome {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.ba-outcome.show { opacity: 1; }
+.ba-outcome-before {
+  background: rgba(185,28,28,.04);
+  border: 1px solid rgba(185,28,28,.08);
+  color: var(--red);
+}
+.ba-outcome-after {
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-text);
+}
+
+/* Bottom callout */
+.ba-bottom {
+  padding: 20px 28px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.ba-callout {
+  display: inline-block;
+  padding: 14px 24px;
+  border: 1px solid var(--border-accent);
+  background: rgba(234,88,12,.04);
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.ba-callout.show { opacity: 1; }
+.ba-callout strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  display: block;
+  line-height: 1.4;
+}
+.ba-callout span {
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Progress */
+.ba-progress {
+  display: flex;
+  gap: 0;
+  padding: 12px 24px 6px;
+  background: var(--bg-raised);
+}
+.ba-prog-seg {
+  flex: 1;
+  height: 4px;
+  background: rgba(17,24,39,.06);
+  border-radius: 2px;
+  margin: 0 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.ba-prog-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.ba-prog-seg.done .ba-prog-fill { width: 100%; transition: width 0.3s; }
+.ba-prog-seg.current .ba-prog-fill { animation: baFill 4s linear forwards; }
+@keyframes baFill { from{width:0;} to{width:100%;} }
+
+.ba-prog-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 24px 14px;
+  background: var(--bg-raised);
+}
+.ba-prog-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.ba-prog-label.active { color: var(--accent); }
+.ba-prog-label.done { color: var(--text-dim); }
+
+/* Replay */
+.ba-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.ba-replay.show { opacity: 1; pointer-events: auto; }
+.ba-replay:hover { background: rgba(234,88,12,.1); transform: translateY(-1px); }
+
+/* Footer controls */
+.ba-footer-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  gap: 10px;
+}
+
+/* Steps (each step = one scene in the comparison) */
+.ba-scene { display: none; }
+.ba-scene.active { display: block; }
+
+/* Mobile */
+@media (max-width: 700px) {
+  .ba-split { grid-template-columns: 1fr; }
+  .ba-panel-before { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body style="background:#F6F7FA;padding:40px 16px;">
+
+<div class="ba-container" id="baContainer">
+  <!-- Top bar -->
+  <div class="ba-topbar">
+    <div class="ba-topbar-left">
+      <span class="ba-logo">PROOF<span class="ba-logo-dot">.</span></span>
+      <span class="ba-badge"><span class="ba-badge-dot"></span> Before & After</span>
+    </div>
+    <div style="display:flex;gap:6px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:#10B981;"></div>
+    </div>
+  </div>
+
+  <!-- Deal header -->
+  <div class="ba-deal-header">
+    <div class="ba-deal-name" id="sceneTitle">Meridian Systems — Stage 3 Pipeline Review</div>
+    <div class="ba-deal-meta" id="sceneMeta">£185K · Close date: June 2026 · Same deal, two workflows</div>
+  </div>
+
+  <!-- SCENE 1: Prep -->
+  <div class="ba-scene active" id="scene1">
+    <div class="ba-split">
+      <div class="ba-panel ba-panel-before">
+        <div class="ba-panel-tag ba-tag-before">✗ Without PROOF</div>
+        <div class="ba-row" data-delay="300">
+          <div class="ba-row-icon ba-icon-time">⏱</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Open CRM, scan opportunity fields</div>
+            <div class="ba-row-sub">Half the fields are empty. Close date moved twice. No context on why.</div>
+            <div class="ba-row-time">3 min</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="700">
+          <div class="ba-row-icon ba-icon-time">⏱</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Search Slack for deal mentions</div>
+            <div class="ba-row-sub">Find fragments across 4 channels. Nothing structured. Conflicting updates.</div>
+            <div class="ba-row-time">4 min</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1100">
+          <div class="ba-row-icon ba-icon-time">⏱</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Dig through call recordings</div>
+            <div class="ba-row-sub">Scrub a 45-min recording looking for the one moment the prospect mentioned timeline.</div>
+            <div class="ba-row-time">6 min</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1500">
+          <div class="ba-row-icon ba-icon-pain">✗</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Still don't know: who's the economic buyer?</div>
+            <div class="ba-row-sub">Rep said "multi-threaded" but CRM shows one contact. No way to verify without asking.</div>
+          </div>
+        </div>
+        <div class="ba-timer ba-timer-before" data-delay="2000">
+          <div class="ba-timer-num" style="color:var(--red);">10–15 min</div>
+          <div class="ba-timer-label" style="color:var(--red);">Per deal · just to prep</div>
+        </div>
+      </div>
+
+      <div class="ba-panel ba-panel-after">
+        <div class="ba-panel-tag ba-tag-after">✓ With PROOF</div>
+        <div class="ba-row" data-delay="500">
+          <div class="ba-row-icon ba-icon-proof">P</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Open PROOF — deal evidence pre-assembled</div>
+            <div class="ba-row-sub">Evidence assembled from connected sources — start CRM-only. Mapped to stage criteria. Gaps flagged.</div>
+            <div class="ba-row-time">0 min prep</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="900">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">4 of 6 criteria verified with evidence</div>
+            <div class="ba-row-sub">Problem confirmed (call transcript, 18 Feb). Champion identified (CRM). ICP match. Budget discussed.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1300">
+          <div class="ba-row-icon ba-icon-proof">!</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">2 gaps surfaced — with reasons</div>
+            <div class="ba-row-sub">Single-threaded risk: 1 stakeholder. Decision process: not documented. Both linked to source evidence.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1700">
+          <div class="ba-row-icon ba-icon-ok">→</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Suggested next steps already drafted</div>
+            <div class="ba-row-sub">Map buying group. Document decision process. Stage held until evidence exists.</div>
+          </div>
+        </div>
+        <div class="ba-timer ba-timer-after" data-delay="2200">
+          <div class="ba-timer-num" style="color:var(--green);">1–2 min</div>
+          <div class="ba-timer-label" style="color:var(--green);">Per deal · evidence ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 2: The Review -->
+  <div class="ba-scene" id="scene2">
+    <div class="ba-split">
+      <div class="ba-panel ba-panel-before">
+        <div class="ba-panel-tag ba-tag-before">✗ Without PROOF</div>
+        <div class="ba-row" data-delay="300">
+          <div class="ba-row-icon ba-icon-pain">?</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">"Walk me through Meridian."</div>
+            <div class="ba-row-sub">Manager asks the same open-ended question. Rep starts a 5-minute monologue mixing facts with optimism.</div>
+            <div class="ba-row-time">5 min talking</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="800">
+          <div class="ba-row-icon ba-icon-pain">?</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">"Who else are you talking to there?"</div>
+            <div class="ba-row-sub">Rep says "a few people." Manager probes. Turns out it's one champion and a vague reference to "procurement."</div>
+            <div class="ba-row-time">3 min digging</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1300">
+          <div class="ba-row-icon ba-icon-pain">?</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">"What's their decision process?"</div>
+            <div class="ba-row-sub">"I think they have a procurement step." No dates. No names. No evidence. Manager flags it as a risk — again.</div>
+            <div class="ba-row-time">2 min repeating</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1800">
+          <div class="ba-row-icon ba-icon-pain">✗</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Manager writes down: "get multi-threaded"</div>
+            <div class="ba-row-sub">Same note they gave last review. No CRM update. No audit trail. Same conversation again next week.</div>
+          </div>
+        </div>
+        <div class="ba-timer ba-timer-before" data-delay="2300">
+          <div class="ba-timer-num" style="color:var(--red);">10–12 min</div>
+          <div class="ba-timer-label" style="color:var(--red);">Per deal · in the review</div>
+        </div>
+      </div>
+
+      <div class="ba-panel ba-panel-after">
+        <div class="ba-panel-tag ba-tag-after">✓ With PROOF</div>
+        <div class="ba-row" data-delay="400">
+          <div class="ba-row-icon ba-icon-proof">P</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">"Meridian has 2 evidence gaps."</div>
+            <div class="ba-row-sub">Manager starts with what PROOF flagged — not "walk me through it." Conversation immediately focused.</div>
+            <div class="ba-row-time">10 sec setup</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="900">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Single-threaded — one contact confirmed</div>
+            <div class="ba-row-sub">Evidence is visible. No need to ask "who else?" — PROOF already showed the contact map. Coaching goes straight to action.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1400">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Decision process gap — next step agreed</div>
+            <div class="ba-row-sub">"Get procurement contact name by Friday." Manager confirms suggested write-back. CRM updated in the meeting.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1900">
+          <div class="ba-row-icon ba-icon-ok">→</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Coaching logged. Stage held. Next deal.</div>
+            <div class="ba-row-sub">Write-back confirmed. Audit trail captured. This deal won't come up again until evidence changes.</div>
+          </div>
+        </div>
+        <div class="ba-timer ba-timer-after" data-delay="2400">
+          <div class="ba-timer-num" style="color:var(--green);">3 min</div>
+          <div class="ba-timer-label" style="color:var(--green);">Per deal · decision made</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 3: After the Review -->
+  <div class="ba-scene" id="scene3">
+    <div class="ba-split">
+      <div class="ba-panel ba-panel-before">
+        <div class="ba-panel-tag ba-tag-before">✗ Without PROOF</div>
+        <div class="ba-row" data-delay="300">
+          <div class="ba-row-icon ba-icon-pain">✗</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">No CRM update after review</div>
+            <div class="ba-row-sub">Rep meant to update it. Forgot. Next steps live in the manager's notebook. Nobody else can see them.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="700">
+          <div class="ba-row-icon ba-icon-pain">✗</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Coaching lost</div>
+            <div class="ba-row-sub">"Get multi-threaded" was said. Not captured. New manager next quarter won't know what was discussed.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1100">
+          <div class="ba-row-icon ba-icon-pain">✗</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">No audit trail</div>
+            <div class="ba-row-sub">CRO asks "what happened with Meridian?" Nobody has a clear, timestamped answer.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1500">
+          <div class="ba-row-icon ba-icon-pain">↻</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Same conversation next week</div>
+            <div class="ba-row-sub">Nothing changed. Nothing was captured. The review repeats from scratch — every single week.</div>
+          </div>
+        </div>
+        <div class="ba-outcome ba-outcome-before" data-delay="2000">
+          "We run the same pipeline review every week — and nothing changes."
+        </div>
+      </div>
+
+      <div class="ba-panel ba-panel-after">
+        <div class="ba-panel-tag ba-tag-after">✓ With PROOF</div>
+        <div class="ba-row" data-delay="400">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">CRM updated in the meeting</div>
+            <div class="ba-row-sub">Write-back confirmed during the review. Next steps, evidence gaps, and stage hold — all written with source attribution.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="800">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Coaching captured and applied</div>
+            <div class="ba-row-sub">Manager's guidance logged once — applied to every deal with the same pattern. Not repeated manually each week.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1200">
+          <div class="ba-row-icon ba-icon-ok">✓</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Full audit trail — who, what, when, why</div>
+            <div class="ba-row-sub">CRO asks about Meridian? Pull the Deal Review Pack. Every decision traceable. Every movement evidenced.</div>
+          </div>
+        </div>
+        <div class="ba-row" data-delay="1600">
+          <div class="ba-row-icon ba-icon-ok">→</div>
+          <div class="ba-row-content">
+            <div class="ba-row-title">Next review: only if evidence changes</div>
+            <div class="ba-row-sub">Meridian doesn't come back to review until something new is flagged. Manager focuses on exceptions only.</div>
+          </div>
+        </div>
+        <div class="ba-outcome ba-outcome-after" data-delay="2100">
+          "PROOF reviews every deal — so humans only review exceptions."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 4: Results -->
+  <div class="ba-scene" id="scene4">
+    <div class="ba-split">
+      <div class="ba-panel ba-panel-before" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div class="ba-panel-tag ba-tag-before" style="margin-bottom:24px;">✗ Without PROOF</div>
+        <div class="ba-row show" style="flex-direction:column;align-items:center;border:none;padding:0;">
+          <div style="font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--red);">20–25 min</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-top:4px;">per deal per review</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:12px;line-height:1.6;max-width:260px;">
+            × 15 deals = <strong style="color:var(--red);">5–6 hours per week</strong><br>
+            on prep and reviews<br>
+            with no audit trail
+          </div>
+        </div>
+        <div class="ba-outcome ba-outcome-before show" style="margin-top:24px;max-width:280px;">
+          Archaeology every week. Same questions. Same gaps. No progress captured.
+        </div>
+      </div>
+
+      <div class="ba-panel ba-panel-after" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div class="ba-panel-tag ba-tag-after" style="margin-bottom:24px;">✓ With PROOF</div>
+        <div class="ba-row show" style="flex-direction:column;align-items:center;border:none;padding:0;">
+          <div style="font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--green);">4 min</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-top:4px;">per deal per review</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:12px;line-height:1.6;max-width:260px;">
+            × only exceptions = <strong style="color:var(--green);">45 min per week</strong><br>
+            Evidence pre-assembled<br>
+            Every decision logged
+          </div>
+        </div>
+        <div class="ba-outcome ba-outcome-after show" style="margin-top:24px;max-width:280px;">
+          Fewer reviews. Better decisions. Evidence at every stage. Pipeline you can defend.
+        </div>
+      </div>
+    </div>
+
+    <div class="ba-bottom">
+      <div class="ba-callout" data-delay="800">
+        <strong>Same deal. Same team. Different system.</strong>
+        <span>PROOF doesn't change how you sell — it captures the evidence as you do.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="ba-progress" id="baProgress">
+    <div class="ba-prog-seg current" data-scene="0"><div class="ba-prog-fill"></div></div>
+    <div class="ba-prog-seg" data-scene="1"><div class="ba-prog-fill"></div></div>
+    <div class="ba-prog-seg" data-scene="2"><div class="ba-prog-fill"></div></div>
+    <div class="ba-prog-seg" data-scene="3"><div class="ba-prog-fill"></div></div>
+  </div>
+  <div class="ba-prog-labels">
+    <span class="ba-prog-label active" data-scene="0">Prep</span>
+    <span class="ba-prog-label" data-scene="1">Review</span>
+    <span class="ba-prog-label" data-scene="2">After</span>
+    <span class="ba-prog-label" data-scene="3">Results</span>
+  </div>
+
+  <div class="ba-footer-controls">
+    <button class="ba-replay" id="baReplay" onclick="startBA()">↻ Replay</button>
+  </div>
+</div>
+
+<script>
+const SD = 4500;
+let cs = 0;
+let st = null;
+
+const titles = [
+  ['Meridian Systems — Preparing for Review', '£185K · Stage 3 · How long does it take to get ready?'],
+  ['Meridian Systems — The Pipeline Review', '£185K · Stage 3 · Same deal, two very different conversations'],
+  ['Meridian Systems — After the Review', '£185K · Stage 3 · What happens when the meeting ends?'],
+  ['The Numbers — One Manager, 15 Deals, Every Week', 'Same deal. Same team. Different system.']
+];
+
+function showScene(n) {
+  cs = n;
+  document.querySelectorAll('.ba-scene').forEach((s,i) => s.classList.toggle('active', i === n));
+  document.getElementById('sceneTitle').textContent = titles[n][0];
+  document.getElementById('sceneMeta').textContent = titles[n][1];
+
+  const scene = document.getElementById('scene' + (n + 1));
+  if (scene) {
+    scene.querySelectorAll('.ba-row[data-delay]').forEach(r => {
+      r.classList.remove('show');
+      setTimeout(() => r.classList.add('show'), parseInt(r.dataset.delay));
+    });
+    scene.querySelectorAll('.ba-timer[data-delay], .ba-outcome[data-delay], .ba-callout[data-delay]').forEach(el => {
+      el.classList.remove('show');
+      setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay));
+    });
+  }
+
+  document.querySelectorAll('.ba-prog-seg').forEach((s,i) => {
+    s.classList.remove('current','done');
+    if (i < n) s.classList.add('done');
+    if (i === n) s.classList.add('current');
+  });
+  document.querySelectorAll('.ba-prog-label').forEach((l,i) => {
+    l.classList.remove('active','done');
+    if (i < n) l.classList.add('done');
+    if (i === n) l.classList.add('active');
+  });
+
+  const replay = document.getElementById('baReplay');
+  if (n === 3) setTimeout(() => replay.classList.add('show'), 2000);
+  else replay.classList.remove('show');
+}
+
+function nextScene() {
+  if (cs < 3) { cs++; showScene(cs); st = setTimeout(nextScene, SD); }
+}
+
+function startBA() {
+  clearTimeout(st);
+  document.getElementById('baReplay').classList.remove('show');
+  showScene(0);
+  st = setTimeout(nextScene, SD);
+}
+
+document.querySelectorAll('.ba-prog-seg, .ba-prog-label').forEach(el => {
+  el.addEventListener('click', () => {
+    const s = parseInt(el.dataset.scene);
+    clearTimeout(st);
+    showScene(s);
+    if (s < 3) st = setTimeout(nextScene, SD);
+  });
+});
+
+startBA();
+</script>
+
+<!-- Conversion footer -->
+<div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background:rgba(234,88,12,0.06);border:1px solid rgba(234,88,12,0.15);border-radius:12px;text-align:center;font-family:'DM Sans',system-ui,sans-serif;">
+  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">Want this on your pipeline?</p>
+  <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching May 2026.</p>
+  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#EA580C;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
+  <span style="margin:0 12px;color:#D1D5DB;">|</span>
+  <a href="/blog" style="color:#EA580C;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
+</div>
+
+</body>
+</html>

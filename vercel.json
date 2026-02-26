@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/roi",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/roi.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/the-real-problem.html",
+      "destination": "/the-real-problem",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/platform.html",
+      "destination": "/platform",
+      "permanent": true
+    },
+    {
+      "source": "/ai-trust.html",
+      "destination": "/ai-trust",
+      "permanent": true
+    },
+    {
+      "source": "/walkthrough.html",
+      "destination": "/walkthrough",
+      "permanent": true
+    },
+    {
+      "source": "/before-after.html",
+      "destination": "/before-after",
+      "permanent": true
+    },
+    {
+      "source": "/system-flow.html",
+      "destination": "/system-flow",
+      "permanent": true
+    },
+    {
+      "source": "/proof-walkthrough.html",
+      "destination": "/walkthrough",
+      "permanent": true
+    },
+    {
+      "source": "/proof-before-after.html",
+      "destination": "/before-after",
+      "permanent": true
+    },
+    {
+      "source": "/proof-system-flow.html",
+      "destination": "/system-flow",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "proofhq.io"
+        }
+      ],
+      "destination": "https://www.proofhq.io/:path*",
+      "permanent": true
+    }
+  ]
+}
