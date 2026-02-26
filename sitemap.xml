@@ -3,51 +3,44 @@
   
   <url>
     <loc>https://www.proofhq.io/</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>https://www.proofhq.io/how-it-works</loc>
-    <lastmod>2026-02-20</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.proofhq.io/platform</loc>
-    <lastmod>2026-02-20</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.proofhq.io/the-real-problem</loc>
-    <lastmod>2026-02-20</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.proofhq.io/ai-trust</loc>
-    <lastmod>2026-02-20</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.proofhq.io/blog</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.proofhq.io/blog/why-pipeline-reviews-keep-repeating</loc>
-    <lastmod>2026-02-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <url>
@@ -59,6 +52,13 @@
 
   <url>
     <loc>https://www.proofhq.io/blog/meddic-without-enforcement</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.proofhq.io/blog/why-pipeline-reviews-keep-repeating</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
