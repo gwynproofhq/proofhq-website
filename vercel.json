@@ -65,6 +65,11 @@
       "permanent": true
     },
     {
+      "source": "/scorecard.html",
+      "destination": "/scorecard",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
