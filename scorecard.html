@@ -1,114 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Revenue Defensibility Audit | PROOF</title>
-<meta name="description" content="If your forecast was challenged tomorrow, could you defend every deal with evidence? A 10-point assessment of evidence integrity, enforcement, and traceability."/>
-<meta property="og:title" content="Revenue Defensibility Audit | PROOF"/>
-<meta property="og:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://www.proofhq.io/scorecard"/>
-<!--<meta property="og:image" content="https://www.proofhq.io/og/scorecard.png"/>-->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Revenue Defensibility Audit | PROOF"/>
-<meta name="twitter:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline."/>
-<meta name="twitter:site" content="@SalesEscapist"/>
-<link rel="icon" href="/favicon.ico"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
-<style>
-:root{--bg:#f5f3ee;--surface:#fff;--ink:#1a1a2e;--muted:#6b6b7b;--faint:#8a8a9a;--border:#e0ddd6;--border-light:#eae7e0;--fd:'Instrument Serif',serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:var(--fb);color:var(--ink)}
-.r{min-height:100vh;background:var(--bg)}
-.hd{max-width:720px;margin:0 auto;padding:28px 32px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:var(--fm);font-size:15px;font-weight:500;letter-spacing:.08em;color:var(--ink);text-decoration:none}
-.tag{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-.hero{max-width:620px;margin:0 auto;padding:48px 32px 36px;text-align:center}
-.hero h1{font-family:var(--fd);font-size:44px;font-weight:400;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
-.hero p{font-size:16px;line-height:1.55;color:var(--muted);max-width:520px;margin:0 auto}
-.hero-s{font-size:13px;color:var(--faint);margin-top:14px;font-family:var(--fm);letter-spacing:.01em}
-.wrap{max-width:620px;margin:0 auto;padding:0 32px 80px}
-.prog{margin-bottom:44px}.prog-bar{width:100%;height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:10px}
-.prog-fill{height:100%;background:var(--ink);border-radius:2px;transition:width .5s cubic-bezier(.22,1,.36,1)}
-.prog-meta{display:flex;justify-content:space-between;font-family:var(--fm);font-size:12px;color:var(--faint)}
-.qa{min-height:460px}
-.qn{font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
-.qd{font-family:var(--fm);font-size:11px;letter-spacing:.04em;color:var(--faint);margin-bottom:16px;opacity:.8}
-.qt{font-family:var(--fd);font-size:26px;font-weight:400;line-height:1.3;letter-spacing:-.01em;margin-bottom:32px}
-.opts{display:flex;flex-direction:column;gap:7px}
-.opt{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .18s ease;text-align:left;width:100%;font-family:var(--fb);font-size:14px;color:var(--ink);line-height:1.4}
-.opt:hover{border-color:var(--ink);transform:translateX(3px)}
-.opt.sel{border-color:var(--ink);background:var(--ink);color:#fff}
-.opt-c{flex:1}.opt-l{font-weight:600}.opt-d{font-size:13px;opacity:.65;margin-top:2px}.opt.sel .opt-d{opacity:.8}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:44px;padding-top:20px;border-top:1px solid var(--border-light)}
-.btn{font-family:var(--fb);font-size:14px;font-weight:600;padding:11px 24px;border-radius:8px;cursor:pointer;transition:all .18s ease;border:none}
-.btn-p{background:transparent;color:var(--faint);padding:11px 0}.btn-p:hover{color:var(--ink)}
-.btn-n{background:var(--ink);color:#fff}.btn-n:hover{background:#2a2a3e}.btn-n:disabled{opacity:.3;cursor:not-allowed}
-.dots{display:flex;gap:6px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;padding:0;cursor:pointer;transition:all .18s ease}
-.dot.a{background:var(--ink)}.dot.c{background:var(--ink);transform:scale(1.35)}
-.fi{opacity:1;transform:translateY(0);transition:all .22s ease}
-.fo{opacity:0;transform:translateY(6px);transition:all .18s ease}
-.res{max-width:620px;margin:0 auto;padding:48px 32px 80px}
-.sc{text-align:center;padding:52px 36px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:36px}
-.sc-n{font-family:var(--fd);font-size:88px;font-weight:400;line-height:1;letter-spacing:-.03em}
-.sc-o{font-family:var(--fm);font-size:26px;color:var(--faint);margin-left:4px}
-.pill{font-family:var(--fm);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:14px;padding:5px 14px;border-radius:100px;display:inline-block}
-.sc-desc{font-size:15px;color:var(--muted);line-height:1.5;margin-top:16px;max-width:460px;margin-left:auto;margin-right:auto}
-.diag{font-family:var(--fm);font-size:12px;color:var(--faint);margin-top:10px}
-.st{font-family:var(--fd);font-size:26px;font-weight:400;margin-bottom:20px}
-.cc{background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:36px}
-.cr{margin-bottom:22px}.cr:last-child{margin-bottom:0}
-.ch{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-.cl{font-family:var(--fb);font-size:14px;font-weight:600}
-.cp{font-family:var(--fm);font-size:14px;font-weight:500}
-.cb{width:100%;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
-.cf{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
-.cd{font-family:var(--fb);font-size:12px;color:var(--muted);margin-top:4px}
-.ea-intro{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:20px}
-.eas{display:flex;flex-direction:column;gap:16px;margin-bottom:36px}
-.ea{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
-.ea-h{font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-.ea-t{font-size:15px;font-weight:700;margin-bottom:12px}
-.ea-r{margin-bottom:10px}.ea-r:last-child{margin-bottom:0}
-.ea-l{font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
-.ea-x{font-size:14px;line-height:1.5;color:var(--muted)}
-.ec{background:var(--ink);border-radius:16px;padding:36px;text-align:center;margin-bottom:28px}
-.ec h3{font-family:var(--fd);font-size:22px;font-weight:400;color:#fff;margin-bottom:6px}
-.ec p{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:20px}
-.ef{display:flex;gap:8px;max-width:420px;margin:0 auto}
-.ei{flex:1;padding:13px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-family:var(--fb);font-size:14px;outline:none}
-.ei::placeholder{color:rgba(255,255,255,.3)}.ei:focus{border-color:rgba(255,255,255,.35)}
-.es{padding:13px 22px;background:#fff;color:var(--ink);border:none;border-radius:8px;font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .18s ease}
-.es:hover{background:#eae7e0}.es:disabled{opacity:.5;cursor:not-allowed}
-.eok{color:rgba(255,255,255,.8);font-size:15px}
-.eerr{color:rgba(255,255,255,.7);font-size:13px;margin-top:10px}
-.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.abtn{padding:12px 22px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .18s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.abtn:hover{border-color:var(--ink)}
-.alink{padding:12px 22px;font-family:var(--fb);font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .18s ease}
-.alink:hover{color:var(--ink)}
-.retake{text-align:center;margin-top:24px}
-.shared{background:var(--surface);border-radius:16px;border:1px solid var(--border);padding:40px 36px;margin-bottom:32px;text-align:center}
-.sh-cta{margin-top:28px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.sh-note{font-family:var(--fm);font-size:11px;color:var(--faint);margin-top:16px}
-.ft{text-align:center;padding:36px 32px;font-family:var(--fm);font-size:12px;color:var(--faint)}
-.ft a{color:var(--muted);text-decoration:none}.ft a:hover{color:var(--ink)}
-.loading{max-width:620px;margin:0 auto;padding:120px 32px;text-align:center}
-.loading-t{font-family:var(--fm);font-size:14px;color:var(--faint);letter-spacing:.02em}
-@media(max-width:640px){.hero h1{font-size:32px}.hero{padding:36px 20px 28px}.wrap{padding:0 20px 60px}.res{padding:36px 20px 60px}.qt{font-size:22px}.sc-n{font-size:68px}.ef{flex-direction:column}.hd{padding:20px}.acts{flex-direction:column;align-items:center}.sc{padding:36px 20px}.cc{padding:20px}.ec{padding:28px 20px}.shared{padding:28px 20px}.sh-cta{flex-direction:column;align-items:center}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revenue Defensibility Audit | PROOF</title>
+  <link rel="canonical" href="https://www.proofhq.io/scorecard" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <meta name="description" content="If your forecast was challenged tomorrow, could you defend every deal with evidence? A 10-point assessment of evidence integrity, enforcement, and traceability." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+  <meta property="og:site_name" content="PROOF" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="Revenue Defensibility Audit | PROOF" />
+  <meta property="og:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline." />
+  <meta property="og:url" content="https://www.proofhq.io/scorecard" />
+  <!--<meta property="og:image" content="https://www.proofhq.io/og/scorecard.png" />-->
+  <meta name="twitter:title" content="Revenue Defensibility Audit | PROOF" />
+  <meta name="twitter:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline." />
+  <!--<meta name="twitter:image" content="https://www.proofhq.io/og/scorecard.png" />-->
+  <meta name="twitter:site" content="@SalesEscapist" />
+
+  <style>
+    /* ── Scorecard-specific styles (scoped with .rda- prefix) ── */
+    .rda-wrap{max-width:620px;margin:0 auto;padding:0 0 40px}
+    .rda-hero{max-width:620px;margin:0 auto;padding:12px 0 28px;text-align:center}
+    .rda-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.6px;margin-bottom:14px}
+    .rda-hero p{font-size:16px;line-height:1.55;color:var(--text-mid);max-width:520px;margin:0 auto}
+    .rda-hero-sub{font-size:13px;color:var(--text-dim);margin-top:12px;font-weight:500;letter-spacing:.01em}
+    .rda-prog{margin-bottom:36px}
+    .rda-prog-bar{width:100%;height:3px;background:var(--border-md);border-radius:2px;overflow:hidden;margin-bottom:8px}
+    .rda-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .5s cubic-bezier(.22,1,.36,1)}
+    .rda-prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim);font-weight:500}
+    .rda-qa{min-height:440px}
+    .rda-qn{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;font-weight:600}
+    .rda-qd{font-size:11px;letter-spacing:.04em;color:var(--text-faint);margin-bottom:14px}
+    .rda-qt{font-family:var(--font-display);font-size:clamp(20px,3vw,26px);font-weight:800;line-height:1.25;letter-spacing:-.3px;margin-bottom:28px}
+    .rda-opts{display:flex;flex-direction:column;gap:7px}
+    .rda-opt{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .18s ease;text-align:left;width:100%;font-family:var(--font-body);font-size:14px;color:var(--text);line-height:1.4}
+    .rda-opt:hover{border-color:var(--accent);transform:translateX(3px);box-shadow:var(--sh-h)}
+    .rda-opt.sel{border-color:var(--accent);background:var(--accent);color:#fff}
+    .rda-opt-c{flex:1}.rda-opt-l{font-weight:600}.rda-opt-d{font-size:13px;opacity:.6;margin-top:2px}.rda-opt.sel .rda-opt-d{opacity:.85}
+    .rda-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:18px;border-top:1px solid var(--border)}
+    .rda-btn{font-family:var(--font-body);font-size:14px;font-weight:600;padding:10px 22px;border-radius:10px;cursor:pointer;transition:all .18s ease;border:none}
+    .rda-btn-p{background:transparent;color:var(--text-dim);padding:10px 0}.rda-btn-p:hover{color:var(--text)}
+    .rda-btn-n{background:var(--accent);color:#fff}.rda-btn-n:hover{background:var(--accent-light)}.rda-btn-n:disabled{opacity:.3;cursor:not-allowed}
+    .rda-dots{display:flex;gap:6px}
+    .rda-dot{width:8px;height:8px;border-radius:50%;background:var(--border-md);border:none;padding:0;cursor:pointer;transition:all .18s ease}
+    .rda-dot.a{background:var(--accent)}.rda-dot.c{background:var(--accent);transform:scale(1.35)}
+    .rda-fi{opacity:1;transform:translateY(0);transition:all .22s ease}
+    .rda-fo{opacity:0;transform:translateY(6px);transition:all .18s ease}
+    .rda-sc{text-align:center;padding:44px 32px;background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--sh);margin-bottom:32px}
+    .rda-sc-n{font-family:var(--font-display);font-size:clamp(64px,10vw,88px);font-weight:900;line-height:1;letter-spacing:-.03em}
+    .rda-sc-o{font-size:26px;color:var(--text-faint);margin-left:4px;font-weight:500}
+    .rda-pill{font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:12px;padding:5px 14px;border-radius:100px;display:inline-block;font-weight:600}
+    .rda-sc-desc{font-size:15px;color:var(--text-mid);line-height:1.5;margin-top:14px;max-width:460px;margin-left:auto;margin-right:auto}
+    .rda-diag{font-size:12px;color:var(--text-dim);margin-top:8px;font-weight:500}
+    .rda-st{font-family:var(--font-display);font-size:clamp(22px,3vw,28px);font-weight:800;margin-bottom:18px;letter-spacing:-.3px}
+    .rda-cc{background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);padding:24px;margin-bottom:32px;box-shadow:var(--sh)}
+    .rda-cr{margin-bottom:20px}.rda-cr:last-child{margin-bottom:0}
+    .rda-ch{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+    .rda-cl{font-size:14px;font-weight:600}.rda-cp{font-size:14px;font-weight:600}
+    .rda-cb{width:100%;height:8px;background:var(--border-md);border-radius:4px;overflow:hidden}
+    .rda-cf{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+    .rda-cd{font-size:12px;color:var(--text-dim);margin-top:4px}
+    .rda-ea-intro{font-size:14px;color:var(--text-mid);line-height:1.5;margin-bottom:18px}
+    .rda-eas{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+    .rda-ea{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--sh)}
+    .rda-ea-h{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;font-weight:600}
+    .rda-ea-t{font-size:15px;font-weight:700;margin-bottom:10px}
+    .rda-ea-r{margin-bottom:8px}.rda-ea-r:last-child{margin-bottom:0}
+    .rda-ea-l{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px;font-weight:600}
+    .rda-ea-x{font-size:14px;line-height:1.5;color:var(--text-mid)}
+    .rda-ec{background:var(--text);border-radius:var(--r);padding:32px;text-align:center;margin-bottom:24px}
+    .rda-ec h3{font-family:var(--font-display);font-size:22px;font-weight:800;color:#fff;margin-bottom:6px}
+    .rda-ec p{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:18px}
+    .rda-ef{display:flex;gap:8px;max-width:420px;margin:0 auto}
+    .rda-ei{flex:1;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-family:var(--font-body);font-size:14px;outline:none}
+    .rda-ei::placeholder{color:rgba(255,255,255,.3)}.rda-ei:focus{border-color:rgba(255,255,255,.35)}
+    .rda-es{padding:12px 20px;background:#fff;color:var(--text);border:none;border-radius:10px;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .rda-es:hover{background:var(--bg)}.rda-es:disabled{opacity:.5;cursor:not-allowed}
+    .rda-eok{color:rgba(255,255,255,.8);font-size:15px}
+    .rda-eerr{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+    .rda-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .rda-abtn{padding:11px 20px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;color:var(--text);transition:all .18s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+    .rda-abtn:hover{border-color:var(--accent);box-shadow:var(--sh-h)}
+    .rda-alink{padding:11px 20px;font-size:14px;font-weight:600;color:var(--text-mid);text-decoration:none}.rda-alink:hover{color:var(--accent)}
+    .rda-retake{text-align:center;margin-top:20px}
+    .rda-shared{background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);padding:36px 32px;margin-bottom:28px;text-align:center;box-shadow:var(--sh)}
+    .rda-sh-cta{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .rda-sh-note{font-size:11px;color:var(--text-faint);margin-top:14px;font-weight:500}
+    .rda-loading{padding:100px 0;text-align:center}
+    .rda-loading-t{font-size:14px;color:var(--text-dim);font-weight:500;letter-spacing:.02em}
+    @media(max-width:768px){
+      .rda-hero h1{font-size:28px}
+      .rda-qt{font-size:20px}
+      .rda-sc-n{font-size:64px}
+      .rda-ef{flex-direction:column}
+      .rda-acts{flex-direction:column;align-items:center}
+      .rda-sh-cta{flex-direction:column;align-items:center}
+      .rda-sc{padding:32px 20px}
+      .rda-cc{padding:18px}
+      .rda-ec{padding:24px 18px}
+      .rda-shared{padding:28px 18px}
+    }
+  </style>
 </head>
 <body>
-<div id="root"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="PROOF Home">
+        <img class="logo-img" src="logo.svg" alt="PROOF" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <span class="nav-separator">|</span>
+        <a href="/the-real-problem">The Problem</a>
+        <span class="nav-separator">|</span>
+        <a href="/how-it-works">How It Works</a>
+        <span class="nav-separator">|</span>
+        <a href="/platform">Platform</a>
+        <span class="nav-separator">|</span>
+        <a href="/ai-trust">AI Trust</a>
+        <span class="nav-separator">|</span>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Demos <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="/before-after" class="nav-dropdown-item"><strong>Before &amp; After</strong><span>Same deal, two review workflows</span></a>
+            <a href="/walkthrough" class="nav-dropdown-item"><strong>Deal Walkthrough</strong><span>Scan → Diagnose → Suggest → Write Back</span></a>
+            <a href="/system-flow" class="nav-dropdown-item"><strong>System Flow</strong><span>Architecture behind evidence governance</span></a>
+          </div>
+        </div>
+        <span class="nav-separator">|</span>
+        <a href="/blog">Blog</a>
+      </nav>
+      <a class="btn btn-primary" href="/#join">Get Early Access</a>
+      <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+  <div class="mobile-menu">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/the-real-problem">The Problem</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/platform">Platform</a>
+      <a href="/ai-trust">AI Trust</a>
+      <div class="mobile-demos-label">Demos</div>
+      <a href="/before-after" class="mobile-demos-item">Before &amp; After</a>
+      <a href="/walkthrough" class="mobile-demos-item">Deal Walkthrough</a>
+      <a href="/system-flow" class="mobile-demos-item">System Flow</a>
+      <a href="/blog">Blog</a>
+      <a href="/#join" class="btn btn-primary" style="margin-top: 24px;">Get Early Access</a>
+    </nav>
+  </div>
+
+  <!-- SCORECARD -->
+  <section class="section">
+    <div class="container">
+      <div id="rda-root"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">&copy; 2026 PROOFHQ</div>
+        <div class="footer-right">
+          <span id="em-sc"></span>
+          <script>(function(){var e="hello";var d="proofhq.io";document.getElementById("em-sc").innerHTML='<a href="mailto:'+e+'@'+d+'">'+e+'@'+d+'</a>';}());</script>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/how-it-works">How It Works</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/#join">Get Early Access</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 10px; font-size: 0.78em; color: #9CA3AF;">PROOFHQ is a deal evidence &amp; revenue governance platform for sales teams (not the Workfront proofing product).</div>
+    </div>
+  </footer>
+
+  <script src="menu.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script>
 var h=React.createElement,useState=React.useState,useEffect=React.useEffect,useRef=React.useRef;
 
-/* ================================================================
-   CONTROL SET v1.0
-   ================================================================ */
 var C=[
 {id:"c1",w:1.25,cat:"enf",dom:"Stage Advancement Enforcement",
 q:"Does the CRM prevent stage advancement unless defined evidence thresholds are met?",
@@ -228,57 +312,26 @@ var CATS=[
 {id:"rev",label:"Review & Forecast Quality",desc:"Do reviews and forecasts run on evidence, not narrative?",ids:["c5","c8","c9"]}
 ];
 
-/* ---- SCORING ---- */
 var CMap={};C.forEach(function(c){CMap[c.id]=c});
 var MAX_RAW=C.reduce(function(s,c){return s+10*(c.w||1)},0);
-
 function clamp(n){return Math.max(0,Math.min(100,Math.round(isNaN(n)?0:n)))}
 function score(a){return clamp(C.reduce(function(s,c){return s+(a[c.id]||0)*(c.w||1)},0)/MAX_RAW*100)}
-function catScores(a){var r={};CATS.forEach(function(cat){
-var raw=cat.ids.reduce(function(s,id){return s+(a[id]||0)*(CMap[id].w||1)},0);
-var mx=cat.ids.reduce(function(s,id){return s+10*(CMap[id].w||1)},0);
-r[cat.id]=clamp(raw/mx*100)});return r}
-
+function catScores(a){var r={};CATS.forEach(function(cat){var raw=cat.ids.reduce(function(s,id){return s+(a[id]||0)*(CMap[id].w||1)},0);var mx=cat.ids.reduce(function(s,id){return s+10*(CMap[id].w||1)},0);r[cat.id]=clamp(raw/mx*100)});return r}
 function band(s){
-if(s<=39)return{l:"High Exposure",d:"Your forecast would be difficult to defend under board-level scrutiny. Evidence is not captured, enforced, or traceable.",c:"#b91c1c",bg:"rgba(185,28,28,.08)"};
-if(s<=69)return{l:"Material Exposure",d:"Evidence exists in places, but enforcement and integrity are inconsistent. Blind spots remain under scrutiny.",c:"#c2410c",bg:"rgba(194,65,12,.08)"};
-if(s<=89)return{l:"Controlled Exposure",d:"Your pipeline is defensible in most scenarios. Gaps remain under sustained executive challenge.",c:"#a16207",bg:"rgba(161,98,7,.08)"};
-return{l:"Defensible",d:"Your pipeline is evidence-governed and defensible under executive challenge. This is rare.",c:"#15803d",bg:"rgba(21,128,61,.08)"}}
-
-function findings(a){
-var sorted=C.map(function(c){return{c:c,v:a[c.id]||0}}).sort(function(a,b){return a.v-b.v});
-var out=[];
-for(var i=0;i<sorted.length&&out.length<3;i++){if(sorted[i].v<7.5)out.push(sorted[i].c)}
-for(var i=0;i<sorted.length&&out.length<3;i++){if(out.indexOf(sorted[i].c)===-1)out.push(sorted[i].c)}
-return out}
-
-function diag(a){
-var cs=catScores(a);
-var entries=CATS.map(function(cat){return[cat.id,cs[cat.id]]}).sort(function(a,b){return a[1]-b[1]});
-var m={enf:"Primary exposure: enforcement & visibility \u2014 evidence gates are not enforced or independently visible.",
-std:"Primary exposure: evidence standards \u2014 criteria, verification, or portability are not evidence-defined.",
-int:"Primary exposure: integrity & traceability \u2014 evidence is not versioned, tamper-resistant, or traceable.",
-rev:"Primary exposure: review & forecast quality \u2014 reviews and forecasts run on narrative, not evidence."};
-return m[entries[0][0]]}
-
-/* ---- SHARE ---- */
+if(s<=39)return{l:"High Exposure",d:"Your forecast would be difficult to defend under board-level scrutiny. Evidence is not captured, enforced, or traceable.",c:"#B91C1C",bg:"rgba(185,28,28,.08)"};
+if(s<=69)return{l:"Material Exposure",d:"Evidence exists in places, but enforcement and integrity are inconsistent. Blind spots remain under scrutiny.",c:"#EA580C",bg:"rgba(234,88,12,.08)"};
+if(s<=89)return{l:"Controlled Exposure",d:"Your pipeline is defensible in most scenarios. Gaps remain under sustained executive challenge.",c:"#B45309",bg:"rgba(180,83,9,.08)"};
+return{l:"Defensible",d:"Your pipeline is evidence-governed and defensible under executive challenge. This is rare.",c:"#047857",bg:"rgba(4,120,87,.08)"}}
+function findings(a){var sorted=C.map(function(c){return{c:c,v:a[c.id]||0}}).sort(function(a,b){return a.v-b.v});var out=[];for(var i=0;i<sorted.length&&out.length<3;i++){if(sorted[i].v<7.5)out.push(sorted[i].c)}for(var i=0;i<sorted.length&&out.length<3;i++){if(out.indexOf(sorted[i].c)===-1)out.push(sorted[i].c)}return out}
+function diag(a){var cs=catScores(a);var entries=CATS.map(function(cat){return[cat.id,cs[cat.id]]}).sort(function(a,b){return a[1]-b[1]});var m={enf:"Primary exposure: enforcement & visibility \u2014 evidence gates are not enforced or independently visible.",std:"Primary exposure: evidence standards \u2014 criteria, verification, or portability are not evidence-defined.",int:"Primary exposure: integrity & traceability \u2014 evidence is not versioned, tamper-resistant, or traceable.",rev:"Primary exposure: review & forecast quality \u2014 reviews and forecasts run on narrative, not evidence."};return m[entries[0][0]]}
 function b64e(o){var b=btoa(unescape(encodeURIComponent(JSON.stringify(o))));return b.replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"")}
 function b64d(s){try{var p=s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4);return JSON.parse(decodeURIComponent(escape(atob(p))))}catch(e){return null}}
-
 function getOffer(){try{var k="proof_rda_v";var e=localStorage.getItem(k);if(e==="pdf"||e==="tpl")return e;var p=Math.random()<.5?"pdf":"tpl";localStorage.setItem(k,p);return p}catch(e){return"tpl"}}
 
-/* ---- COMPONENTS ---- */
-function Anim(p){var s=useState(0),v=s[0],set=s[1];
-useEffect(function(){var d=1400,st=performance.now();(function t(n){var pr=Math.min((n-st)/d,1);set(Math.round((1-Math.pow(1-pr,3))*p.t));if(pr<1)requestAnimationFrame(t)})(performance.now())},[p.t]);
-return h("span",null,v)}
+function Anim(p){var s=useState(0),v=s[0],set=s[1];useEffect(function(){var d=1400,st=performance.now();(function t(n){var pr=Math.min((n-st)/d,1);set(Math.round((1-Math.pow(1-pr,3))*p.t));if(pr<1)requestAnimationFrame(t)})(performance.now())},[p.t]);return h("span",null,v)}
 
-function Bar(p){var b=band(p.s);
-return h("div",{className:"cr"},
-h("div",{className:"ch"},h("span",{className:"cl"},p.l),h("span",{className:"cp",style:{color:b.c}},p.s+"%")),
-h("div",{className:"cb"},h("div",{className:"cf",style:{width:p.s+"%",background:b.c}})),
-h("div",{className:"cd"},p.d))}
+function Bar(p){var b=band(p.s);return h("div",{className:"rda-cr"},h("div",{className:"rda-ch"},h("span",{className:"rda-cl"},p.l),h("span",{className:"rda-cp",style:{color:b.c}},p.s+"%")),h("div",{className:"rda-cb"},h("div",{className:"rda-cf",style:{width:p.s+"%",background:b.c}})),h("div",{className:"rda-cd"},p.d))}
 
-/* ---- MAIN ---- */
 function App(){
 var s1=useState({}),ans=s1[0],setAns=s1[1];
 var s2=useState(0),cur=s2[0],setCur=s2[1];
@@ -292,10 +345,7 @@ var s9=useState("idle"),eSt=s9[0],setESt=s9[1];
 var s10=useState(false),copied=s10[0],setCopied=s10[1];
 var rRef=useRef(null);
 
-useEffect(function(){
-var p=new URLSearchParams(window.location.search).get("s");
-if(p){var d=b64d(p);if(d&&d.v===1){setShared(true);setSnap(d)}}
-setOffer(getOffer())},[]);
+useEffect(function(){var p=new URLSearchParams(window.location.search).get("s");if(p){var d=b64d(p);if(d&&d.v===1){setShared(true);setSnap(d)}}setOffer(getOffer())},[]);
 
 var keys=Object.keys(ans),prog=keys.length/C.length,done=keys.length===C.length;
 var sc=score(ans),cs=catScores(ans),bn=band(sc),fn=findings(ans),dg=diag(ans);
@@ -309,106 +359,60 @@ function sLink(){var u=new URL(window.location.href);u.searchParams.set("s",b64e
 function cpLink(){navigator.clipboard.writeText(sLink()).then(function(){setCopied(true);setTimeout(function(){setCopied(false)},2500)}).catch(function(){prompt("Copy:",sLink())})}
 function toX(){window.open("https://x.com/intent/tweet?text="+encodeURIComponent("I scored "+sc+"/100 on the Revenue Defensibility Audit \u2014 \u201c"+bn.l+".\u201d Most teams score below 40. Take the audit \u2192")+"&url="+encodeURIComponent(sLink()),"_blank")}
 function toLI(){window.open("https://www.linkedin.com/sharing/share-offsite/?url="+encodeURIComponent(sLink()),"_blank")}
-function sendE(){if(!email||email.indexOf("@")===-1)return;setESt("sending");
-fetch("YOUR_WEBHOOK_ENDPOINT",{method:"POST",headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email:email,offer:offer,score:sc,band:bn.l,diagnosis:dg,categories:cs,
-exposures:fn.map(function(c){return c.dom}),source:"proofhq-rda",ts:new Date().toISOString()})
-}).then(function(r){if(!r.ok)throw 0;setESt("sent")}).catch(function(){setESt("error")})}
+function sendE(){if(!email||email.indexOf("@")===-1)return;setESt("sending");window.open("https://tally.so/r/XxD0B4?email="+encodeURIComponent(email),"_blank");setESt("sent")}
 
-var HD=h("div",{className:"hd"},h("a",{href:"https://www.proofhq.io",className:"logo",target:"_blank",rel:"noopener"},"PROOF."),h("span",{className:"tag"},"Revenue Defensibility Audit"));
-var FT=h("div",{className:"ft"},h("a",{href:"https://www.proofhq.io",target:"_blank",rel:"noopener"},"PROOF")," \u00b7 Revenue Defensibility Audit \u00b7 ",h("a",{href:"https://x.com/SalesEscapist",target:"_blank",rel:"noopener"},"@SalesEscapist"));
+/* SHARED */
+if(shared&&snap){var sv={score:clamp(snap.score),band:band(clamp(snap.score)),cats:snap.categories||{}};
+return h("div",null,
+h("div",{className:"rda-hero"},h("h1",null,"Someone scored "+sv.score+"/100"),h("p",null,"Take the audit yourself to receive your personalised exposure assessment.")),
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-shared"},h("div",{className:"rda-sc-n",style:{color:sv.band.c}},sv.score,h("span",{className:"rda-sc-o"},"/ 100")),h("div",{className:"rda-pill",style:{color:sv.band.c,background:sv.band.bg}},sv.band.l),h("div",{className:"rda-sc-desc"},sv.band.d)),
+h("div",{className:"rda-cc"},h("div",{className:"rda-st",style:{marginBottom:14}},"Exposure breakdown"),CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:clamp(sv.cats[cat.id]||0),d:cat.desc})})),
+h("div",{className:"rda-sh-note",style:{textAlign:"center",marginBottom:18}},"Audit findings are not included on shared links. Run the audit to generate exposure areas and remediation."),
+h("div",{className:"rda-sh-cta"},h("button",{className:"rda-btn rda-btn-n",onClick:reset},"Take the audit yourself \u2192"),h("a",{className:"rda-alink",href:"/before-after"},"Review an example of enforced evidence governance \u2192"))))}
 
-/* ---- SHARED ---- */
-if(shared&&snap){
-var ss=clamp(snap.score),sb=band(ss),sc2=snap.cats||{};
-return h("div",{className:"r"},HD,
-h("div",{className:"hero"},h("h1",null,"Someone scored "+ss+"/100"),h("p",null,"Take the audit yourself to receive your personalised exposure assessment.")),
-h("div",{className:"wrap"},
-h("div",{className:"shared"},
-h("div",{className:"sc-n",style:{color:sb.c}},ss,h("span",{className:"sc-o"},"/ 100")),
-h("div",{className:"pill",style:{color:sb.c,background:sb.bg}},sb.l),
-h("div",{className:"sc-desc"},sb.d)),
-h("div",{className:"cc"},h("div",{className:"st",style:{marginBottom:16}},"Exposure breakdown"),
-CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:clamp(sc2[cat.id]||0),d:cat.desc})})),
-h("div",{className:"sh-note",style:{textAlign:"center",marginBottom:20}},"Audit findings are not included on shared links. Run the audit to generate exposure areas and remediation."),
-h("div",{className:"sh-cta"},
-h("button",{className:"btn btn-n",onClick:reset},"Take the audit yourself \u2192"),
-h("a",{className:"alink",href:"https://www.proofhq.io/before-after",target:"_blank",rel:"noopener"},"Review an example of enforced evidence governance \u2192"))),
-FT)}
+/* LOADING */
+if(view==="loading"){return h("div",{className:"rda-loading"},h("div",{className:"rda-loading-t"},"Assessing exposure areas\u2026"))}
 
-/* ---- LOADING ---- */
-if(view==="loading"){
-return h("div",{className:"r"},HD,h("div",{className:"loading"},h("div",{className:"loading-t"},"Assessing exposure areas\u2026")),FT)}
-
-/* ---- QUIZ ---- */
-if(view==="quiz"){
-return h("div",{className:"r"},HD,
-h("div",{className:"hero"},
+/* QUIZ */
+if(view==="quiz"){return h("div",null,
+h("div",{className:"rda-hero"},
+h("div",{className:"label"},"Revenue Defensibility Audit"),
 h("h1",null,"Could you defend every deal with evidence?"),
 h("p",null,"Most pipelines look healthy until you inspect the evidence behind them. This 10-point audit reveals where yours is exposed."),
-h("div",{className:"hero-s"},"10 controls \u00b7 2 minutes \u00b7 instant exposure assessment")),
-h("div",{className:"wrap"},
-h("div",{className:"prog"},
-h("div",{className:"prog-bar"},h("div",{className:"prog-fill",style:{width:prog*100+"%"}})),
-h("div",{className:"prog-meta"},h("span",null,"Audit progress: "+keys.length+" of "+C.length+" controls assessed"),h("span",null,Math.round(prog*100)+"%"))),
-h("div",{className:"qa"},
-h("div",{className:fade?"fi":"fo"},
-h("div",{className:"qn"},"Control "+(cur+1)+" of "+C.length),
-h("div",{className:"qd"},ctrl.dom+(ctrl.w>1?" \u00b7 Weighted":"")),
-h("div",{className:"qt"},ctrl.q),
-h("div",{className:"opts"},ctrl.o.map(function(o){
-return h("button",{key:o.v,className:"opt"+(ans[ctrl.id]===o.v?" sel":""),onClick:function(){pick(ctrl.id,o.v)}},
-h("div",{className:"opt-c"},h("div",{className:"opt-l"},o.l),h("div",{className:"opt-d"},o.d)))})))),
-h("div",{className:"nav"},
-h("button",{className:"btn btn-p",style:{visibility:cur===0?"hidden":"visible"},onClick:function(){tr(function(){setCur(Math.max(0,cur-1))})}},"\u2190 Previous"),
-h("div",{className:"dots"},C.map(function(c,i){return h("button",{key:c.id,className:"dot"+(ans[c.id]!==undefined?" a":"")+(i===cur?" c":""),onClick:function(){tr(function(){setCur(i)})}})})),
-done?h("button",{className:"btn btn-n",onClick:submit},"See exposure assessment \u2192"):
-h("button",{className:"btn btn-n",disabled:ans[ctrl.id]===undefined,onClick:function(){tr(function(){setCur(Math.min(C.length-1,cur+1))})}},"Next \u2192"))),
-FT)}
+h("div",{className:"rda-hero-sub"},"10 controls \u00b7 2 minutes \u00b7 instant exposure assessment")),
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-prog"},h("div",{className:"rda-prog-bar"},h("div",{className:"rda-prog-fill",style:{width:prog*100+"%"}})),h("div",{className:"rda-prog-meta"},h("span",null,"Audit progress: "+keys.length+" of "+C.length+" controls assessed"),h("span",null,Math.round(prog*100)+"%"))),
+h("div",{className:"rda-qa"},h("div",{className:fade?"rda-fi":"rda-fo"},
+h("div",{className:"rda-qn"},"Control "+(cur+1)+" of "+C.length),
+h("div",{className:"rda-qd"},ctrl.dom+(ctrl.w>1?" \u00b7 Weighted":"")),
+h("div",{className:"rda-qt"},ctrl.q),
+h("div",{className:"rda-opts"},ctrl.o.map(function(o){return h("button",{key:o.v,className:"rda-opt"+(ans[ctrl.id]===o.v?" sel":""),onClick:function(){pick(ctrl.id,o.v)}},h("div",{className:"rda-opt-c"},h("div",{className:"rda-opt-l"},o.l),h("div",{className:"rda-opt-d"},o.d)))})))),
+h("div",{className:"rda-nav"},
+h("button",{className:"rda-btn rda-btn-p",style:{visibility:cur===0?"hidden":"visible"},onClick:function(){tr(function(){setCur(Math.max(0,cur-1))})}},"\u2190 Previous"),
+h("div",{className:"rda-dots"},C.map(function(c,i){return h("button",{key:c.id,className:"rda-dot"+(ans[c.id]!==undefined?" a":"")+(i===cur?" c":""),onClick:function(){tr(function(){setCur(i)})}})})),
+done?h("button",{className:"rda-btn rda-btn-n",onClick:submit},"See exposure assessment \u2192"):h("button",{className:"rda-btn rda-btn-n",disabled:ans[ctrl.id]===undefined,onClick:function(){tr(function(){setCur(Math.min(C.length-1,cur+1))})}},"Next \u2192")))))}
 
-/* ---- RESULTS ---- */
-return h("div",{className:"r"},HD,
-h("div",{className:"res",ref:rRef},
-
-h("div",{className:"sc"},
-h("div",null,h("span",{className:"sc-n",style:{color:bn.c}},h(Anim,{t:sc})),h("span",{className:"sc-o"},"/ 100")),
-h("div",{className:"pill",style:{color:bn.c,background:bn.bg}},bn.l),
-h("div",{className:"sc-desc"},bn.d),
-h("div",{className:"diag"},dg)),
-
-h("div",{className:"st"},"Exposure breakdown"),
-h("div",{className:"cc"},CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:cs[cat.id],d:cat.desc})})),
-
-h("div",{className:"st"},"Top exposure areas"),
-h("div",{className:"ea-intro"},"The following exposure areas reflect controls that are not consistently enforced and may reduce forecast defensibility under scrutiny."),
-h("div",{className:"eas"},fn.map(function(c,i){
-return h("div",{className:"ea",key:c.id},
-h("div",{className:"ea-h"},"Exposure Area "+(i+1)),
-h("div",{className:"ea-t"},c.dom),
-h("div",{className:"ea-r"},h("div",{className:"ea-l"},"Observed Exposure"),h("div",{className:"ea-x"},c.f.e)),
-h("div",{className:"ea-r"},h("div",{className:"ea-l"},"Impact Under Scrutiny"),h("div",{className:"ea-x"},c.f.i)),
-h("div",{className:"ea-r"},h("div",{className:"ea-l"},"Recommended Remediation"),h("div",{className:"ea-x"},c.f.r)))})),
-
-h("div",{className:"ec"},
+/* RESULTS */
+return h("div",{ref:rRef},
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-sc"},h("div",null,h("span",{className:"rda-sc-n",style:{color:bn.c}},h(Anim,{t:sc})),h("span",{className:"rda-sc-o"},"/ 100")),h("div",{className:"rda-pill",style:{color:bn.c,background:bn.bg}},bn.l),h("div",{className:"rda-sc-desc"},bn.d),h("div",{className:"rda-diag"},dg)),
+h("div",{className:"rda-st"},"Exposure breakdown"),
+h("div",{className:"rda-cc"},CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:cs[cat.id],d:cat.desc})})),
+h("div",{className:"rda-st"},"Top exposure areas"),
+h("div",{className:"rda-ea-intro"},"The following exposure areas reflect controls that are not consistently enforced and may reduce forecast defensibility under scrutiny."),
+h("div",{className:"rda-eas"},fn.map(function(c,i){return h("div",{className:"rda-ea",key:c.id},h("div",{className:"rda-ea-h"},"Exposure Area "+(i+1)),h("div",{className:"rda-ea-t"},c.dom),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Observed Exposure"),h("div",{className:"rda-ea-x"},c.f.e)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Impact Under Scrutiny"),h("div",{className:"rda-ea-x"},c.f.i)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Recommended Remediation"),h("div",{className:"rda-ea-x"},c.f.r)))})),
+h("div",{className:"rda-ec"},
 eSt!=="sent"?h(React.Fragment,null,
 h("h3",null,offer==="pdf"?"Get your full exposure report + early access":"Get the 10-control audit template for your team"),
 h("p",null,offer==="pdf"?"We\u2019ll send your assessment breakdown and recommended remediations.":"Run this audit in your next pipeline review. Plus early access to PROOF."),
-h("div",{className:"ef"},
-h("input",{className:"ei",type:"email",placeholder:"you@company.com",value:email,onChange:function(e){setEmail(e.target.value)},onKeyDown:function(e){if(e.key==="Enter")sendE()}}),
-h("button",{className:"es",onClick:sendE,disabled:eSt==="sending"},eSt==="sending"?"Sending\u2026":"Send it")),
-eSt==="error"?h("div",{className:"eerr"},"Something went wrong. Try again."):null):
-h("div",{className:"eok"},h("p",{style:{fontSize:18,color:"#fff",marginBottom:6}},"\u2713 You\u2019re in."),h("p",null,"Check your inbox for the audit template and early access details."))),
+h("div",{className:"rda-ef"},h("input",{className:"rda-ei",type:"email",placeholder:"you@company.com",value:email,onChange:function(e){setEmail(e.target.value)},onKeyDown:function(e){if(e.key==="Enter")sendE()}}),h("button",{className:"rda-es",onClick:sendE,disabled:eSt==="sending"},eSt==="sending"?"Sending\u2026":"Send it")),
+eSt==="error"?h("div",{className:"rda-eerr"},"Something went wrong. Try again."):null):
+h("div",{className:"rda-eok"},h("p",{style:{fontSize:18,color:"#fff",marginBottom:6}},"\u2713 You\u2019re in."),h("p",null,"Check your inbox for the audit template and early access details."))),
+h("div",{className:"rda-acts"},h("button",{className:"rda-abtn",onClick:toLI},"Share on LinkedIn"),h("button",{className:"rda-abtn",onClick:toX},"Share on \ud835\udd4f"),h("button",{className:"rda-abtn",onClick:cpLink},copied?"\u2713 Copied":"Copy share link"),h("a",{className:"rda-alink",href:"/before-after"},"Review an example of enforced evidence governance \u2192")),
+h("div",{className:"rda-retake"},h("button",{className:"rda-btn rda-btn-p",onClick:reset},"\u21ba Retake audit"))))}
 
-h("div",{className:"acts"},
-h("button",{className:"abtn",onClick:toLI},"Share on LinkedIn"),
-h("button",{className:"abtn",onClick:toX},"Share on \ud835\udd4f"),
-h("button",{className:"abtn",onClick:cpLink},copied?"\u2713 Copied":"Copy share link"),
-h("a",{className:"alink",href:"https://www.proofhq.io/before-after",target:"_blank",rel:"noopener"},"Review an example of enforced evidence governance \u2192")),
-
-h("div",{className:"retake"},h("button",{className:"btn btn-p",onClick:reset},"\u21ba Retake audit"))),
-FT)}
-
-ReactDOM.createRoot(document.getElementById("root")).render(h(App));
-</script>
+ReactDOM.createRoot(document.getElementById("rda-root")).render(h(App));
+  </script>
 </body>
 </html>
