@@ -195,7 +195,7 @@ var h=React.createElement,useState=React.useState,useEffect=React.useEffect,useR
 
 var C=[
 {id:"c1",w:1.25,cat:"enf",dom:"Stage Advancement Enforcement",
-q:"Does the CRM prevent stage advancement unless defined evidence thresholds are met?",
+q:"Is stage advancement prevented unless defined evidence thresholds are met?",
 o:[{v:0,l:"Control Absent",d:"Stage movement is discretionary and not system-enforced."},
 {v:2.5,l:"Manager-Dependent",d:"Advancement is reviewed manually but not technically restricted."},
 {v:5,l:"Partially Enforced",d:"Evidence is required in select stages but inconsistently applied."},
@@ -307,7 +307,7 @@ r:"Standardise evidence capture so a new manager can assess and defend deal posi
 
 var CATS=[
 {id:"enf",label:"Enforcement & Visibility",desc:"Are evidence gates enforced and independently visible?",ids:["c1","c2"]},
-{id:"std",label:"Evidence Standards & Verification",desc:"Are criteria, stakeholders, and portability evidence-defined?",ids:["c3","c7","c10"]},
+{id:"std",label:"Standards & Verification",desc:"Are criteria, stakeholders, and portability evidence-defined?",ids:["c3","c7","c10"]},
 {id:"int",label:"Integrity & Traceability",desc:"Is evidence versioned, tamper-resistant, and traceable?",ids:["c4","c6"]},
 {id:"rev",label:"Review & Forecast Quality",desc:"Do reviews and forecasts run on evidence, not narrative?",ids:["c5","c8","c9"]}
 ];
@@ -320,8 +320,8 @@ function catScores(a){var r={};CATS.forEach(function(cat){var raw=cat.ids.reduce
 function band(s){
 if(s<=39)return{l:"High Exposure",d:"Your forecast would be difficult to defend under board-level scrutiny. Evidence is not captured, enforced, or traceable.",c:"#B91C1C",bg:"rgba(185,28,28,.08)"};
 if(s<=69)return{l:"Material Exposure",d:"Evidence exists in places, but enforcement and integrity are inconsistent. Blind spots remain under scrutiny.",c:"#EA580C",bg:"rgba(234,88,12,.08)"};
-if(s<=89)return{l:"Controlled Exposure",d:"Your pipeline is defensible in most scenarios. Gaps remain under sustained executive challenge.",c:"#B45309",bg:"rgba(180,83,9,.08)"};
-return{l:"Defensible",d:"Your pipeline is evidence-governed and defensible under executive challenge. This is rare.",c:"#047857",bg:"rgba(4,120,87,.08)"}}
+if(s<=89)return{l:"Controlled Exposure",d:"Defensible under routine scrutiny. Gaps remain under sustained executive challenge.",c:"#B45309",bg:"rgba(180,83,9,.08)"};
+return{l:"Defensible",d:"Your pipeline is evidence-governed and defensible under executive challenge. This indicates consistent control enforcement.",c:"#047857",bg:"rgba(4,120,87,.08)"}}
 function findings(a){var sorted=C.map(function(c){return{c:c,v:a[c.id]||0}}).sort(function(a,b){return a.v-b.v});var out=[];for(var i=0;i<sorted.length&&out.length<3;i++){if(sorted[i].v<7.5)out.push(sorted[i].c)}for(var i=0;i<sorted.length&&out.length<3;i++){if(out.indexOf(sorted[i].c)===-1)out.push(sorted[i].c)}return out}
 function diag(a){var cs=catScores(a);var entries=CATS.map(function(cat){return[cat.id,cs[cat.id]]}).sort(function(a,b){return a[1]-b[1]});var m={enf:"Primary exposure: enforcement & visibility \u2014 evidence gates are not enforced or independently visible.",std:"Primary exposure: evidence standards \u2014 criteria, verification, or portability are not evidence-defined.",int:"Primary exposure: integrity & traceability \u2014 evidence is not versioned, tamper-resistant, or traceable.",rev:"Primary exposure: review & forecast quality \u2014 reviews and forecasts run on narrative, not evidence."};return m[entries[0][0]]}
 function b64e(o){var b=btoa(unescape(encodeURIComponent(JSON.stringify(o))));return b.replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"")}
@@ -352,12 +352,12 @@ var sc=score(ans),cs=catScores(ans),bn=band(sc),fn=findings(ans),dg=diag(ans);
 var ctrl=C[cur];
 
 function tr(fn){setFade(false);setTimeout(function(){fn();setFade(true)},180)}
-function pick(id,v){tr(function(){var n=Object.assign({},ans);n[id]=v;setAns(n);if(cur<C.length-1)setCur(cur+1)})}
+function pick(id,v){tr(function(){var n=Object.assign({},ans);n[id]=v;setAns(n);if(cur<C.length-1){setTimeout(function(){setCur(cur+1)},220)}})}
 function submit(){setView("loading");setTimeout(function(){setView("results");setTimeout(function(){if(rRef.current)rRef.current.scrollIntoView({behavior:"smooth"})},50)},800)}
 function reset(){setAns({});setCur(0);setView("quiz");setEmail("");setESt("idle");setCopied(false);var u=new URL(window.location.href);u.searchParams.delete("s");window.history.replaceState({},"",u.toString());setShared(false);setSnap(null);window.scrollTo({top:0,behavior:"smooth"})}
 function sLink(){var u=new URL(window.location.href);u.searchParams.set("s",b64e({v:1,score:sc,band:bn.l,cats:cs}));return u.toString()}
 function cpLink(){navigator.clipboard.writeText(sLink()).then(function(){setCopied(true);setTimeout(function(){setCopied(false)},2500)}).catch(function(){prompt("Copy:",sLink())})}
-function toX(){window.open("https://x.com/intent/tweet?text="+encodeURIComponent("I scored "+sc+"/100 on the Revenue Defensibility Audit \u2014 \u201c"+bn.l+".\u201d Most teams score below 40. Take the audit \u2192")+"&url="+encodeURIComponent(sLink()),"_blank")}
+function toX(){window.open("https://x.com/intent/tweet?text="+encodeURIComponent("I scored "+sc+"/100 on the Revenue Defensibility Audit \u2014 \u201c"+bn.l+".\u201d If you\u2019re below 40, your forecast is hard to defend. Take the audit \u2192")+"&url="+encodeURIComponent(sLink()),"_blank")}
 function toLI(){window.open("https://www.linkedin.com/sharing/share-offsite/?url="+encodeURIComponent(sLink()),"_blank")}
 function sendE(){if(!email||email.indexOf("@")===-1)return;setESt("sending");window.open("https://tally.so/r/XxD0B4?email="+encodeURIComponent(email),"_blank");setESt("sent")}
 
@@ -368,7 +368,7 @@ h("div",{className:"rda-hero"},h("h1",null,"Someone scored "+sv.score+"/100"),h(
 h("div",{className:"rda-wrap"},
 h("div",{className:"rda-shared"},h("div",{className:"rda-sc-n",style:{color:sv.band.c}},sv.score,h("span",{className:"rda-sc-o"},"/ 100")),h("div",{className:"rda-pill",style:{color:sv.band.c,background:sv.band.bg}},sv.band.l),h("div",{className:"rda-sc-desc"},sv.band.d)),
 h("div",{className:"rda-cc"},h("div",{className:"rda-st",style:{marginBottom:14}},"Exposure breakdown"),CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:clamp(sv.cats[cat.id]||0),d:cat.desc})})),
-h("div",{className:"rda-sh-note",style:{textAlign:"center",marginBottom:18}},"Audit findings are not included on shared links. Run the audit to generate exposure areas and remediation."),
+h("div",{className:"rda-sh-note",style:{textAlign:"center",marginBottom:18}},"Shared links display score and band only. Exposure findings remain private."),
 h("div",{className:"rda-sh-cta"},h("button",{className:"rda-btn rda-btn-n",onClick:reset},"Take the audit yourself \u2192"),h("a",{className:"rda-alink",href:"/before-after"},"Review an example of enforced evidence governance \u2192"))))}
 
 /* LOADING */
@@ -379,7 +379,7 @@ if(view==="quiz"){return h("div",null,
 h("div",{className:"rda-hero"},
 h("div",{className:"label"},"Revenue Defensibility Audit"),
 h("h1",null,"Could you defend every deal with evidence?"),
-h("p",null,"Most pipelines look healthy until you inspect the evidence behind them. This 10-point audit reveals where yours is exposed."),
+h("p",null,"Most pipelines look healthy until you inspect the evidence behind them."),
 h("div",{className:"rda-hero-sub"},"10 controls \u00b7 2 minutes \u00b7 instant exposure assessment")),
 h("div",{className:"rda-wrap"},
 h("div",{className:"rda-prog"},h("div",{className:"rda-prog-bar"},h("div",{className:"rda-prog-fill",style:{width:prog*100+"%"}})),h("div",{className:"rda-prog-meta"},h("span",null,"Audit progress: "+keys.length+" of "+C.length+" controls assessed"),h("span",null,Math.round(prog*100)+"%"))),
@@ -401,7 +401,7 @@ h("div",{className:"rda-st"},"Exposure breakdown"),
 h("div",{className:"rda-cc"},CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:cs[cat.id],d:cat.desc})})),
 h("div",{className:"rda-st"},"Top exposure areas"),
 h("div",{className:"rda-ea-intro"},"The following exposure areas reflect controls that are not consistently enforced and may reduce forecast defensibility under scrutiny."),
-h("div",{className:"rda-eas"},fn.map(function(c,i){return h("div",{className:"rda-ea",key:c.id},h("div",{className:"rda-ea-h"},"Exposure Area "+(i+1)),h("div",{className:"rda-ea-t"},c.dom),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Observed Exposure"),h("div",{className:"rda-ea-x"},c.f.e)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Impact Under Scrutiny"),h("div",{className:"rda-ea-x"},c.f.i)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Recommended Remediation"),h("div",{className:"rda-ea-x"},c.f.r)))})),
+h("div",{className:"rda-eas"},fn.map(function(c,i){return h("div",{className:"rda-ea",key:c.id},h("div",{className:"rda-ea-h"},"Exposure Area "+parseInt(c.id.slice(1),10)+" \u2014 "+c.dom),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Observed Exposure"),h("div",{className:"rda-ea-x"},c.f.e)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Impact Under Scrutiny"),h("div",{className:"rda-ea-x"},c.f.i)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Recommended Remediation"),h("div",{className:"rda-ea-x"},c.f.r)))})),
 h("div",{className:"rda-ec"},
 eSt!=="sent"?h(React.Fragment,null,
 h("h3",null,offer==="pdf"?"Get your full exposure report + early access":"Get the 10-control audit template for your team"),
