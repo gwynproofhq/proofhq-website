@@ -362,7 +362,7 @@ function toLI(){window.open("https://www.linkedin.com/sharing/share-offsite/?url
 function sendE(){if(!email||email.indexOf("@")===-1)return;setESt("sending");window.open("https://tally.so/r/XxD0B4?email="+encodeURIComponent(email),"_blank");setESt("sent")}
 
 /* SHARED */
-if(shared&&snap){var sv={score:clamp(snap.score),band:band(clamp(snap.score)),cats:snap.categories||{}};
+if(shared&&snap){var sv={score:clamp(snap.score),band:band(clamp(snap.score)),cats:snap.cats||{}};
 return h("div",null,
 h("div",{className:"rda-hero"},h("h1",null,"Someone scored "+sv.score+"/100"),h("p",null,"Take the audit yourself to receive your personalised exposure assessment.")),
 h("div",{className:"rda-wrap"},
@@ -391,7 +391,7 @@ h("div",{className:"rda-opts"},ctrl.o.map(function(o){return h("button",{key:o.v
 h("div",{className:"rda-nav"},
 h("button",{className:"rda-btn rda-btn-p",style:{visibility:cur===0?"hidden":"visible"},onClick:function(){tr(function(){setCur(Math.max(0,cur-1))})}},"\u2190 Previous"),
 h("div",{className:"rda-dots"},C.map(function(c,i){return h("button",{key:c.id,className:"rda-dot"+(ans[c.id]!==undefined?" a":"")+(i===cur?" c":""),onClick:function(){tr(function(){setCur(i)})}})})),
-done?h("button",{className:"rda-btn rda-btn-n",onClick:submit},"See exposure assessment \u2192"):h("button",{className:"rda-btn rda-btn-n",disabled:ans[ctrl.id]===undefined,onClick:function(){tr(function(){setCur(Math.min(C.length-1,cur+1))})}},"Next \u2192")))))}
+done?h("button",{className:"rda-btn rda-btn-n",onClick:submit},"See exposure assessment \u2192"):h("button",{className:"rda-btn rda-btn-n",disabled:ans[ctrl.id]===undefined,onClick:function(){tr(function(){setCur(Math.min(C.length-1,cur+1))})}},"Next \u2192"))))}
 
 /* RESULTS */
 return h("div",{ref:rRef},
