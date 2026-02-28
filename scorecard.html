@@ -352,8 +352,8 @@ var sc=score(ans),cs=catScores(ans),bn=band(sc),fn=findings(ans),dg=diag(ans);
 var ctrl=C[cur];
 
 function tr(fn){setFade(false);setTimeout(function(){fn();setFade(true)},180)}
-function pick(id,v){tr(function(){var n=Object.assign({},ans);n[id]=v;setAns(n);if(cur<C.length-1){setTimeout(function(){setCur(cur+1)},220)}})}
-function submit(){setView("loading");setTimeout(function(){setView("results");setTimeout(function(){if(rRef.current)rRef.current.scrollIntoView({behavior:"smooth"})},50)},800)}
+function pick(id,v){tr(function(){var n=Object.assign({},ans);n[id]=v;setAns(n);if(cur<C.length-1){setCur(cur+1)}})}
+function submit(){setView("loading");setTimeout(function(){setView("results");setTimeout(function(){if(rRef.current)rRef.current.scrollIntoView({behavior:"smooth"})},50)},2200)}
 function reset(){setAns({});setCur(0);setView("quiz");setEmail("");setESt("idle");setCopied(false);var u=new URL(window.location.href);u.searchParams.delete("s");window.history.replaceState({},"",u.toString());setShared(false);setSnap(null);window.scrollTo({top:0,behavior:"smooth"})}
 function sLink(){var u=new URL(window.location.href);u.searchParams.set("s",b64e({v:1,score:sc,band:bn.l,cats:cs}));return u.toString()}
 function cpLink(){navigator.clipboard.writeText(sLink()).then(function(){setCopied(true);setTimeout(function(){setCopied(false)},2500)}).catch(function(){prompt("Copy:",sLink())})}
