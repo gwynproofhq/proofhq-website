@@ -1027,6 +1027,12 @@ details[open].accordion summary::after{ content:"Close"; }
 
 .mobile-menu .btn {
   margin-top: 16px;
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-bottom: none;
 }
 
 /* Overlay backdrop */

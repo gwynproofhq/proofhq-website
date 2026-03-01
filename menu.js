@@ -23,6 +23,36 @@ function toggleMobileMenu() {
   body.classList.toggle('menu-open');
 }
 
+// Close mobile menu when any link inside it is clicked
+document.addEventListener('DOMContentLoaded', function() {
+  var mobileMenu = document.querySelector('.mobile-menu');
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        // If the menu is open, close it first
+        if (mobileMenu.classList.contains('active')) {
+          // For anchor links on the same page, close menu then scroll
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            toggleMobileMenu();
+            // Small delay to let body position reset before scrolling
+            setTimeout(function() {
+              var target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 350);
+          } else {
+            // For normal page links, just close the menu
+            toggleMobileMenu();
+          }
+        }
+      });
+    });
+  }
+});
+
 // Demos dropdown — click toggle (works alongside CSS hover)
 document.addEventListener('DOMContentLoaded', function() {
   var toggle = document.querySelector('.nav-dropdown-toggle');
