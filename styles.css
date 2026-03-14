@@ -12,25 +12,27 @@
   --bg-raised: #FFFFFF;
   --bg-card: #FFFFFF;
   --bg-card-hover: #F3F4F6;
-  --bg-code: #1B1D24;
+  --bg-code: #1B2A4A;
 
   --border: rgba(17,24,39,.08);
   --border-md: rgba(17,24,39,.14);
-  --border-accent: rgba(249,115,22,.28);
+  --border-accent: rgba(0,194,199,.28);
 
-  --text: #0B1220;
+  --text: #1B2A4A;
   --text-mid: #4B5563;
   --text-dim: #6B7280;
   --text-faint: #9CA3AF;
 
-  --accent: #EA580C;
-  --accent-light: #F97316;
-  --accent-glow: rgba(234,88,12,.10);
-  --accent-glow-s: rgba(234,88,12,.16);
-  --accent-bg: rgba(234,88,12,.06);
-  --accent-bg-s: #FFEDD5;
-  --accent-text: #9A3412;
+  --accent: #00C2C7;
+  --accent-light: #00D4DA;
+  --accent-glow: rgba(0,194,199,.10);
+  --accent-glow-s: rgba(0,194,199,.16);
+  --accent-bg: rgba(0,194,199,.06);
+  --accent-bg-s: #E0F7F8;
+  --accent-text: #0E7490;
 
+  --navy: #1B2A4A;
+  --navy-bg: rgba(27,42,74,.06);
   --blue: #1D4ED8;
   --blue-bg: rgba(29,78,216,.06);
   --green: #047857;
@@ -40,8 +42,8 @@
   --amber: #B45309;
   --amber-bg: rgba(180,83,9,.06);
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', -apple-system, system-ui, Segoe UI, Roboto, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --max-w: 1120px;
   --section-pad: clamp(40px, 6vw, 72px);
   --r: 16px;
@@ -124,7 +126,7 @@ body.menu-open {
 }
 .brand .logo {
   font-family: var(--font-display);
-  font-weight: 800; letter-spacing: -.6px; font-size: 20px;
+  font-weight: 600; letter-spacing: -.3px; font-size: 20px;
 }
 .brand .tag {
   font-size: 12px; font-weight: 700; letter-spacing: .9px;
@@ -179,7 +181,7 @@ body.menu-open {
   display: block; padding: 10px 14px; border-radius: 10px;
   text-decoration: none; transition: background .15s;
 }
-.nav-dropdown-item:hover { background: rgba(234,88,12,.04); }
+.nav-dropdown-item:hover { background: rgba(0,194,199,.06); }
 .nav-dropdown-item strong {
   display: block; font-size: 14px; font-weight: 700; color: var(--text);
   margin-bottom: 2px;
@@ -199,7 +201,7 @@ body.menu-open {
   color: var(--text-dim); text-decoration: none; border-radius: 8px;
   transition: background .15s;
 }
-.mobile-demos-item:hover { background: rgba(234,88,12,.04); color: var(--text); }
+.mobile-demos-item:hover { background: rgba(0,194,199,.06); color: var(--text); }
 
 /* ── Buttons ── */
 .btn {
@@ -211,12 +213,12 @@ body.menu-open {
 }
 .btn-primary {
   background: var(--accent); color: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 10px 24px rgba(234,88,12,.12);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 10px 24px rgba(0,194,199,.15);
 }
 .btn-primary:hover {
   background: var(--accent-light);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(234,88,12,.2);
+  box-shadow: 0 4px 16px rgba(0,194,199,.25);
 }
 .btn-ghost {
   background: transparent; color: var(--text);
@@ -240,7 +242,7 @@ body.menu-open {
   position: absolute; inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(1200px 560px at 50% -220px, rgba(234,88,12,.07), transparent 70%),
+    radial-gradient(1200px 560px at 50% -220px, rgba(0,194,199,.06), transparent 70%),
     linear-gradient(to bottom, rgba(17,24,39,.02), transparent 40%);
 }
 .hero-inner { position: relative; z-index: 1; max-width: 1000px; }
@@ -261,17 +263,14 @@ body.menu-open {
 }
 .h1 {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(36px, 5vw, 60px);
   line-height: 1.05;
   letter-spacing: -1.1px;
   margin: 16px 0 14px;
 }
 .h1 .hl {
-  background: linear-gradient(135deg, #EA580C, #F97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #00C2C7;
 }
 .sub {
   font-size: clamp(16px, 1.9vw, 19px);
@@ -290,7 +289,7 @@ body.menu-open {
   background: var(--bg-card);
   box-shadow: var(--sh);
 }
-.meta b { font-family: var(--font-display); font-size: 20px; letter-spacing: -.4px; }
+.meta b { font-size: 20px; font-weight: 700; letter-spacing: -.4px; }
 .meta span { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
 
 /* ═══════════════════
@@ -301,9 +300,9 @@ body.menu-open {
 
 
 .title {
-  font-family: var(--font-display);  /* Fraunces serif */
+  font-family: var(--font-display);
   font-size: clamp(32px, 4vw, 48px);
-  font-weight: 800;                  /* Consistent weight */
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -.8px;
   margin-bottom: 14px;
@@ -628,13 +627,13 @@ details[open].accordion summary::after{ content:"Close"; }
 
 /* Support SVG logo in nav */
 .brand .logo-img{
-  height: 90px; /* increased 20% from 75px - weight 800 for maximum authority */
+  height: 36px;
   width: auto;
   display: block;
 }
 @media (max-width: 480px){
   .brand .logo-img{
-  height: 90px; /* increased 20% from 75px - weight 800 for maximum authority */
+  height: 36px;
   width: auto;
   display: block;
 }
@@ -744,7 +743,7 @@ details[open].accordion summary::after{ content:"Close"; }
 
 /* Nav logo slightly prouder */
 .brand .logo-img{
-  height: 90px; /* increased 20% from 75px - weight 800 for maximum authority */
+  height: 36px;
   width: auto;
   display: block;
 }
@@ -874,17 +873,17 @@ details[open].accordion summary::after{ content:"Close"; }
 }
 
 .brand .logo-img{
-  height: 90px; /* increased 20% from 75px - weight 800 for maximum authority */
+  height: 36px;
   width: auto;
   display: block;
 }
 
 @media (max-width: 900px){
-  .brand .logo-img{ height: 74px; }
+  .brand .logo-img{ height: 30px; }
 }
 
 @media (max-width: 480px){
-  .brand .logo-img{ height: 62px; }
+  .brand .logo-img{ height: 26px; }
 }
 
 /* ========================================
@@ -895,7 +894,7 @@ details[open].accordion summary::after{ content:"Close"; }
   font-weight: 900;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #EA580C;
+  color: #00C2C7;
   margin-bottom: 16px;
   display: block;
 }
@@ -913,7 +912,7 @@ details[open].accordion summary::after{ content:"Close"; }
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 1.2px;
-  color: #EA580C;
+  color: #00C2C7;
   text-transform: uppercase;
 }
 
@@ -937,7 +936,7 @@ details[open].accordion summary::after{ content:"Close"; }
   justify-content: flex-start;
   font-size: 20px;
   font-weight: 900;
-  color: #EA580C;
+  color: #00C2C7;
   flex-shrink: 0;
 }
 
@@ -1017,11 +1016,11 @@ details[open].accordion summary::after{ content:"Close"; }
 }
 
 .mobile-menu a:hover {
-  color: #EA580C;
+  color: #1B2A4A;
 }
 
 .mobile-menu a.active {
-  color: #EA580C;
+  color: #00C2C7;
   font-weight: 700;
 }
 
@@ -1121,8 +1120,8 @@ details[open].accordion summary::after{ content:"Close"; }
   flex-shrink: 0;
 }
 .exc-highlight {
-  background: rgba(234,88,12,0.04);
-  border: 1px solid rgba(234,88,12,0.15);
+  background: rgba(0,194,199,0.04);
+  border: 1px solid rgba(0,194,199,0.15);
 }
 
 /* Mobile: stack the flow vertically */
