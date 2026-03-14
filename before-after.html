@@ -6,7 +6,7 @@
 <title>PROOF — Before & After Pipeline Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #F6F7FA;
@@ -20,9 +20,9 @@
   --text-mid: #4B5563;
   --text-dim: #6B7280;
   --text-faint: #9CA3AF;
-  --accent: #EA580C;
-  --accent-light: #F97316;
-  --accent-bg: rgba(234,88,12,.06);
+  --accent: #1B2A4A;
+  --accent-light: #00C2C7;
+  --accent-bg: rgba(0,194,199,.06);
   --accent-text: #9A3412;
   --blue: #1D4ED8;
   --blue-bg: rgba(29,78,216,.06);
@@ -32,8 +32,8 @@
   --red-bg: rgba(185,28,28,.06);
   --amber: #B45309;
   --amber-bg: rgba(180,83,9,.06);
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', -apple-system, system-ui, sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, system-ui, sans-serif;
   --font-mono: 'DM Mono', monospace;
   --r: 16px;
   --sh: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
@@ -65,7 +65,7 @@
 }
 .ba-topbar-left { display: flex; align-items: center; gap: 10px; }
 .ba-logo {
-  font-family: var(--font-display);
+  font-family: 'Inter', sans-serif;
   font-weight: 800;
   font-size: 20px;
   color: var(--text);
@@ -80,7 +80,7 @@
   border: 1px solid var(--border-accent);
   border-radius: 999px;
   background: var(--accent-bg);
-  color: var(--accent);
+  color: #1B2A4A;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .4px;
@@ -101,7 +101,7 @@
   text-align: center;
 }
 .ba-deal-name {
-  font-family: var(--font-display);
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: var(--text);
@@ -186,7 +186,7 @@
 .ba-icon-pain { background: var(--red-bg); color: var(--red); font-weight: 900; }
 .ba-icon-ok { background: var(--green-bg); color: var(--green); font-weight: 900; }
 .ba-icon-time { background: var(--amber-bg); color: var(--amber); font-weight: 900; }
-.ba-icon-proof { background: var(--accent-bg); color: var(--accent); font-weight: 900; }
+.ba-icon-proof { background: var(--accent-bg); color: #1B2A4A; font-weight: 900; }
 
 .ba-row-content { flex: 1; }
 .ba-row-title {
@@ -227,7 +227,7 @@
   border: 1px solid rgba(4,120,87,.12);
 }
 .ba-timer-num {
-  font-family: var(--font-display);
+  font-family: 'Inter', sans-serif;
   font-size: 28px;
   font-weight: 800;
 }
@@ -274,7 +274,7 @@
   display: inline-block;
   padding: 14px 24px;
   border: 1px solid var(--border-accent);
-  background: rgba(234,88,12,.04);
+  background: rgba(0,194,199,.04);
   border-radius: 14px;
   opacity: 0;
   transition: opacity 0.5s;
@@ -335,7 +335,7 @@
   cursor: pointer;
   transition: color 0.2s;
 }
-.ba-prog-label.active { color: var(--accent); }
+.ba-prog-label.active { color: #1B2A4A; }
 .ba-prog-label.done { color: var(--text-dim); }
 
 /* Replay */
@@ -345,7 +345,7 @@
   justify-content: center;
   font-size: 12px;
   font-weight: 800;
-  color: var(--accent);
+  color: #1B2A4A;
   background: var(--accent-bg);
   border: 1px solid var(--border-accent);
   padding: 8px 16px;
@@ -358,7 +358,7 @@
   white-space: nowrap;
 }
 .ba-replay.show { opacity: 1; pointer-events: auto; }
-.ba-replay:hover { background: rgba(234,88,12,.1); transform: translateY(-1px); }
+.ba-replay:hover { background: rgba(0,194,199,0.05); transform: translateY(-1px); }
 
 /* Footer controls */
 .ba-footer-controls {
@@ -389,23 +389,23 @@
   max-width: 960px; margin: 0 auto 24px; padding: 0 0 16px;
   display: flex; align-items: center; justify-content: space-between;
   border-bottom: 1px solid rgba(17,24,39,.08);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   flex-wrap: wrap; gap: 10px;
 }
 .demo-nav-left {
   display: flex; align-items: center; gap: 16px;
 }
 .demo-nav-logo {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 800; font-size: 18px; color: #0B1220;
   text-decoration: none; letter-spacing: -.4px;
 }
-.demo-nav-logo .dot { color: #EA580C; }
+.demo-nav-logo .dot { color: #1B2A4A; }
 .demo-nav-back {
   font-size: 13px; font-weight: 600; color: #6B7280;
   text-decoration: none; transition: color .2s;
 }
-.demo-nav-back:hover { color: #EA580C; }
+.demo-nav-back:hover { color: #1B2A4A; }
 .demo-nav-right {
   display: flex; align-items: center; gap: 6px;
   font-size: 12px; color: #9CA3AF;
@@ -415,7 +415,7 @@
   text-decoration: none; padding: 5px 10px; border-radius: 6px;
   border: 1px solid rgba(17,24,39,.08); transition: all .15s;
 }
-.demo-nav-link:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
+.demo-nav-link:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
 @media (max-width: 600px) {
   .demo-nav { flex-direction: column; align-items: flex-start; }
 }
@@ -827,7 +827,7 @@ startBA();
 .demo-cross-links {
   max-width: 960px; margin: 20px auto 0; padding: 14px 0;
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
   font-size: 13px; color: #9CA3AF;
 }
 .demo-cross-links a {
@@ -835,8 +835,8 @@ startBA();
   padding: 5px 12px; border-radius: 6px;
   border: 1px solid rgba(17,24,39,.08); transition: all .15s;
 }
-.demo-cross-links a:hover { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.03); }
-.demo-cross-links a.current { color: #EA580C; border-color: rgba(234,88,12,.25); background: rgba(234,88,12,.04); pointer-events: none; }
+.demo-cross-links a:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
+.demo-cross-links a.current { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,.04); pointer-events: none; }
 </style>
 <div class="demo-cross-links">
   Demo suite: <a href="/walkthrough">Deal Walkthrough</a>
@@ -844,12 +844,12 @@ startBA();
   <a href="/system-flow">System Flow</a>
 </div>
 <!-- Conversion footer -->
-<div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background:rgba(234,88,12,0.06);border:1px solid rgba(234,88,12,0.15);border-radius:12px;text-align:center;font-family:'DM Sans',system-ui,sans-serif;">
+<div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background: rgba(0,194,199,0.05);border:1px solid rgba(0,194,199,0.15);border-radius:12px;text-align:center;font-family:'Inter',system-ui,sans-serif;">
   <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
   <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching July 2026.</p>
-  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#EA580C;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
+  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#1B2A4A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
   <span style="margin:0 12px;color:#D1D5DB;">|</span>
-  <a href="/blog" style="color:#EA580C;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
+  <a href="/blog" style="color:#1B2A4A;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
 </div>
 
 </body>
