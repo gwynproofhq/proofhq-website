@@ -1,4 +1,3 @@
-// api/partner.js
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -14,14 +13,12 @@ export default async function handler(req, res) {
   try {
     const { name, email, company, partner_type, notes, website } = req.body
 
-    // Honeypot
     if (website) return res.json({ ok: true })
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Name and email required' })
     }
 
-    // Write to Supabase
     const { error: dbError } = await supabase
       .from('form_submissions')
       .insert({
@@ -35,7 +32,6 @@ export default async function handler(req, res) {
 
     if (dbError) console.error('Supabase error:', dbError)
 
-    // Email via Resend
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
