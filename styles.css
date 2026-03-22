@@ -157,9 +157,21 @@ p {
   box-shadow: 0 10px 30px rgba(0,194,199,0.24);
 }
 .btn-secondary {
-  color: var(--text);
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.08);
+  color: var(--teal);
+  background: transparent;
+  border-color: var(--teal);
+}
+.btn-secondary:hover {
+  background: rgba(0,194,199,0.08);
+}
+.btn-ghost {
+  color: var(--teal);
+  background: transparent;
+  border-color: rgba(0,194,199,0.3);
+}
+.btn-ghost:hover {
+  border-color: var(--teal);
+  background: rgba(0,194,199,0.06);
 }
 .btn-block { width: 100%; }
 
