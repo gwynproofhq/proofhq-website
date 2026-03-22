@@ -552,38 +552,70 @@
     </div>
   </div>
 
+  <!-- PHASE 0: Playbook Builder -->
+  <div class="sf-phase" id="phase0">
+    <div class="sf-label" style="color: var(--teal, #00C2C7);">Phase 0 · Playbook Builder</div>
+    <div class="sf-title">Define the standard once. Run it everywhere.</div>
+    <div class="sf-desc">Configure your qualification criteria, stage gates, inspection prompts, coaching logic, and commit rules inside PROOF.</div>
+
+    <div class="sf-sources">
+      <div class="sf-source" data-delay="300">
+        <span class="sf-source-icon">✅</span>
+        <div class="sf-source-name">Qualification</div>
+        <div class="sf-source-detail">MEDDIC, MEDDPICC, or custom criteria configured as operational checkpoints</div>
+      </div>
+      <div class="sf-source" data-delay="600">
+        <span class="sf-source-icon">🔒</span>
+        <div class="sf-source-name">Stage Gates</div>
+        <div class="sf-source-detail">Evidence requirements per stage — progression blocked or flagged when gaps exist</div>
+      </div>
+      <div class="sf-source" data-delay="900">
+        <span class="sf-source-icon">🔍</span>
+        <div class="sf-source-name">Inspection &amp; Coaching</div>
+        <div class="sf-source-detail">Review prompts, coaching cues, and manager inspection logic tied to deal evidence</div>
+      </div>
+      <div class="sf-source" data-delay="1200">
+        <span class="sf-source-icon">📊</span>
+        <div class="sf-source-name">Commit Rules</div>
+        <div class="sf-source-detail">Define what a commit-ready deal looks like before it shapes the forecast</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-connector" id="conn0"><div class="sf-connector-line"></div></div>
+
   <!-- PHASE 1: Sources -->
   <div class="sf-phase" id="phase1">
-    <div class="sf-label" style="color: var(--blue);">Phase 1 · Data Sources</div>
+    <div class="sf-label" style="color: var(--blue);">Phase 1 · Evidence Sources</div>
     <div class="sf-title">PROOF connects where evidence already lives.</div>
-    <div class="sf-desc">No new tools for reps. Start with CRM-only, then add transcripts and docs when you're ready.</div>
+    <div class="sf-desc">No new tools for reps. Start CRM-first, then layer in email, calendar, and voice when ready.</div>
 
     <div class="sf-sources">
       <div class="sf-source" data-delay="300">
         <span class="sf-source-icon">💾</span>
         <div class="sf-source-name">CRM</div>
-        <div class="sf-source-detail">Opportunities, contacts, activities, stage history, field changes</div>
+        <div class="sf-source-detail">Salesforce or HubSpot — opportunities, contacts, activities, stage history, field changes</div>
       </div>
       <div class="sf-source" data-delay="600">
-        <span class="sf-source-icon">🎙️</span>
-        <div class="sf-source-name">Call Transcripts</div>
-        <div class="sf-source-detail">Paste or upload from Gong, Chorus, or any call tool — structured evidence extraction</div>
+        <span class="sf-source-icon">📧</span>
+        <div class="sf-source-name">Email &amp; Calendar</div>
+        <div class="sf-source-detail">Google Workspace or Microsoft 365 — metadata only (sender, timestamps, meeting participants)</div>
       </div>
       <div class="sf-source" data-delay="900">
-        <span class="sf-source-icon">📝</span>
-        <div class="sf-source-name">Notes & Docs</div>
-        <div class="sf-source-detail">Meeting notes, proposals, mutual action plans</div>
+        <span class="sf-source-icon">🎙️</span>
+        <div class="sf-source-name">Voice-to-CRM</div>
+        <div class="sf-source-detail">Rep-dictated deal updates mapped to CRM fields. Audio processed and discarded.</div>
       </div>
       <div class="sf-source" data-delay="1200">
-        <span class="sf-source-icon">🌐</span>
-        <div class="sf-source-name">External Signals</div>
-        <div class="sf-source-detail">Buying group roles, org context, change indicators (optional)</div>
+        <span class="sf-source-icon">💬</span>
+        <div class="sf-source-name">Slack &amp; Teams</div>
+        <div class="sf-source-detail">Push deal alerts and review prompts to existing channels. Outbound only.</div>
       </div>
     </div>
 
     <div class="sf-sync" data-delay="1800">
       <span class="sf-sync-dot"></span>
-      <span class="sf-sync-text">Syncing ~1,000 opportunities · ~18,000 activities · ~5,000 contacts</span>
+      <span class="sf-sync-text">Syncing CRM records · email metadata · calendar signals · voice updates</span>
     </div>
   </div>
 
@@ -592,7 +624,7 @@
   <!-- PHASE 2: Engine -->
   <div class="sf-phase sf-phase-raised" id="phase2">
     <div class="sf-label" style="color: #1B2A4A;">Phase 2 · Evidence Engine</div>
-    <div class="sf-title">Every deal checked against your evidence standard — automatically.</div>
+    <div class="sf-title">Every deal checked against your configured playbook — automatically.</div>
     <div class="sf-desc">PROOF doesn't guess. It verifies whether evidence exists for each stage criteria — then flags what's missing.</div>
 
     <div class="sf-engine-grid">
@@ -818,7 +850,7 @@ function showPhase(n) {
 }
 
 function nextPhase() {
-  if (cp < 3) { cp++; showPhase(cp); pt = setTimeout(nextPhase, PD); }
+  if (cp < 4) { cp++; showPhase(cp); pt = setTimeout(nextPhase, PD); }
 }
 
 function startFlow() {
@@ -867,7 +899,7 @@ startFlow();
 <div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background: rgba(0,194,199,0.05);border:1px solid rgba(0,194,199,0.15);border-radius:12px;text-align:center;font-family:'Inter',system-ui,sans-serif;">
   <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
   <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching July 2026.</p>
-  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#1B2A4A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
+  <a href="/#request" style="display:inline-block;padding:10px 20px;background:linear-gradient(180deg,#1ae0d4,#00adb2);color:#071015;border-radius:999px;text-decoration:none;font-size:14px;font-weight:700;">Request walkthrough</a>
   <span style="margin:0 12px;color:#D1D5DB;">|</span>
   <a href="/blog" style="color:#1B2A4A;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
 </div>
