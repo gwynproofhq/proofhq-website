@@ -74,7 +74,7 @@ h2 {
   font-size: clamp(2rem, 4vw, 3.3rem);
   line-height: 1.04;
   letter-spacing: -0.035em;
-  max-width: 14ch;
+  max-width: 22ch;
 }
 h3 {
   font-size: 1.1rem;
@@ -428,6 +428,15 @@ p {
   border-color: rgba(0,194,199,0.2);
   background: linear-gradient(180deg, rgba(19,33,38,0.98), rgba(11,24,29,0.95));
 }
+.compare-card-highlight h3 { color: var(--teal); }
+.compare-card-highlight ul { color: var(--text); }
+.compare-card-highlight li::before { color: var(--teal); }
+.compare-card-dim {
+  opacity: 0.6;
+  border-color: rgba(255,255,255,0.04);
+}
+.compare-card-dim h3 { color: var(--dim); }
+.compare-card-dim li::before { color: var(--red); }
 .two-col-feature {
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
