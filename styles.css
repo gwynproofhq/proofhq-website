@@ -44,7 +44,7 @@ button, input, select, textarea { font: inherit; }
   margin: 0 auto;
 }
 .section {
-  padding: 92px 0;
+  padding: 64px 0;
   position: relative;
 }
 .muted-band {
@@ -1102,7 +1102,7 @@ p {
 }
 
 @media (max-width: 760px) {
-  .section { padding: 72px 0; }
+  .section { padding: 52px 0; }
   .container { width: min(calc(100% - 28px), var(--container)); }
   .compare-grid,
   .persona-grid,
