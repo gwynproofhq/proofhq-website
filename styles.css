@@ -184,9 +184,9 @@ p {
 .hero { padding-top: 100px; }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(460px, 560px);
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
-  gap: 44px;
+  gap: 48px;
 }
 .hero-subhead {
   font-size: 1.12rem;
