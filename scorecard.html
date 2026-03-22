@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revenue Defensibility Audit | PROOF</title>
+  <link rel="canonical" href="https://www.proofhq.io/scorecard" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <meta name="description" content="If your forecast was challenged tomorrow, could you defend every deal with evidence? A 10-point assessment of evidence integrity, enforcement, and traceability." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+  <meta property="og:site_name" content="PROOF" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="Revenue Defensibility Audit | PROOF" />
+  <meta property="og:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline." />
+  <meta property="og:url" content="https://www.proofhq.io/scorecard" />
+  <!--<meta property="og:image" content="https://www.proofhq.io/og/scorecard.png" />-->
+  <meta name="twitter:title" content="Revenue Defensibility Audit | PROOF" />
+  <meta name="twitter:description" content="A 10-point assessment of evidence integrity, enforcement, and traceability across your pipeline." />
+  <!--<meta name="twitter:image" content="https://www.proofhq.io/og/scorecard.png" />-->
+  <meta name="twitter:site" content="@SalesEscapist" />
+
+  <style>
+    /* ── Scorecard-specific styles (scoped with .rda- prefix) ── */
+    .rda-wrap{max-width:620px;margin:0 auto;padding:0 0 40px}
+    .rda-hero{max-width:620px;margin:0 auto;padding:12px 0 28px;text-align:center}
+    .rda-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.6px;margin-bottom:14px}
+    .rda-hero p{font-size:16px;line-height:1.55;color:var(--text-mid);max-width:520px;margin:0 auto}
+    .rda-hero-sub{font-size:13px;color:var(--text-dim);margin-top:12px;font-weight:500;letter-spacing:.01em}
+    .rda-prog{margin-bottom:36px}
+    .rda-prog-bar{width:100%;height:3px;background:var(--border-md);border-radius:2px;overflow:hidden;margin-bottom:8px}
+    .rda-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .5s cubic-bezier(.22,1,.36,1)}
+    .rda-prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim);font-weight:500}
+    .rda-qa{min-height:440px}
+    .rda-qn{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;font-weight:600}
+    .rda-qd{font-size:11px;letter-spacing:.04em;color:var(--text-faint);margin-bottom:14px}
+    .rda-qt{font-family:var(--font-display);font-size:clamp(20px,3vw,26px);font-weight:800;line-height:1.25;letter-spacing:-.3px;margin-bottom:28px}
+    .rda-opts{display:flex;flex-direction:column;gap:7px}
+    .rda-opt{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .18s ease;text-align:left;width:100%;font-family:var(--font-body);font-size:14px;color:var(--text);line-height:1.4}
+    .rda-opt:hover{border-color:var(--accent);transform:translateX(3px);box-shadow:var(--sh-h)}
+    .rda-opt.sel{border-color:var(--accent);background:var(--accent);color:#fff}
+    .rda-opt-c{flex:1}.rda-opt-l{font-weight:600}.rda-opt-d{font-size:13px;opacity:.6;margin-top:2px}.rda-opt.sel .rda-opt-d{opacity:.85}
+    .rda-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:18px;border-top:1px solid var(--border)}
+    .rda-btn{font-family:var(--font-body);font-size:14px;font-weight:600;padding:10px 22px;border-radius:10px;cursor:pointer;transition:all .18s ease;border:none}
+    .rda-btn-p{background:transparent;color:var(--text-dim);padding:10px 0}.rda-btn-p:hover{color:var(--text)}
+    .rda-btn-n{background:var(--accent);color:#fff}.rda-btn-n:hover{background:var(--accent-light)}.rda-btn-n:disabled{opacity:.3;cursor:not-allowed}
+    .rda-dots{display:flex;gap:6px}
+    .rda-dot{width:8px;height:8px;border-radius:50%;background:var(--border-md);border:none;padding:0;cursor:pointer;transition:all .18s ease}
+    .rda-dot.a{background:var(--accent)}.rda-dot.c{background:var(--accent);transform:scale(1.35)}
+    .rda-fi{opacity:1;transform:translateY(0);transition:all .22s ease}
+    .rda-fo{opacity:0;transform:translateY(6px);transition:all .18s ease}
+    .rda-sc{text-align:center;padding:44px 32px;background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--sh);margin-bottom:32px}
+    .rda-sc-n{font-family:var(--font-display);font-size:clamp(64px,10vw,88px);font-weight:900;line-height:1;letter-spacing:-.03em}
+    .rda-sc-o{font-size:26px;color:var(--text-faint);margin-left:4px;font-weight:500}
+    .rda-pill{font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:12px;padding:5px 14px;border-radius:100px;display:inline-block;font-weight:600}
+    .rda-sc-desc{font-size:15px;color:var(--text-mid);line-height:1.5;margin-top:14px;max-width:460px;margin-left:auto;margin-right:auto}
+    .rda-diag{font-size:12px;color:var(--text-dim);margin-top:8px;font-weight:500}
+    .rda-st{font-family:var(--font-display);font-size:clamp(22px,3vw,28px);font-weight:800;margin-bottom:18px;letter-spacing:-.3px}
+    .rda-cc{background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);padding:24px;margin-bottom:32px;box-shadow:var(--sh)}
+    .rda-cr{margin-bottom:20px}.rda-cr:last-child{margin-bottom:0}
+    .rda-ch{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+    .rda-cl{font-size:14px;font-weight:600}.rda-cp{font-size:14px;font-weight:600}
+    .rda-cb{width:100%;height:8px;background:var(--border-md);border-radius:4px;overflow:hidden}
+    .rda-cf{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+    .rda-cd{font-size:12px;color:var(--text-dim);margin-top:4px}
+    .rda-ea-intro{font-size:14px;color:var(--text-mid);line-height:1.5;margin-bottom:18px}
+    .rda-eas{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+    .rda-ea{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--sh)}
+    .rda-ea-h{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;font-weight:600}
+    .rda-ea-t{font-size:15px;font-weight:700;margin-bottom:10px}
+    .rda-ea-r{margin-bottom:8px}.rda-ea-r:last-child{margin-bottom:0}
+    .rda-ea-l{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px;font-weight:600}
+    .rda-ea-x{font-size:14px;line-height:1.5;color:var(--text-mid)}
+    .rda-ec{background:var(--text);border-radius:var(--r);padding:32px;text-align:center;margin-bottom:24px}
+    .rda-ec h3{font-family:var(--font-display);font-size:22px;font-weight:800;color:#fff;margin-bottom:6px}
+    .rda-ec p{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:18px}
+    .rda-ef{display:flex;gap:8px;max-width:420px;margin:0 auto}
+    .rda-ei{flex:1;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-family:var(--font-body);font-size:14px;outline:none}
+    .rda-ei::placeholder{color:rgba(255,255,255,.3)}.rda-ei:focus{border-color:rgba(255,255,255,.35)}
+    .rda-es{padding:12px 20px;background:#fff;color:var(--text);border:none;border-radius:10px;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .rda-es:hover{background:var(--bg)}.rda-es:disabled{opacity:.5;cursor:not-allowed}
+    .rda-eok{color:rgba(255,255,255,.8);font-size:15px}
+    .rda-eerr{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+    .rda-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .rda-abtn{padding:11px 20px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;color:var(--text);transition:all .18s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+    .rda-abtn:hover{border-color:var(--accent);box-shadow:var(--sh-h)}
+    .rda-alink{padding:11px 20px;font-size:14px;font-weight:600;color:var(--text-mid);text-decoration:none}.rda-alink:hover{color:var(--accent)}
+    .rda-retake{text-align:center;margin-top:20px}
+    .rda-shared{background:var(--bg-card);border-radius:var(--r);border:1px solid var(--border);padding:36px 32px;margin-bottom:28px;text-align:center;box-shadow:var(--sh)}
+    .rda-sh-cta{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .rda-sh-note{font-size:11px;color:var(--text-faint);margin-top:14px;font-weight:500}
+    .rda-loading{padding:100px 0;text-align:center}
+    .rda-loading-t{font-size:14px;color:var(--text-dim);font-weight:500;letter-spacing:.02em}
+    @media(max-width:768px){
+      .rda-hero h1{font-size:28px}
+      .rda-qt{font-size:20px}
+      .rda-sc-n{font-size:64px}
+      .rda-ef{flex-direction:column}
+      .rda-acts{flex-direction:column;align-items:center}
+      .rda-sh-cta{flex-direction:column;align-items:center}
+      .rda-sc{padding:32px 20px}
+      .rda-cc{padding:18px}
+      .rda-ec{padding:24px 18px}
+      .rda-shared{padding:28px 18px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="PROOF Home">
+        <img class="logo-img" src="/logo-light.svg" alt="PROOF" style="height:26px;width:auto;" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <span class="nav-separator">|</span>
+        <a href="/platform">Platform</a>
+        <span class="nav-separator">|</span>
+        <a href="/playbooks">Playbooks</a>
+        <span class="nav-separator">|</span>
+        <a href="/how-it-works">How It Works</a>
+        <span class="nav-separator">|</span>
+        <a href="/partners">Partners</a>
+        <span class="nav-separator">|</span>
+        <a href="/ai-trust">AI Trust</a>
+        <span class="nav-separator">|</span>
+        <a href="/blog">Insights</a>
+        <span class="nav-separator">|</span>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Demos <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="/before-after" class="nav-dropdown-item"><strong>Before &amp; After</strong><span>Same deal, two review workflows</span></a>
+            <a href="/walkthrough" class="nav-dropdown-item"><strong>Deal Walkthrough</strong><span>Scan → Diagnose → Suggest → Write Back</span></a>
+            <a href="/system-flow" class="nav-dropdown-item"><strong>System Flow</strong><span>Architecture behind evidence governance</span></a>
+          </div>
+        </div>
+      </nav>
+      <a class="btn btn-primary" href="/#request">Request walkthrough</a>
+      <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+  <div class="mobile-menu">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/platform">Platform</a>
+      <a href="/playbooks">Playbooks</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/partners">Partners</a>
+      <a href="/ai-trust">AI Trust</a>
+      <a href="/blog">Insights</a>
+      <div class="mobile-demos-label">Demos</div>
+      <a href="/before-after" class="mobile-demos-item">Before &amp; After</a>
+      <a href="/walkthrough" class="mobile-demos-item">Deal Walkthrough</a>
+      <a href="/system-flow" class="mobile-demos-item">System Flow</a>
+      <a href="/#request" class="btn btn-primary" style="margin-top: 24px;">Request walkthrough</a>
+    </nav>
+  </div>
+
+  <!-- SCORECARD -->
+  <section class="section">
+    <div class="container">
+      <div id="rda-root"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">&copy; 2026 PROOFHQ</div>
+        <div class="footer-right">
+          <span id="em-sc"></span>
+          <script>(function(){var e="hello";var d="proofhq.io";document.getElementById("em-sc").innerHTML='<a href="mailto:'+e+'@'+d+'">'+e+'@'+d+'</a>';}());</script>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/how-it-works">How It Works</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/#join">Get Early Access</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 10px; font-size: 0.78em; color: #9CA3AF;">PROOFHQ is a deal evidence &amp; revenue governance platform for sales teams (not the Workfront proofing product).</div>
+    </div>
+  </footer>
+
+  <script src="menu.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script>
+var h=React.createElement,useState=React.useState,useEffect=React.useEffect,useRef=React.useRef;
+
+var C=[
+{id:"c1",w:1.25,cat:"enf",dom:"Stage Advancement Enforcement",
+q:"Is stage advancement prevented unless defined evidence thresholds are met?",
+o:[{v:0,l:"Control Absent",d:"Stage movement is discretionary and not system-enforced."},
+{v:2.5,l:"Manager-Dependent",d:"Advancement is reviewed manually but not technically restricted."},
+{v:5,l:"Partially Enforced",d:"Evidence is required in select stages but inconsistently applied."},
+{v:7.5,l:"Broadly Enforced",d:"Most stages require defined evidence before progression."},
+{v:10,l:"Fully Enforced",d:"Stage advancement is system-blocked until documented evidence meets predefined criteria."}],
+f:{e:"Stage advancement is not consistently blocked unless verified evidence thresholds are met.",
+i:"Deal status would be difficult to defend in executive forecast review, as stage position lacks documented, verifiable justification.",
+r:"Implement system-enforced evidence thresholds that prevent stage advancement until predefined criteria are met."}},
+
+{id:"c2",w:1,cat:"enf",dom:"Independent Evidence Visibility",
+q:"Can leadership independently review all deal evidence without rep mediation?",
+o:[{v:0,l:"Opaque",d:"Evidence resides primarily in rep conversations or informal notes."},
+{v:2.5,l:"Fragmented",d:"Evidence exists but is distributed across tools and not centrally structured."},
+{v:5,l:"Partially Structured",d:"Evidence is visible but inconsistently formatted or complete."},
+{v:7.5,l:"Structured",d:"Evidence is centrally accessible and generally reviewable."},
+{v:10,l:"Independently Reviewable",d:"All deal evidence is structured, centralised, and independently reviewable without rep explanation."}],
+f:{e:"Deal evidence is not consistently available in a structured format that leadership can review independently.",
+i:"Executive review becomes dependent on rep mediation, reducing the ability to assess deal status without narrative interpretation.",
+r:"Standardise a single evidence view per deal that is structured, complete, and independently reviewable."}},
+
+{id:"c3",w:1,cat:"std",dom:"Stage Definition Integrity",
+q:"Are stage definitions tied to verifiable facts rather than activities or judgment?",
+o:[{v:0,l:"Judgment-Based",d:"Stage status reflects rep assessment or task completion."},
+{v:2.5,l:"Mixed Criteria",d:"Stages combine activity and partial evidence requirements."},
+{v:5,l:"Evidence-Referenced",d:"Stages reference evidence but lack strict definition."},
+{v:7.5,l:"Evidence-Defined",d:"Stages are defined by documented, confirmable facts."},
+{v:10,l:"Fact-Based",d:"Stage status reflects confirmed, auditable evidence only."}],
+f:{e:"Stage definitions are not consistently tied to verifiable facts and remain open to activity-based interpretation.",
+i:"Stage-based pipeline health and conversion assumptions would be difficult to defend in executive review due to inconsistent classification standards.",
+r:"Define stage criteria as verifiable evidence statements and standardise interpretation across the organisation."}},
+
+{id:"c4",w:1.25,cat:"int",dom:"Close-Date Change Traceability",
+q:"Are close-date changes automatically logged with reason and timestamp?",
+o:[{v:0,l:"Unlogged",d:"Date changes occur without consistent traceability."},
+{v:2.5,l:"Manually Logged",d:"Changes may be recorded but depend on rep input."},
+{v:5,l:"Partially Logged",d:"Some changes are tracked; logging is inconsistent."},
+{v:7.5,l:"System Logged",d:"Changes are automatically timestamped with reason."},
+{v:10,l:"Fully Traceable",d:"All close-date changes are system-logged, timestamped, and reviewable."}],
+f:{e:"Close-date changes are not consistently logged with reason and timestamp.",
+i:"Forecast variance would be difficult to defend in executive review due to non-traceable slippage patterns.",
+r:"Introduce automated logging for all close-date modifications, including reason codes and timestamps."}},
+
+{id:"c5",w:1,cat:"rev",dom:"Review Exception Discipline",
+q:"Do pipeline reviews begin with evidence exceptions rather than rep narrative?",
+o:[{v:0,l:"Narrative-Led",d:"Reviews rely primarily on rep explanation."},
+{v:2.5,l:"Mixed Format",d:"Narrative dominates but exceptions may be discussed."},
+{v:5,l:"Exception-Aware",d:"Evidence gaps are referenced inconsistently."},
+{v:7.5,l:"Exception-Driven",d:"Reviews focus on visible evidence gaps first."},
+{v:10,l:"Control-Led",d:"Reviews are structured around evidence exceptions and control variance."}],
+f:{e:"Pipeline reviews do not consistently begin from evidence exceptions and control gaps.",
+i:"Material risks persist across review cycles because exposures are identified through narrative rather than systematically surfaced exceptions.",
+r:"Structure pipeline reviews around evidence exceptions, with required corrective actions and tracked resolution."}},
+
+{id:"c6",w:1.25,cat:"int",dom:"Evidence Integrity & Versioning",
+q:"Is all deal evidence versioned, tamper-resistant, and audit-traceable?",
+o:[{v:0,l:"Editable Without Trace",d:"Entries can be modified or overwritten without visibility."},
+{v:2.5,l:"Partial History",d:"Some change history exists but lacks integrity assurance."},
+{v:5,l:"Version History Available",d:"Changes are recorded but not fully controlled."},
+{v:7.5,l:"Controlled Versioning",d:"All changes are logged and attributable."},
+{v:10,l:"Audit-Grade Integrity",d:"All evidence changes are versioned, attributable, and tamper-resistant."}],
+f:{e:"Deal evidence can be edited or overwritten without full attribution and version traceability.",
+i:"Evidence reliability would be difficult to defend if challenged, as historical changes cannot be independently verified.",
+r:"Establish audit-grade versioning with attributable, tamper-resistant change history for evidence fields."}},
+
+{id:"c7",w:1,cat:"std",dom:"Stakeholder Verification",
+q:"Is stakeholder coverage verified through logged interactions rather than assertion?",
+o:[{v:0,l:"Assumed",d:"Stakeholder coverage is declared without supporting evidence."},
+{v:2.5,l:"Partially Logged",d:"Some engagement is recorded but incomplete."},
+{v:5,l:"Logged but Unverified",d:"Interactions are captured but not validated."},
+{v:7.5,l:"Verified Engagement",d:"Engagement is logged and generally reviewable."},
+{v:10,l:"Evidence-Verified",d:"Stakeholder coverage is fully evidenced and independently verifiable."}],
+f:{e:"Stakeholder coverage is not consistently verified through logged interactions and remains partially assertion-based.",
+i:"Late-stage confidence would be difficult to defend in executive review where multi-threading claims cannot be independently verified.",
+r:"Require logged stakeholder interactions for late-stage classification and flag deals lacking evidence of coverage."}},
+
+{id:"c8",w:1.25,cat:"rev",dom:"Forecast Determination Basis",
+q:"Are forecast categories determined by verified evidence rather than confidence?",
+o:[{v:0,l:"Sentiment-Based",d:"Forecast status is driven primarily by rep confidence."},
+{v:2.5,l:"Confidence-Weighted",d:"Confidence heavily influences forecast category."},
+{v:5,l:"Mixed Determination",d:"Forecast combines evidence and sentiment."},
+{v:7.5,l:"Evidence-Weighted",d:"Forecast primarily reflects evidence thresholds."},
+{v:10,l:"Evidence-Determined",d:"Forecast category is defined by verified evidence only."}],
+f:{e:"Forecast categories are not consistently determined by verified evidence thresholds and remain partially confidence-driven.",
+i:"Forecast calls would be difficult to defend in CFO challenge scenarios where classification is not traceable to verifiable evidence.",
+r:"Define evidence thresholds for forecast categories and enforce consistent classification based on verification status."}},
+
+{id:"c9",w:1.25,cat:"rev",dom:"Slip Reconstruction Capability",
+q:"Can a complete, timestamped timeline be reconstructed when a deal slips?",
+o:[{v:0,l:"Non-Reconstructable",d:"Timeline reconstruction relies on memory."},
+{v:2.5,l:"Partial Reconstruction",d:"Limited timestamp history exists."},
+{v:5,l:"Basic Timeline",d:"Change history available but incomplete."},
+{v:7.5,l:"Reconstructable",d:"Full timeline reconstruction is possible with effort."},
+{v:10,l:"Immediate Reconstruction",d:"A complete, timestamped history is instantly available."}],
+f:{e:"A complete, timestamped timeline cannot be consistently reconstructed when deals slip.",
+i:"Slippage drivers would be difficult to defend in executive review where cause and timing cannot be established from system records.",
+r:"Capture timestamped changes for key evidence and stage transitions to enable immediate timeline reconstruction."}},
+
+{id:"c10",w:1,cat:"std",dom:"Evidence Portability",
+q:"Could a new manager defend any deal using system evidence alone?",
+o:[{v:0,l:"Rep-Dependent",d:"Deal context depends entirely on rep explanation."},
+{v:2.5,l:"Partially Transferable",d:"Some context is transferable; significant gaps remain."},
+{v:5,l:"Transferable with Review",d:"Evidence mostly sufficient with clarification needed."},
+{v:7.5,l:"Largely Independent",d:"Evidence enables near-independent deal assessment."},
+{v:10,l:"Fully Portable",d:"Any deal can be defended independently using system evidence alone."}],
+f:{e:"Deal defensibility remains partially rep-dependent and is not consistently portable through system evidence alone.",
+i:"Continuity would be difficult to defend during manager change or rep churn, as decision-quality depends on rep mediation.",
+r:"Standardise evidence capture so a new manager can assess and defend deal position using system evidence alone."}}
+];
+
+var CATS=[
+{id:"enf",label:"Enforcement & Visibility",desc:"Are evidence gates enforced and independently visible?",ids:["c1","c2"]},
+{id:"std",label:"Standards & Verification",desc:"Are criteria, stakeholders, and portability evidence-defined?",ids:["c3","c7","c10"]},
+{id:"int",label:"Integrity & Traceability",desc:"Is evidence versioned, tamper-resistant, and traceable?",ids:["c4","c6"]},
+{id:"rev",label:"Review & Forecast Quality",desc:"Do reviews and forecasts run on evidence, not narrative?",ids:["c5","c8","c9"]}
+];
+
+var CMap={};C.forEach(function(c){CMap[c.id]=c});
+var MAX_RAW=C.reduce(function(s,c){return s+10*(c.w||1)},0);
+function clamp(n){return Math.max(0,Math.min(100,Math.round(isNaN(n)?0:n)))}
+function score(a){return clamp(C.reduce(function(s,c){return s+(a[c.id]||0)*(c.w||1)},0)/MAX_RAW*100)}
+function catScores(a){var r={};CATS.forEach(function(cat){var raw=cat.ids.reduce(function(s,id){return s+(a[id]||0)*(CMap[id].w||1)},0);var mx=cat.ids.reduce(function(s,id){return s+10*(CMap[id].w||1)},0);r[cat.id]=clamp(raw/mx*100)});return r}
+function band(s){
+if(s<=39)return{l:"High Exposure",d:"Your forecast would be difficult to defend under board-level scrutiny. Evidence is not captured, enforced, or traceable.",c:"#B91C1C",bg:"rgba(185,28,28,.08)"};
+if(s<=69)return{l:"Material Exposure",d:"Evidence exists in places, but enforcement and integrity are inconsistent. Blind spots remain under scrutiny.",c:"#EA580C",bg:"rgba(234,88,12,.08)"};
+if(s<=89)return{l:"Controlled Exposure",d:"Defensible under routine scrutiny. Gaps remain under sustained executive challenge.",c:"#B45309",bg:"rgba(180,83,9,.08)"};
+return{l:"Defensible",d:"Your pipeline is evidence-governed and defensible under executive challenge. This indicates consistent control enforcement.",c:"#047857",bg:"rgba(4,120,87,.08)"}}
+function findings(a){var sorted=C.map(function(c){return{c:c,v:a[c.id]||0}}).sort(function(a,b){return a.v-b.v});var out=[];for(var i=0;i<sorted.length&&out.length<3;i++){if(sorted[i].v<7.5)out.push(sorted[i].c)}for(var i=0;i<sorted.length&&out.length<3;i++){if(out.indexOf(sorted[i].c)===-1)out.push(sorted[i].c)}return out}
+function diag(a){var cs=catScores(a);var entries=CATS.map(function(cat){return[cat.id,cs[cat.id]]}).sort(function(a,b){return a[1]-b[1]});var m={enf:"Primary exposure: enforcement & visibility \u2014 evidence gates are not enforced or independently visible.",std:"Primary exposure: evidence standards \u2014 criteria, verification, or portability are not evidence-defined.",int:"Primary exposure: integrity & traceability \u2014 evidence is not versioned, tamper-resistant, or traceable.",rev:"Primary exposure: review & forecast quality \u2014 reviews and forecasts run on narrative, not evidence."};return m[entries[0][0]]}
+function b64e(o){var b=btoa(unescape(encodeURIComponent(JSON.stringify(o))));return b.replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"")}
+function b64d(s){try{var p=s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4);return JSON.parse(decodeURIComponent(escape(atob(p))))}catch(e){return null}}
+function getOffer(){try{var k="proof_rda_v";var e=localStorage.getItem(k);if(e==="pdf"||e==="tpl")return e;var p=Math.random()<.5?"pdf":"tpl";localStorage.setItem(k,p);return p}catch(e){return"tpl"}}
+
+function Anim(p){var s=useState(0),v=s[0],set=s[1];useEffect(function(){var d=1400,st=performance.now();(function t(n){var pr=Math.min((n-st)/d,1);set(Math.round((1-Math.pow(1-pr,3))*p.t));if(pr<1)requestAnimationFrame(t)})(performance.now())},[p.t]);return h("span",null,v)}
+
+function Bar(p){var b=band(p.s);return h("div",{className:"rda-cr"},h("div",{className:"rda-ch"},h("span",{className:"rda-cl"},p.l),h("span",{className:"rda-cp",style:{color:b.c}},p.s+"%")),h("div",{className:"rda-cb"},h("div",{className:"rda-cf",style:{width:p.s+"%",background:b.c}})),h("div",{className:"rda-cd"},p.d))}
+
+function App(){
+var s1=useState({}),ans=s1[0],setAns=s1[1];
+var s2=useState(0),cur=s2[0],setCur=s2[1];
+var s3=useState("quiz"),view=s3[0],setView=s3[1];
+var s4=useState(true),fade=s4[0],setFade=s4[1];
+var s5=useState(false),shared=s5[0],setShared=s5[1];
+var s6=useState(null),snap=s6[0],setSnap=s6[1];
+var s7=useState("tpl"),offer=s7[0],setOffer=s7[1];
+var s8=useState(""),email=s8[0],setEmail=s8[1];
+var s9=useState("idle"),eSt=s9[0],setESt=s9[1];
+var s10=useState(false),copied=s10[0],setCopied=s10[1];
+var rRef=useRef(null);
+
+useEffect(function(){var p=new URLSearchParams(window.location.search).get("s");if(p){var d=b64d(p);if(d&&d.v===1){setShared(true);setSnap(d)}}setOffer(getOffer())},[]);
+
+var keys=Object.keys(ans),prog=keys.length/C.length,done=keys.length===C.length;
+var sc=score(ans),cs=catScores(ans),bn=band(sc),fn=findings(ans),dg=diag(ans);
+var ctrl=C[cur];
+
+function tr(fn){setFade(false);setTimeout(function(){fn();setFade(true)},180)}
+function pick(id,v){tr(function(){var n=Object.assign({},ans);n[id]=v;setAns(n);if(cur<C.length-1){setCur(cur+1)}})}
+function submit(){setView("loading");setTimeout(function(){setView("results");setTimeout(function(){if(rRef.current)rRef.current.scrollIntoView({behavior:"smooth"})},50)},2200)}
+function reset(){setAns({});setCur(0);setView("quiz");setEmail("");setESt("idle");setCopied(false);var u=new URL(window.location.href);u.searchParams.delete("s");window.history.replaceState({},"",u.toString());setShared(false);setSnap(null);window.scrollTo({top:0,behavior:"smooth"})}
+function sLink(){var u=new URL(window.location.href);u.searchParams.set("s",b64e({v:1,score:sc,band:bn.l,cats:cs}));return u.toString()}
+function cpLink(){navigator.clipboard.writeText(sLink()).then(function(){setCopied(true);setTimeout(function(){setCopied(false)},2500)}).catch(function(){prompt("Copy:",sLink())})}
+function toX(){window.open("https://x.com/intent/tweet?text="+encodeURIComponent("I scored "+sc+"/100 on the Revenue Defensibility Audit \u2014 \u201c"+bn.l+".\u201d If you\u2019re below 40, your forecast is hard to defend. Take the audit \u2192")+"&url="+encodeURIComponent(sLink()),"_blank")}
+function toLI(){window.open("https://www.linkedin.com/sharing/share-offsite/?url="+encodeURIComponent(sLink()),"_blank")}
+function sendE(){if(!email||email.indexOf("@")===-1)return;setESt("sending");window.open("https://tally.so/r/XxD0B4?email="+encodeURIComponent(email),"_blank");setESt("sent")}
+
+/* SHARED */
+if(shared&&snap){var sv={score:clamp(snap.score),band:band(clamp(snap.score)),cats:snap.cats||{}};
+return h("div",null,
+h("div",{className:"rda-hero"},h("h1",null,"Someone scored "+sv.score+"/100"),h("p",null,"Take the audit yourself to receive your personalised exposure assessment.")),
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-shared"},h("div",{className:"rda-sc-n",style:{color:sv.band.c}},sv.score,h("span",{className:"rda-sc-o"},"/ 100")),h("div",{className:"rda-pill",style:{color:sv.band.c,background:sv.band.bg}},sv.band.l),h("div",{className:"rda-sc-desc"},sv.band.d)),
+h("div",{className:"rda-cc"},h("div",{className:"rda-st",style:{marginBottom:14}},"Exposure breakdown"),CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:clamp(sv.cats[cat.id]||0),d:cat.desc})})),
+h("div",{className:"rda-sh-note",style:{textAlign:"center",marginBottom:18}},"Shared links display score and band only. Exposure findings remain private."),
+h("div",{className:"rda-sh-cta"},h("button",{className:"rda-btn rda-btn-n",onClick:reset},"Take the audit yourself \u2192"),h("a",{className:"rda-alink",href:"/before-after"},"Review an example of enforced evidence governance \u2192"))))}
+
+/* LOADING */
+if(view==="loading"){return h("div",{className:"rda-loading"},h("div",{className:"rda-loading-t"},"Assessing exposure areas\u2026"))}
+
+/* QUIZ */
+if(view==="quiz"){return h("div",null,
+h("div",{className:"rda-hero"},
+h("div",{className:"label"},"Revenue Defensibility Audit"),
+h("h1",null,"Could you defend every deal with evidence?"),
+h("p",null,"Most pipelines look healthy until you inspect the evidence behind them."),
+h("div",{className:"rda-hero-sub"},"10 controls \u00b7 2 minutes \u00b7 instant exposure assessment")),
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-prog"},h("div",{className:"rda-prog-bar"},h("div",{className:"rda-prog-fill",style:{width:prog*100+"%"}})),h("div",{className:"rda-prog-meta"},h("span",null,"Audit progress: "+keys.length+" of "+C.length+" controls assessed"),h("span",null,Math.round(prog*100)+"%"))),
+h("div",{className:"rda-qa"},h("div",{className:fade?"rda-fi":"rda-fo"},
+h("div",{className:"rda-qn"},"Control "+(cur+1)+" of "+C.length),
+h("div",{className:"rda-qd"},ctrl.dom+(ctrl.w>1?" \u00b7 Weighted":"")),
+h("div",{className:"rda-qt"},ctrl.q),
+h("div",{className:"rda-opts"},ctrl.o.map(function(o){return h("button",{key:o.v,className:"rda-opt"+(ans[ctrl.id]===o.v?" sel":""),onClick:function(){pick(ctrl.id,o.v)}},h("div",{className:"rda-opt-c"},h("div",{className:"rda-opt-l"},o.l),h("div",{className:"rda-opt-d"},o.d)))})))),
+h("div",{className:"rda-nav"},
+h("button",{className:"rda-btn rda-btn-p",style:{visibility:cur===0?"hidden":"visible"},onClick:function(){tr(function(){setCur(Math.max(0,cur-1))})}},"\u2190 Previous"),
+h("div",{className:"rda-dots"},C.map(function(c,i){return h("button",{key:c.id,className:"rda-dot"+(ans[c.id]!==undefined?" a":"")+(i===cur?" c":""),onClick:function(){tr(function(){setCur(i)})}})})),
+done?h("button",{className:"rda-btn rda-btn-n",onClick:submit},"See exposure assessment \u2192"):h("button",{className:"rda-btn rda-btn-n",disabled:ans[ctrl.id]===undefined,onClick:function(){tr(function(){setCur(Math.min(C.length-1,cur+1))})}},"Next \u2192"))))}
+
+/* RESULTS */
+return h("div",{ref:rRef},
+h("div",{className:"rda-wrap"},
+h("div",{className:"rda-sc"},h("div",null,h("span",{className:"rda-sc-n",style:{color:bn.c}},h(Anim,{t:sc})),h("span",{className:"rda-sc-o"},"/ 100")),h("div",{className:"rda-pill",style:{color:bn.c,background:bn.bg}},bn.l),h("div",{className:"rda-sc-desc"},bn.d),h("div",{className:"rda-diag"},dg)),
+h("div",{className:"rda-st"},"Exposure breakdown"),
+h("div",{className:"rda-cc"},CATS.map(function(cat){return h(Bar,{key:cat.id,l:cat.label,s:cs[cat.id],d:cat.desc})})),
+h("div",{className:"rda-st"},"Top exposure areas"),
+h("div",{className:"rda-ea-intro"},"The following exposure areas reflect controls that are not consistently enforced and may reduce forecast defensibility under scrutiny."),
+h("div",{className:"rda-eas"},fn.map(function(c,i){return h("div",{className:"rda-ea",key:c.id},h("div",{className:"rda-ea-h"},"Exposure Area "+parseInt(c.id.slice(1),10)+" \u2014 "+c.dom),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Observed Exposure"),h("div",{className:"rda-ea-x"},c.f.e)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Impact Under Scrutiny"),h("div",{className:"rda-ea-x"},c.f.i)),h("div",{className:"rda-ea-r"},h("div",{className:"rda-ea-l"},"Recommended Remediation"),h("div",{className:"rda-ea-x"},c.f.r)))})),
+h("div",{className:"rda-ec"},
+eSt!=="sent"?h(React.Fragment,null,
+h("h3",null,offer==="pdf"?"Get your full exposure report + early access":"Get the 10-control audit template for your team"),
+h("p",null,offer==="pdf"?"We\u2019ll send your assessment breakdown and recommended remediations.":"Run this audit in your next pipeline review. Plus early access to PROOF."),
+h("div",{className:"rda-ef"},h("input",{className:"rda-ei",type:"email",placeholder:"you@company.com",value:email,onChange:function(e){setEmail(e.target.value)},onKeyDown:function(e){if(e.key==="Enter")sendE()}}),h("button",{className:"rda-es",onClick:sendE,disabled:eSt==="sending"},eSt==="sending"?"Sending\u2026":"Send it")),
+eSt==="error"?h("div",{className:"rda-eerr"},"Something went wrong. Try again."):null):
+h("div",{className:"rda-eok"},h("p",{style:{fontSize:18,color:"#fff",marginBottom:6}},"\u2713 You\u2019re in."),h("p",null,"Check your inbox for the audit template and early access details."))),
+h("div",{className:"rda-acts"},h("button",{className:"rda-abtn",onClick:toLI},"Share on LinkedIn"),h("button",{className:"rda-abtn",onClick:toX},"Share on \ud835\udd4f"),h("button",{className:"rda-abtn",onClick:cpLink},copied?"\u2713 Copied":"Copy share link"),h("a",{className:"rda-alink",href:"/before-after"},"Review an example of enforced evidence governance \u2192")),
+h("div",{className:"rda-retake"},h("button",{className:"rda-btn rda-btn-p",onClick:reset},"\u21ba Retake audit"))))}
+
+ReactDOM.createRoot(document.getElementById("rda-root")).render(h(App));
+  </script>
+</body>
+</html>

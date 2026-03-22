@@ -1,0 +1,15 @@
+{
+  "name": "PROOF",
+  "short_name": "PROOF",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071015",
+  "theme_color": "#071015",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

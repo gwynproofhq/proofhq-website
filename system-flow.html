@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROOF — How the System Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   PROOF Design System (from styles.css)
+   ══════════════════════════════════════════ */
+:root {
+  --bg: #F6F7FA;
+  --bg-raised: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F3F4F6;
+  --bg-code: #1B1D24;
+  --border: rgba(17,24,39,.08);
+  --border-md: rgba(17,24,39,.14);
+  --border-accent: rgba(249,115,22,.28);
+  --text: #0B1220;
+  --text-mid: #4B5563;
+  --text-dim: #6B7280;
+  --text-faint: #9CA3AF;
+  --accent: #1B2A4A;
+  --accent-light: #00C2C7;
+  --accent-glow: rgba(0,194,199,.10);
+  --accent-bg: rgba(0,194,199,.06);
+  --accent-text: #9A3412;
+  --blue: #1D4ED8;
+  --blue-bg: rgba(29,78,216,.06);
+  --green: #047857;
+  --green-bg: rgba(4,120,87,.06);
+  --red: #B91C1C;
+  --red-bg: rgba(185,28,28,.06);
+  --amber: #B45309;
+  --amber-bg: rgba(180,83,9,.06);
+  --purple: #7C3AED;
+  --purple-bg: rgba(124,58,237,.06);
+  --cyan: #0891B2;
+  --cyan-bg: rgba(8,145,178,.06);
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --r: 16px;
+  --sh: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  --sh-h: 0 2px 8px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.sf-container {
+  font-family: var(--font-body);
+  background: var(--bg);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-width: 960px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  box-shadow: var(--sh);
+}
+
+/* ── Top bar ── */
+.sf-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
+}
+.sf-topbar-left { display: flex; align-items: center; gap: 10px; }
+.sf-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.6px;
+}
+.sf-logo-dot { color: var(--accent-light); }
+.sf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-accent);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: #1B2A4A;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+.sf-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: sfPulse 2.5s infinite;
+}
+@keyframes sfPulse {
+  0%, 100% { opacity: .4; }
+  50% { opacity: 1; }
+}
+
+/* ── Phase sections ── */
+.sf-phase {
+  padding: 32px 28px 28px;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.sf-phase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.sf-phase-raised { background: var(--bg-raised); }
+
+.sf-label {
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.sf-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.sf-desc {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+
+/* ── Source cards ── */
+.sf-sources {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.sf-source {
+  padding: 18px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  box-shadow: var(--sh);
+  text-align: center;
+  transition: all .25s;
+  opacity: 0;
+  transform: translateY(8px);
+}
+.sf-source.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.sf-source:hover { background: var(--bg-card-hover); border-color: var(--border-md); box-shadow: var(--sh-h); }
+.sf-source-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.sf-source-name { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 3px; }
+.sf-source-detail { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+
+/* ── Flow connector ── */
+.sf-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+  background: var(--bg);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.sf-connector.visible { opacity: 1; }
+.sf-connector-line {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--accent-light));
+  position: relative;
+}
+.sf-connector-line::after {
+  content: '▼';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  color: var(--accent-light);
+}
+
+/* ── Sync pulse ── */
+.sf-sync {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 12px;
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.sf-sync.show { opacity: 1; }
+.sf-sync-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: sfPulse 1.5s infinite;
+}
+.sf-sync-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-text);
+}
+
+/* ── Engine cards ── */
+.sf-engine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.sf-engine {
+  padding: 20px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  box-shadow: var(--sh);
+  transition: all .25s;
+  opacity: 0;
+  transform: translateY(8px);
+}
+.sf-engine.show { opacity: 1; transform: translateY(0); }
+.sf-engine:hover { background: var(--bg-card-hover); box-shadow: var(--sh-h); }
+.sf-engine-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+.sf-engine h3 { font-size: 14px; font-weight: 900; margin-bottom: 6px; color: var(--text); }
+.sf-engine p { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+.sf-engine-stat {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #1B2A4A;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-weight: 500;
+}
+
+/* ── Persona cards ── */
+.sf-personas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.sf-persona {
+  padding: 20px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  box-shadow: var(--sh);
+  transition: all .3s;
+  opacity: 0;
+  transform: translateY(8px);
+  position: relative;
+  overflow: hidden;
+}
+.sf-persona.show { opacity: 1; transform: translateY(0); }
+.sf-persona:hover { box-shadow: var(--sh-h); }
+.sf-persona-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.sf-persona-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.sf-persona-role {
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+.sf-persona-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sf-persona-li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.sf-persona-li:first-child { border-top: none; }
+.sf-persona-arrow {
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 11px;
+}
+.sf-persona-quote {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.sf-persona-quote.show { opacity: 1; }
+
+/* ── Write-back flow ── */
+.sf-wb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.sf-wb-step {
+  padding: 18px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  box-shadow: var(--sh);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.4s;
+}
+.sf-wb-step.show { opacity: 1; transform: translateY(0); }
+.sf-wb-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1B2A4A;
+  margin-bottom: 4px;
+}
+.sf-wb-step h3 { font-size: 13px; font-weight: 900; margin-bottom: 4px; }
+.sf-wb-step p { font-size: 11px; color: var(--text-mid); line-height: 1.5; }
+
+.sf-audit {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--green-bg);
+  border: 1px solid rgba(4,120,87,.15);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.sf-audit.show { opacity: 1; }
+.sf-audit strong { color: var(--green); font-weight: 500; }
+
+/* ── Callout (PROOF signature) ── */
+.sf-callout {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--border-accent);
+  background: rgba(0,194,199,.04);
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.sf-callout.show { opacity: 1; }
+.sf-callout strong {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: #1B2A4A;
+  margin-bottom: 4px;
+}
+.sf-callout p {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ── Progress bar ── */
+.sf-progress {
+  display: flex;
+  gap: 0;
+  padding: 12px 24px 6px;
+  background: var(--bg-raised);
+}
+.sf-prog-seg {
+  flex: 1;
+  height: 4px;
+  background: rgba(17,24,39,.06);
+  border-radius: 2px;
+  margin: 0 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.sf-prog-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.sf-prog-seg.done .sf-prog-fill { width: 100%; transition: width 0.3s; }
+.sf-prog-seg.current .sf-prog-fill { animation: sfFillBar 5s linear forwards; }
+@keyframes sfFillBar { from { width: 0; } to { width: 100%; } }
+
+.sf-prog-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 24px 14px;
+  background: var(--bg-raised);
+}
+.sf-prog-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.sf-prog-label.active { color: #1B2A4A; }
+.sf-prog-label.done { color: var(--text-dim); }
+
+/* ── Replay ── */
+.sf-footer-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  gap: 10px;
+}
+.sf-replay {
+  /* In-footer button (prevents overlap on small heights) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1B2A4A;
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.sf-replay.show { opacity: 1; pointer-events: auto; }
+.sf-replay:hover { background: rgba(0,194,199,0.05); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,194,199,.12); }
+
+/* ── Mobile ── */
+@media (max-width: 800px) {
+  .sf-sources { grid-template-columns: repeat(2, 1fr); }
+  .sf-engine-grid { grid-template-columns: 1fr; }
+  .sf-personas { grid-template-columns: repeat(2, 1fr); }
+  .sf-wb-grid { grid-template-columns: repeat(2, 1fr); }
+  .sf-phase { padding: 24px 18px 20px; }
+}
+@media (max-width: 480px) {
+  .sf-sources { grid-template-columns: 1fr 1fr; }
+  .sf-personas { grid-template-columns: 1fr; }
+  .sf-wb-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body style="background: #F6F7FA; padding: 40px 16px;">
+
+<style>
+.demo-nav {
+  max-width: 960px; margin: 0 auto 24px; padding: 0 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(17,24,39,.08);
+  font-family: 'Inter', system-ui, sans-serif;
+  flex-wrap: wrap; gap: 10px;
+}
+.demo-nav-left {
+  display: flex; align-items: center; gap: 16px;
+}
+.demo-nav-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800; font-size: 18px; color: #0B1220;
+  text-decoration: none; letter-spacing: -.4px;
+}
+.demo-nav-logo .dot { color: #1B2A4A; }
+.demo-nav-back {
+  font-size: 13px; font-weight: 600; color: #6B7280;
+  text-decoration: none; transition: color .2s;
+}
+.demo-nav-back:hover { color: #1B2A4A; }
+.demo-nav-right {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #9CA3AF;
+}
+.demo-nav-link {
+  font-size: 13px; font-weight: 700; color: #4B5563;
+  text-decoration: none; padding: 5px 10px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-nav-link:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
+@media (max-width: 600px) {
+  .demo-nav { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="demo-nav">
+  <div class="demo-nav-left">
+    <a href="/" class="demo-nav-logo"><img src="/logo-light.svg" alt="PROOF" style="height:22px;width:auto;" /></a>
+    <a href="/" class="demo-nav-back">&larr; Back to site</a>
+  </div>
+  <div class="demo-nav-right">
+    <span>Also see:</span>
+    <a href="/walkthrough" class="demo-nav-link">Deal Walkthrough</a><a href="/before-after" class="demo-nav-link">Before & After</a>
+  </div>
+</div>
+
+
+<div class="sf-container" id="sysFlow" style="position:relative;">
+  <!-- Top bar -->
+  <div class="sf-topbar">
+    <div class="sf-topbar-left">
+      <img src="/logo-light.svg" alt="PROOF" style="height:20px;width:auto;" />
+      <span class="sf-badge"><span class="sf-badge-dot"></span> System Flow</span>
+    </div>
+    <div style="display:flex;gap:6px;">
+      <div class="sys-dot" style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+      <div class="sys-dot" style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+      <div class="sys-dot" style="width:10px;height:10px;border-radius:50%;background:#10B981;"></div>
+    </div>
+  </div>
+
+  <!-- PHASE 1: Sources -->
+  <div class="sf-phase" id="phase1">
+    <div class="sf-label" style="color: var(--blue);">Phase 1 · Data Sources</div>
+    <div class="sf-title">PROOF connects where evidence already lives.</div>
+    <div class="sf-desc">No new tools for reps. Start with CRM-only, then add transcripts and docs when you're ready.</div>
+
+    <div class="sf-sources">
+      <div class="sf-source" data-delay="300">
+        <span class="sf-source-icon">💾</span>
+        <div class="sf-source-name">CRM</div>
+        <div class="sf-source-detail">Opportunities, contacts, activities, stage history, field changes</div>
+      </div>
+      <div class="sf-source" data-delay="600">
+        <span class="sf-source-icon">🎙️</span>
+        <div class="sf-source-name">Call Transcripts</div>
+        <div class="sf-source-detail">Paste or upload from Gong, Chorus, or any call tool — structured evidence extraction</div>
+      </div>
+      <div class="sf-source" data-delay="900">
+        <span class="sf-source-icon">📝</span>
+        <div class="sf-source-name">Notes & Docs</div>
+        <div class="sf-source-detail">Meeting notes, proposals, mutual action plans</div>
+      </div>
+      <div class="sf-source" data-delay="1200">
+        <span class="sf-source-icon">🌐</span>
+        <div class="sf-source-name">External Signals</div>
+        <div class="sf-source-detail">Buying group roles, org context, change indicators (optional)</div>
+      </div>
+    </div>
+
+    <div class="sf-sync" data-delay="1800">
+      <span class="sf-sync-dot"></span>
+      <span class="sf-sync-text">Syncing ~1,000 opportunities · ~18,000 activities · ~5,000 contacts</span>
+    </div>
+  </div>
+
+  <div class="sf-connector" id="conn1"><div class="sf-connector-line"></div></div>
+
+  <!-- PHASE 2: Engine -->
+  <div class="sf-phase sf-phase-raised" id="phase2">
+    <div class="sf-label" style="color: #1B2A4A;">Phase 2 · Evidence Engine</div>
+    <div class="sf-title">Every deal checked against your evidence standard — automatically.</div>
+    <div class="sf-desc">PROOF doesn't guess. It verifies whether evidence exists for each stage criteria — then flags what's missing.</div>
+
+    <div class="sf-engine-grid">
+      <div class="sf-engine" data-delay="400">
+        <div class="sf-engine-num">01</div>
+        <h3>Evidence Mapping</h3>
+        <p>Maps signals to your stage criteria. MEDDIC, MEDDPICC, or custom — your framework, enforced.</p>
+        <div class="sf-engine-stat">6 criteria × ~1,000 deals = ~6,000 checks</div>
+      </div>
+      <div class="sf-engine" data-delay="700">
+        <div class="sf-engine-num">02</div>
+        <h3>Gap Detection</h3>
+        <p>Diagnostic codes pinpoint failure patterns — not generic "risk scores".</p>
+        <div class="sf-engine-stat">142 gaps found across pipeline</div>
+      </div>
+      <div class="sf-engine" data-delay="1000">
+        <div class="sf-engine-num">03</div>
+        <h3>Attention Routing</h3>
+        <p>Routes only exceptions to humans — with the reason attached. Everyone else: carry on.</p>
+        <div class="sf-engine-stat">68 deals need review · 779 verified clean</div>
+      </div>
+    </div>
+
+    <div class="sf-sync" data-delay="1600">
+      <span class="sf-sync-dot"></span>
+      <span class="sf-sync-text">Processing complete · 68 exceptions routed · 779 deals passed evidence gate</span>
+    </div>
+  </div>
+
+  <div class="sf-connector" id="conn2"><div class="sf-connector-line"></div></div>
+
+  <!-- PHASE 3: Personas -->
+  <div class="sf-phase" id="phase3">
+    <div class="sf-label" style="color: var(--green);">Phase 3 · Delivered to Every Role</div>
+    <div class="sf-title">The right evidence, to the right person, at the right time.</div>
+    <div class="sf-desc">Each role gets exactly what they need — no dashboards to dig through, no reports to build.</div>
+
+    <div class="sf-personas">
+      <!-- Rep -->
+      <div class="sf-persona" data-delay="300">
+        <div class="sf-persona-bar" style="background: var(--blue);"></div>
+        <span class="sf-persona-icon">🎯</span>
+        <div class="sf-persona-role" style="color: var(--blue);">Rep</div>
+        <ul class="sf-persona-list">
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--blue);">→</span> Missing evidence per deal</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--blue);">→</span> What's required before next review</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--blue);">→</span> Next steps mapped to CRM fields</li>
+        </ul>
+        <div class="sf-persona-quote" style="background: var(--blue-bg); color: var(--blue);">
+          "I know what's needed — no surprise questions in reviews."
+        </div>
+      </div>
+
+      <!-- Sales Leader -->
+      <div class="sf-persona" data-delay="600">
+        <div class="sf-persona-bar" style="background: var(--accent);"></div>
+        <span class="sf-persona-icon">📋</span>
+        <div class="sf-persona-role" style="color: #1B2A4A;">Sales Leader</div>
+        <ul class="sf-persona-list">
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--accent);">→</span> Exception queue (only deals that need attention)</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--accent);">→</span> Evidence-cited Deal Review Pack</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--accent);">→</span> Coaching captured once, applied everywhere</li>
+        </ul>
+        <div class="sf-persona-quote" style="background: var(--accent-bg); color: var(--accent-text);">
+          "I review 12 deals instead of 60 — and they're the right 12."
+        </div>
+      </div>
+
+      <!-- CRO -->
+      <div class="sf-persona" data-delay="900">
+        <div class="sf-persona-bar" style="background: var(--purple);"></div>
+        <span class="sf-persona-icon">📊</span>
+        <div class="sf-persona-role" style="color: var(--purple);">CRO / VP Sales</div>
+        <ul class="sf-persona-list">
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--purple);">→</span> Evidence coverage by stage & quarter</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--purple);">→</span> Slippage patterns by team</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--purple);">→</span> Defensible pipeline number for board</li>
+        </ul>
+        <div class="sf-persona-quote" style="background: var(--purple-bg); color: var(--purple);">
+          "I can tell the board which pipeline is evidence-backed."
+        </div>
+      </div>
+
+      <!-- RevOps -->
+      <div class="sf-persona" data-delay="1200">
+        <div class="sf-persona-bar" style="background: var(--cyan);"></div>
+        <span class="sf-persona-icon">⚙️</span>
+        <div class="sf-persona-role" style="color: var(--cyan);">RevOps</div>
+        <ul class="sf-persona-list">
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--cyan);">→</span> Evidence standards by stage</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--cyan);">→</span> Compliance without audits</li>
+          <li class="sf-persona-li"><span class="sf-persona-arrow" style="color:var(--cyan);">→</span> Full field-change audit trail</li>
+        </ul>
+        <div class="sf-persona-quote" style="background: var(--cyan-bg); color: var(--cyan);">
+          "Standards enforced at scale — without chasing reps."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-connector" id="conn3"><div class="sf-connector-line"></div></div>
+
+  <!-- PHASE 4: Write-back -->
+  <div class="sf-phase sf-phase-raised" id="phase4">
+    <div class="sf-label" style="color: var(--green);">Phase 4 · Controlled Write-back</div>
+    <div class="sf-title">Nothing changes without permission. Everything is logged.</div>
+    <div class="sf-desc">PROOF suggests CRM updates based on evidence. Humans confirm. The audit trail writes itself.</div>
+
+    <div class="sf-wb-grid">
+      <div class="sf-wb-step" data-delay="300">
+        <div class="sf-wb-num">1</div>
+        <h3>PROOF Suggests</h3>
+        <p>Evidence-cited updates with field-level detail</p>
+      </div>
+      <div class="sf-wb-step" data-delay="600">
+        <div class="sf-wb-num">2</div>
+        <h3>Human Confirms</h3>
+        <p>Rep or manager reviews, edits, then approves</p>
+      </div>
+      <div class="sf-wb-step" data-delay="900">
+        <div class="sf-wb-num">3</div>
+        <h3>CRM Updated</h3>
+        <p>Fields written with source attribution</p>
+      </div>
+      <div class="sf-wb-step" data-delay="1200">
+        <div class="sf-wb-num">4</div>
+        <h3>Audit Logged</h3>
+        <p>Who, what, when, why — immutable record</p>
+      </div>
+    </div>
+
+    <div class="sf-audit" data-delay="1800">
+      <strong>Audit:</strong> 3 fields updated on Meridian Systems · Confirmed by J. Morgan<br>
+      <strong>Source:</strong> DL-09 Single Thread Risk, DL-14 Decision Process Undefined<br>
+      <strong>Policy:</strong> No silent write-back · No black-box scoring · Evidence-cited only
+    </div>
+
+    <div class="sf-callout show" style="margin-top:12px;">
+  <strong>Forecast impact</strong>
+  <p>Pipeline coverage: <span style="color:var(--green);">78% evidence-backed</span> · Exceptions: <span style="color:var(--amber);">22%</span></p>
+</div>
+<div class="sf-callout" data-delay="2400">
+      <strong>The outcome</strong>
+      <p>PROOF reviews every deal — so humans only review exceptions.</p>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="sf-progress" id="sfProgress">
+    <div class="sf-prog-seg current" data-phase="0"><div class="sf-prog-fill"></div></div>
+    <div class="sf-prog-seg" data-phase="1"><div class="sf-prog-fill"></div></div>
+    <div class="sf-prog-seg" data-phase="2"><div class="sf-prog-fill"></div></div>
+    <div class="sf-prog-seg" data-phase="3"><div class="sf-prog-fill"></div></div>
+  </div>
+  <div class="sf-prog-labels">
+    <span class="sf-prog-label active" data-phase="0">Sources</span>
+    <span class="sf-prog-label" data-phase="1">Engine</span>
+    <span class="sf-prog-label" data-phase="2">Delivery</span>
+    <span class="sf-prog-label" data-phase="3">Write-back</span>
+  </div>
+
+  <div class="sf-footer-controls">
+    <button class="sf-replay" id="sfReplay" onclick="startFlow()">↻ Replay</button>
+  </div>
+
+
+
+</div>
+
+<script>
+const PD = 5000;
+let cp = 0;
+let pt = null;
+
+function showPhase(n) {
+  cp = n;
+  const phases = document.querySelectorAll('.sf-phase');
+  const conns = ['conn1','conn2','conn3'];
+
+  phases.forEach((p, i) => {
+    if (i <= n) p.classList.add('visible');
+    else p.classList.remove('visible');
+  });
+  conns.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (i < n) el.classList.add('visible');
+    else el.classList.remove('visible');
+  });
+
+  const phase = document.getElementById('phase' + (n + 1));
+  if (!phase) return;
+
+  // Animate children
+  phase.querySelectorAll('.sf-source[data-delay], .sf-engine[data-delay], .sf-persona[data-delay], .sf-wb-step[data-delay]').forEach(el => {
+    el.classList.remove('show');
+    setTimeout(() => {
+      el.classList.add('show');
+      const q = el.querySelector('.sf-persona-quote');
+      if (q) setTimeout(() => q.classList.add('show'), 800);
+    }, parseInt(el.dataset.delay));
+  });
+
+  phase.querySelectorAll('.sf-sync[data-delay], .sf-audit[data-delay], .sf-callout[data-delay]').forEach(el => {
+    el.classList.remove('show');
+    setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay));
+  });
+
+  // Progress
+  document.querySelectorAll('.sf-prog-seg').forEach((s, i) => {
+    s.classList.remove('current', 'done');
+    if (i < n) s.classList.add('done');
+    if (i === n) s.classList.add('current');
+  });
+  document.querySelectorAll('.sf-prog-label').forEach((l, i) => {
+    l.classList.remove('active', 'done');
+    if (i < n) l.classList.add('done');
+    if (i === n) l.classList.add('active');
+  });
+
+  const replay = document.getElementById('sfReplay');
+  if (n === 3) setTimeout(() => replay.classList.add('show'), 3200);
+  else replay.classList.remove('show');
+}
+
+function nextPhase() {
+  if (cp < 3) { cp++; showPhase(cp); pt = setTimeout(nextPhase, PD); }
+}
+
+function startFlow() {
+  clearTimeout(pt);
+  document.getElementById('sfReplay').classList.remove('show');
+  document.querySelectorAll('.sf-persona-quote').forEach(q => q.classList.remove('show'));
+  document.querySelectorAll('.sf-phase').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.sf-connector').forEach(c => c.classList.remove('visible'));
+  setTimeout(() => { showPhase(0); pt = setTimeout(nextPhase, PD); }, 150);
+}
+
+document.querySelectorAll('.sf-prog-seg, .sf-prog-label').forEach(el => {
+  el.addEventListener('click', () => {
+    const p = parseInt(el.dataset.phase);
+    clearTimeout(pt);
+    showPhase(p);
+    if (p < 3) pt = setTimeout(nextPhase, PD);
+  });
+});
+
+startFlow();
+</script>
+
+
+<style>
+.demo-cross-links {
+  max-width: 960px; margin: 20px auto 0; padding: 14px 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: 13px; color: #9CA3AF;
+}
+.demo-cross-links a {
+  font-weight: 700; color: #4B5563; text-decoration: none;
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-cross-links a:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
+.demo-cross-links a.current { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,.04); pointer-events: none; }
+</style>
+<div class="demo-cross-links">
+  Demo suite: <a href="/walkthrough">Deal Walkthrough</a>
+  <a href="/before-after">Before &amp; After</a>
+  <a href="/system-flow" class="current">System Flow</a>
+</div>
+<!-- Conversion footer -->
+<div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background: rgba(0,194,199,0.05);border:1px solid rgba(0,194,199,0.15);border-radius:12px;text-align:center;font-family:'Inter',system-ui,sans-serif;">
+  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
+  <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching July 2026.</p>
+  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#1B2A4A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
+  <span style="margin:0 12px;color:#D1D5DB;">|</span>
+  <a href="/blog" style="color:#1B2A4A;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="PROOF">
+  <title>PROOF</title>
+  <!-- Left chamfered bracket -->
+  <polygon points="8,10 22,10 19,16 8,16" fill="#00C2C7"/>
+  <rect x="8" y="10" width="6" height="44" fill="#00C2C7"/>
+  <polygon points="8,54 22,54 19,48 8,48" fill="#00C2C7"/>
+  <!-- Right chamfered bracket -->
+  <polygon points="56,10 42,10 45,16 56,16" fill="#00C2C7"/>
+  <rect x="50" y="10" width="6" height="44" fill="#00C2C7"/>
+  <polygon points="56,54 42,54 45,48 56,48" fill="#00C2C7"/>
+</svg>

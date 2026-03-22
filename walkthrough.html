@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROOF Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F6F7FA;
+  --bg-card: #FFFFFF;
+  --border: rgba(17,24,39,.08);
+  --border-md: rgba(17,24,39,.14);
+  --border-accent: rgba(249,115,22,.28);
+  --bg-raised: #FFFFFF;
+  --accent-bg: rgba(0,194,199,.06);
+  --accent-text: #9A3412;
+  --sh: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  --r: 16px;
+  --text: #0B1220;
+  --text-mid: #4B5563;
+  --text-dim: #6B7280;
+  --text-faint: #9CA3AF;
+  --accent: #1B2A4A;
+  --accent-light: #00C2C7;
+  --blue: #1D4ED8;
+  --green: #047857;
+  --amber: #D97706;
+  --red: #B91C1C;
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.walkthrough-container {
+  font-family: var(--font-body);
+  background: var(--bg);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid var(--border);
+  box-shadow: var(--sh);
+}
+
+/* Top bar */
+.wt-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
+}
+.wt-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wt-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.6px;
+}
+.wt-logo-dot { color: var(--accent-light); }
+.wt-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.wt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-accent);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: #1B2A4A;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.wt-topbar-right {
+  display: flex;
+  gap: 6px;
+}
+.wt-dot { width: 10px; height: 10px; border-radius: 50%; }
+.wt-dot-r { background: #EF4444; }
+.wt-dot-y { background: #F59E0B; }
+.wt-dot-g { background: #10B981; }
+
+/* Main content */
+.wt-body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 460px;
+}
+
+/* Sidebar */
+.wt-sidebar {
+  background: rgba(17,24,39,0.02);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+}
+.wt-sidebar-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-faint);
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+.wt-deal {
+  padding: 10px 16px;
+  cursor: default;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+}
+.wt-deal.active {
+  background: rgba(0,194,199,0.05);
+  border-left-color: var(--accent-light);
+}
+.wt-deal-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.wt-deal-meta {
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+.wt-deal-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+.wt-status-ok { background: rgba(16,185,129,0.12); color: #047857; }
+.wt-status-warn { background: rgba(245,158,11,0.10); color: #D97706; }
+.wt-status-risk { background: rgba(239,68,68,0.08); color: #B91C1C; }
+
+/* Main panel */
+.wt-main {
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Steps - each step is a phase of the animation */
+.wt-step {
+  position: absolute;
+  inset: 0;
+  padding: 20px 24px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.wt-step.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Step header */
+.wt-step-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent-light);
+  margin-bottom: 6px;
+}
+.wt-step-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* Deal card inside main */
+.wt-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.wt-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.wt-card-deal {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.wt-card-stage {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(29,78,216,0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Evidence rows */
+.wt-evidence-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--text-mid);
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateX(-8px);
+}
+.wt-evidence-row.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.wt-ev-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.wt-ev-ok { background: rgba(16,185,129,0.15); color: #047857; }
+.wt-ev-warn { background: rgba(245,158,11,0.10); color: #D97706; }
+.wt-ev-miss { background: rgba(239,68,68,0.08); color: #B91C1C; }
+
+/* Diagnostic code */
+.wt-diag {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 12px;
+  opacity: 0;
+}
+.wt-diag.show {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.wt-diag-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: #B91C1C;
+  margin-bottom: 4px;
+}
+.wt-diag-text {
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* Suggestion box */
+.wt-suggest {
+  background: rgba(0,194,199,0.05);
+  border: 1px solid rgba(0,194,199,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+.wt-suggest-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent-light);
+  margin-bottom: 8px;
+}
+.wt-suggest-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.5;
+  opacity: 0;
+}
+.wt-suggest-item.show {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.wt-suggest-arrow {
+  color: var(--accent-light);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.wt-suggest-field {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+/* Confirm button */
+.wt-confirm-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  opacity: 0;
+}
+.wt-confirm-bar.show {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.wt-btn-confirm {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-body);
+  cursor: default;
+}
+.wt-btn-confirm.clicked {
+  background: #059669;
+}
+.wt-btn-dismiss {
+  padding: 8px 16px;
+  background: transparent;
+  color: #9CA3AF;
+  border: 1px solid var(--border-md);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: default;
+}
+
+/* Write-back confirmation */
+.wt-writeback {
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+.wt-writeback-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #047857;
+  margin-bottom: 8px;
+}
+.wt-writeback-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--text-mid);
+  opacity: 0;
+}
+.wt-writeback-row.show {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.wt-wb-check { color: #047857; font-weight: 700; }
+
+/* Audit log */
+.wt-audit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6B7280;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(17,24,39,0.02);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  opacity: 0;
+}
+.wt-audit.show {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* Progress bar at bottom */
+.wt-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 12px 24px 6px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+}
+.wt-prog-step {
+  flex: 1;
+  height: 4px;
+  background: rgba(17,24,39,.06);
+  border-radius: 2px;
+  margin: 0 2px;
+  position: relative;
+  cursor: pointer;
+}
+.wt-prog-step::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: var(--accent-light);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.wt-prog-step.done::after { width: 100%; }
+.wt-prog-step.current::after {
+  width: 100%;
+  animation: progFill 4s linear forwards;
+}
+@keyframes progFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.wt-prog-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 24px 0;
+  background: var(--bg-raised);
+}
+.wt-prog-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.wt-prog-label.active { color: var(--accent-light); }
+.wt-prog-label.done { color: var(--text-mid); }
+
+/* Replay button */
+.wt-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1B2A4A;
+  background: var(--accent-bg);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.wt-replay.show { opacity: 1; pointer-events: auto; }
+.wt-replay:hover { background: rgba(0,194,199,0.05); }
+
+/* Footer controls row */
+.wt-footer-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  gap: 10px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .wt-body { grid-template-columns: 1fr; }
+  .wt-sidebar { display: none; }
+  .wt-main { min-height: 420px; }
+}
+</style>
+</head>
+<body style="background:#F6F7FA;padding:40px 16px;">
+
+<style>
+.demo-nav {
+  max-width: 960px; margin: 0 auto 24px; padding: 0 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(17,24,39,.08);
+  font-family: 'Inter', system-ui, sans-serif;
+  flex-wrap: wrap; gap: 10px;
+}
+.demo-nav-left {
+  display: flex; align-items: center; gap: 16px;
+}
+.demo-nav-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800; font-size: 18px; color: #0B1220;
+  text-decoration: none; letter-spacing: -.4px;
+}
+.demo-nav-logo .dot { color: #1B2A4A; }
+.demo-nav-back {
+  font-size: 13px; font-weight: 600; color: #6B7280;
+  text-decoration: none; transition: color .2s;
+}
+.demo-nav-back:hover { color: #1B2A4A; }
+.demo-nav-right {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #9CA3AF;
+}
+.demo-nav-link {
+  font-size: 13px; font-weight: 700; color: #4B5563;
+  text-decoration: none; padding: 5px 10px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-nav-link:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
+@media (max-width: 600px) {
+  .demo-nav { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="demo-nav">
+  <div class="demo-nav-left">
+    <a href="/" class="demo-nav-logo"><img src="/logo-light.svg" alt="PROOF" style="height:22px;width:auto;" /></a>
+    <a href="/" class="demo-nav-back">&larr; Back to site</a>
+  </div>
+  <div class="demo-nav-right">
+    <span>Also see:</span>
+    <a href="/before-after" class="demo-nav-link">Before &amp; After</a><a href="/system-flow" class="demo-nav-link">System Flow</a>
+  </div>
+</div>
+
+
+<div class="walkthrough-container" id="walkthrough">
+  <!-- Top bar -->
+  <div class="wt-topbar">
+    <div class="wt-topbar-left">
+      <img src="/logo-light.svg" alt="PROOF" style="height:20px;width:auto;" />
+      <span class="wt-badge"><span class="wt-badge-dot"></span> Deal Walkthrough</span>
+    </div>
+    <div class="wt-topbar-right">
+      <div class="wt-dot wt-dot-r"></div>
+      <div class="wt-dot wt-dot-y"></div>
+      <div class="wt-dot wt-dot-g"></div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="wt-body">
+    <!-- Sidebar -->
+    <div class="wt-sidebar">
+      <div class="wt-sidebar-label">Pipeline Review</div>
+      <div class="wt-deal active" id="deal-meridian">
+        <div class="wt-deal-name">Meridian Systems</div>
+        <div class="wt-deal-meta">Stage 3 · £185K · Jun 26</div>
+        <div class="wt-deal-status wt-status-warn">2 gaps found</div>
+      </div>
+      <div class="wt-deal">
+        <div class="wt-deal-name">Apex Partners</div>
+        <div class="wt-deal-meta">Stage 4 · £320K · May 26</div>
+        <div class="wt-deal-status wt-status-ok">Evidence complete</div>
+      </div>
+      <div class="wt-deal">
+        <div class="wt-deal-name">Northvale Group</div>
+        <div class="wt-deal-meta">Stage 2 · £95K · Jul 26</div>
+        <div class="wt-deal-status wt-status-risk">3 gaps · stalled</div>
+      </div>
+      <div class="wt-deal">
+        <div class="wt-deal-name">Prism Health</div>
+        <div class="wt-deal-meta">Stage 3 · £210K · Jun 26</div>
+        <div class="wt-deal-status wt-status-ok">Evidence complete</div>
+      </div>
+    </div>
+
+    <!-- Main panel with animated steps -->
+    <div class="wt-main">
+
+      <!-- STEP 1: Evidence Scan -->
+      <div class="wt-step active" id="step1">
+        <div class="wt-step-label">Step 1 · Evidence Scan</div>
+        <div class="wt-step-title">Evidence scan</div>
+        <div class="wt-card">
+          <div class="wt-card-header">
+            <span class="wt-card-deal">Meridian Systems</span>
+            <span class="wt-card-stage">Stage 3 · Validation</span>
+          </div>
+          <div class="wt-evidence-row" data-delay="600"><span class="wt-ev-icon wt-ev-ok">✓</span> Problem confirmed <span style="color:#6B7280; margin-left:auto; font-size:11px;">call transcript · 18 Feb</span></div>
+          <div class="wt-evidence-row" data-delay="900"><span class="wt-ev-icon wt-ev-ok">✓</span> Champion identified <span style="color:#6B7280; margin-left:auto; font-size:11px;">CRM contact role</span></div>
+          <div class="wt-evidence-row" data-delay="1200"><span class="wt-ev-icon wt-ev-ok">✓</span> ICP match verified <span style="color:#6B7280; margin-left:auto; font-size:11px;">firmographic data</span></div>
+          <div class="wt-evidence-row" data-delay="1500"><span class="wt-ev-icon wt-ev-ok">✓</span> Budget range discussed <span style="color:#6B7280; margin-left:auto; font-size:11px;">call transcript · 20 Feb</span></div>
+          <div class="wt-evidence-row" data-delay="1800"><span class="wt-ev-icon wt-ev-warn">!</span> Single-threaded — 1 active stakeholder <span style="color:#6B7280; margin-left:auto; font-size:11px;">CRM contacts</span></div>
+          <div class="wt-evidence-row" data-delay="2100"><span class="wt-ev-icon wt-ev-miss">✗</span> No decision process documented <span style="color:#6B7280; margin-left:auto; font-size:11px;">—</span></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Diagnostic -->
+      <div class="wt-step" id="step2">
+        <div class="wt-step-label">Step 2 · Diagnostics</div>
+        <div class="wt-step-title">Gaps detected</div>
+        <div class="wt-card">
+          <div class="wt-card-header">
+            <span class="wt-card-deal">Meridian Systems</span>
+            <span class="wt-card-stage">Stage 3 · Validation</span>
+          </div>
+          <div class="wt-evidence-row show"><span class="wt-ev-icon wt-ev-ok">✓</span> 4 of 6 criteria met</div>
+          <div class="wt-evidence-row show"><span class="wt-ev-icon wt-ev-warn">!</span> Single-threaded — champion risk</div>
+          <div class="wt-evidence-row show"><span class="wt-ev-icon wt-ev-miss">✗</span> Decision process missing</div>
+        </div>
+        <div class="wt-diag" id="diag1" data-delay="800">
+          <div class="wt-diag-code">DL-09 · Single Thread Risk</div>
+          <div class="wt-diag-text">Only 1 active stakeholder across touchpoints. Recommend mapping buying group before Stage 4 to reduce late-stage stalls.</div>
+        </div>
+        <div class="wt-diag" id="diag2" data-delay="1400">
+          <div class="wt-diag-code">DL-14 · Decision Process Undefined</div>
+          <div class="wt-diag-text">No evidence of approval chain, procurement steps, or legal timeline. Stage 3 requires a documented decision process before advancing.</div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Suggestion -->
+      <div class="wt-step" id="step3">
+        <div class="wt-step-label">Step 3 · Suggested Write-back</div>
+        <div class="wt-step-title">Suggested updates (you confirm)</div>
+        <div class="wt-suggest">
+          <div class="wt-suggest-label">Suggested CRM Updates</div>
+          <div class="wt-suggest-item" data-delay="500">
+            <span class="wt-suggest-arrow">→</span>
+            <div>Add next step: <strong style="color:#0B1220;">"Map buying group — identify economic buyer + procurement contact"</strong>
+              <div class="wt-suggest-field">Field: Next_Step__c · Source: DL-09 diagnostic</div>
+            </div>
+          </div>
+          <div class="wt-suggest-item" data-delay="1000">
+            <span class="wt-suggest-arrow">→</span>
+            <div>Flag: <strong style="color:#0B1220;">"Decision process — requires documentation before Stage 4 advancement"</strong>
+              <div class="wt-suggest-field">Field: Evidence_Gap__c · Source: DL-14 diagnostic</div>
+            </div>
+          </div>
+          <div class="wt-suggest-item" data-delay="1500">
+            <span class="wt-suggest-arrow">→</span>
+            <div>Hold stage at: <strong style="color:#0B1220;">Stage 3 — Validation</strong> (2 criteria unmet)
+              <div class="wt-suggest-field">Field: StageName · Reason: evidence gate not passed</div>
+            </div>
+          </div>
+        </div>
+        <div class="wt-confirm-bar" id="confirmBar" data-delay="2200">
+          <button class="wt-btn-confirm" id="btnConfirm">Confirm & Write Back</button>
+          <button class="wt-btn-dismiss">Dismiss</button>
+          <span style="font-size:11px; color:#6B7280; margin-left: auto;">3 updates pending</span>
+        </div>
+      </div>
+
+      <!-- STEP 4: Write-back -->
+      <div class="wt-step" id="step4">
+        <div class="wt-step-label">Step 4 · Written Back</div>
+        <div class="wt-step-title">Written back + logged</div>
+        <div class="wt-writeback">
+          <div class="wt-writeback-label">Written to Salesforce</div>
+          <div class="wt-writeback-row" data-delay="500"><span class="wt-wb-check">✓</span> Next step updated — "Map buying group"</div>
+          <div class="wt-writeback-row" data-delay="900"><span class="wt-wb-check">✓</span> Evidence gap flagged — decision process</div>
+          <div class="wt-writeback-row" data-delay="1300"><span class="wt-wb-check">✓</span> Stage held at Validation — gate not passed</div>
+        </div>
+        <div class="wt-audit" id="auditLog" data-delay="1800">
+          2026-02-25 14:32:07 UTC · Confirmed by J. Morgan (Manager)<br>
+          3 fields updated · Source: PROOF diagnostic DL-09, DL-14<br>
+          Audit ID: PRF-2026-00847
+        </div>
+        <div class="wt-audit" style="margin-top:12px;padding:12px 14px;background:rgba(29,78,216,0.10);border:1px solid rgba(29,78,216,0.22);border-radius:8px;" id="forecastImpact" data-delay="2100">
+  <p style="font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#1D4ED8;">Forecast impact</p>
+  <p style="margin-top:6px;font-size:12px;color:#4B5563;line-height:1.5;">
+    Evidence-backed coverage: <strong style="color:#0B1220;">78%</strong> · Exceptions routed: <strong style="color:#D97706;">22%</strong>
+  </p>
+</div>
+<div style="margin-top: 16px; padding: 12px 14px; background: rgba(0,194,199,0.05); border: 1px solid rgba(0,194,199,0.15); border-radius: 8px; opacity:0;" id="nextDeal" data-delay="2400">
+          <p style="font-size: 12px; font-weight: 700; color: var(--accent-light);">Next: Northvale Group — 3 gaps · stalled 14 days</p>
+          <p style="font-size: 11px; color: #9CA3AF; margin-top: 2px;">PROOF reviews every deal — you only review exceptions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="wt-progress" id="progressBar">
+    <div class="wt-prog-step current" data-step="0"></div>
+    <div class="wt-prog-step" data-step="1"></div>
+    <div class="wt-prog-step" data-step="2"></div>
+    <div class="wt-prog-step" data-step="3"></div>
+  </div>
+  <div class="wt-prog-labels" id="progressLabels">
+    <span class="wt-prog-label active" data-step="0">Scan</span>
+    <span class="wt-prog-label" data-step="1">Diagnose</span>
+    <span class="wt-prog-label" data-step="2">Suggest</span>
+    <span class="wt-prog-label" data-step="3">Write Back</span>
+  </div>
+
+  <!-- Footer controls -->
+  <div class="wt-footer-controls">
+    <button class="wt-replay" id="replayBtn" onclick="startWalkthrough()">↻ Replay</button>
+  </div>
+</div>
+
+<script>
+const STEP_DURATION = 4000;
+let currentStep = 0;
+let timer = null;
+let isPaused = false;
+
+function showStep(n) {
+  // Update steps
+  document.querySelectorAll('.wt-step').forEach((s, i) => {
+    s.classList.toggle('active', i === n);
+  });
+
+  // Update progress
+  document.querySelectorAll('.wt-prog-step').forEach((p, i) => {
+    p.classList.remove('current', 'done');
+    if (i < n) p.classList.add('done');
+    if (i === n) p.classList.add('current');
+  });
+  document.querySelectorAll('.wt-prog-label').forEach((l, i) => {
+    l.classList.remove('active', 'done');
+    if (i < n) l.classList.add('done');
+    if (i === n) l.classList.add('active');
+  });
+
+  // Animate elements within step
+  const step = document.getElementById('step' + (n + 1));
+  if (!step) return;
+
+  // Evidence rows
+  step.querySelectorAll('.wt-evidence-row[data-delay]').forEach(row => {
+    row.classList.remove('show');
+    setTimeout(() => row.classList.add('show'), parseInt(row.dataset.delay));
+  });
+
+  // Diagnostics
+  step.querySelectorAll('.wt-diag[data-delay]').forEach(d => {
+    d.classList.remove('show');
+    setTimeout(() => d.classList.add('show'), parseInt(d.dataset.delay));
+  });
+
+  // Suggestions
+  step.querySelectorAll('.wt-suggest-item[data-delay]').forEach(s => {
+    s.classList.remove('show');
+    setTimeout(() => s.classList.add('show'), parseInt(s.dataset.delay));
+  });
+
+  // Confirm bar
+  const cb = step.querySelector('.wt-confirm-bar[data-delay]');
+  if (cb) {
+    cb.classList.remove('show');
+    setTimeout(() => {
+      cb.classList.add('show');
+      // Auto-click confirm after a beat
+      setTimeout(() => {
+        const btn = document.getElementById('btnConfirm');
+        if (btn) {
+          btn.classList.add('clicked');
+          btn.textContent = '✓ Confirmed';
+        }
+      }, 1000);
+    }, parseInt(cb.dataset.delay));
+  }
+
+  // Write-back rows
+  step.querySelectorAll('.wt-writeback-row[data-delay]').forEach(r => {
+    r.classList.remove('show');
+    setTimeout(() => r.classList.add('show'), parseInt(r.dataset.delay));
+  });
+
+  // Audit log
+  const audit = step.querySelector('.wt-audit[data-delay]');
+  if (audit) {
+    audit.classList.remove('show');
+    setTimeout(() => audit.classList.add('show'), parseInt(audit.dataset.delay));
+  }
+
+  // Forecast impact (same .show pattern)
+  const fi = step.querySelector('#forecastImpact');
+  if (fi) {
+    fi.classList.remove('show');
+    setTimeout(() => fi.classList.add('show'), parseInt(fi.dataset.delay));
+  }
+
+  // Next deal prompt
+  const nd = step.querySelector('[data-delay]#nextDeal');
+  if (nd) {
+    nd.style.opacity = '0';
+    setTimeout(() => { nd.style.opacity = '1'; nd.style.transition = 'opacity 0.4s'; }, parseInt(nd.dataset.delay));
+  }
+
+  // Show replay on last step
+  const replay = document.getElementById('replayBtn');
+  if (n === 3) {
+    setTimeout(() => replay.classList.add('show'), 3000);
+  } else {
+    replay.classList.remove('show');
+  }
+}
+
+function nextStep() {
+  if (currentStep < 3) {
+    currentStep++;
+    showStep(currentStep);
+    timer = setTimeout(nextStep, STEP_DURATION);
+  }
+}
+
+function startWalkthrough() {
+  currentStep = 0;
+  clearTimeout(timer);
+
+  // Reset confirm button
+  const btn = document.getElementById('btnConfirm');
+  if (btn) { btn.classList.remove('clicked'); btn.textContent = 'Confirm & Write Back'; }
+
+  document.getElementById('replayBtn').classList.remove('show');
+  showStep(0);
+  timer = setTimeout(nextStep, STEP_DURATION);
+}
+
+// Click on progress to jump
+document.querySelectorAll('.wt-prog-step, .wt-prog-label').forEach(el => {
+  el.addEventListener('click', () => {
+    const s = parseInt(el.dataset.step);
+    clearTimeout(timer);
+    currentStep = s;
+    showStep(s);
+    if (s < 3) timer = setTimeout(nextStep, STEP_DURATION);
+  });
+});
+
+// Start on load
+startWalkthrough();
+</script>
+
+
+<style>
+.demo-cross-links {
+  max-width: 960px; margin: 20px auto 0; padding: 14px 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: 13px; color: #9CA3AF;
+}
+.demo-cross-links a {
+  font-weight: 700; color: #4B5563; text-decoration: none;
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid rgba(17,24,39,.08); transition: all .15s;
+}
+.demo-cross-links a:hover { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,0.05); }
+.demo-cross-links a.current { color: #1B2A4A; border-color: rgba(0,194,199,.25); background: rgba(0,194,199,.04); pointer-events: none; }
+</style>
+<div class="demo-cross-links">
+  Demo suite: <a href="/walkthrough" class="current">Deal Walkthrough</a>
+  <a href="/before-after">Before &amp; After</a>
+  <a href="/system-flow">System Flow</a>
+</div>
+<!-- Conversion footer -->
+<div style="max-width:900px;margin:32px auto 0;padding:20px 28px;background: rgba(0,194,199,0.05);border:1px solid rgba(0,194,199,0.15);border-radius:12px;text-align:center;font-family:'Inter',system-ui,sans-serif;">
+  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0B1220;">This is what we're building.</p>
+  <p style="margin:0 0 14px;font-size:13px;color:#6B7280;">PROOF reviews every deal — you only review exceptions. Launching July 2026.</p>
+  <a href="/#join" style="display:inline-block;padding:10px 20px;background:#1B2A4A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Get Early Access</a>
+  <span style="margin:0 12px;color:#D1D5DB;">|</span>
+  <a href="/blog" style="color:#1B2A4A;font-size:13px;font-weight:600;text-decoration:none;">Read the series &rarr;</a>
+</div>
+
+</body>
+</html>
