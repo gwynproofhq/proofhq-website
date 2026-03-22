@@ -995,6 +995,7 @@ p {
   color: var(--text);
   font: inherit;
 }
+.field select option { background: #0d171d; color: var(--text); }
 .field textarea { min-height: 120px; resize: vertical; }
 .field input::placeholder, .field textarea::placeholder { color: #83979a; }
 .form-note { margin-top: 14px; }
