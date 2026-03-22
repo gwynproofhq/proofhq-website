@@ -9,7 +9,7 @@
   --line-strong: rgba(143, 188, 191, 0.24);
   --text: #ebf3f4;
   --muted: #9fb3b6;
-  --teal: #20d6bc;
+  --teal: #00C2C7;
   --teal-soft: rgba(32, 214, 188, 0.12);
   --amber: #f7b955;
   --red: #ff6b6b;
@@ -28,7 +28,7 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(32,214,188,0.08), transparent 32%),
+    radial-gradient(circle at top left, rgba(0,194,199,0.08), transparent 32%),
     radial-gradient(circle at 90% 10%, rgba(247,185,85,0.06), transparent 24%),
     linear-gradient(180deg, #061015 0%, #081218 52%, #071015 100%);
   color: var(--text);
@@ -120,8 +120,8 @@ p {
   display: inline-grid;
   place-items: center;
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(32,214,188,0.24), rgba(32,214,188,0.09));
-  border: 1px solid rgba(32,214,188,0.26);
+  background: linear-gradient(180deg, rgba(0,194,199,0.24), rgba(0,194,199,0.09));
+  border: 1px solid rgba(0,194,199,0.26);
   color: var(--text);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
 }
@@ -154,8 +154,8 @@ p {
 .btn:hover { transform: translateY(-1px); }
 .btn-primary {
   color: #071015;
-  background: linear-gradient(180deg, #3cf1d4, #1ed0b6);
-  box-shadow: 0 10px 30px rgba(32,214,188,0.24);
+  background: linear-gradient(180deg, #1ae0d4, #00adb2);
+  box-shadow: 0 10px 30px rgba(0,194,199,0.24);
 }
 .btn-secondary {
   color: var(--text);
@@ -278,7 +278,7 @@ p {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.05);
 }
-.side-card.active { border-color: rgba(32,214,188,0.24); background: rgba(32,214,188,0.08); }
+.side-card.active { border-color: rgba(0,194,199,0.24); background: rgba(0,194,199,0.08); }
 .side-card strong, .score-pill, .mock-scorecard strong, .playbook-rule strong, .inspection-block strong { display: block; }
 .side-card span, .meta, .playbook-rule span, .inspection-block span, .mini-feature-list p, .cred-points span { color: var(--muted); }
 .side-card strong { margin-bottom: 4px; font-size: 0.96rem; }
@@ -305,8 +305,8 @@ p {
 .score-pill {
   min-width: 90px;
   padding: 12px 16px;
-  background: rgba(32,214,188,0.12);
-  border: 1px solid rgba(32,214,188,0.2);
+  background: rgba(0,194,199,0.12);
+  border: 1px solid rgba(0,194,199,0.2);
   color: #b9f2ea;
   font-weight: 800;
 }
@@ -382,7 +382,7 @@ p {
   width: 18px; height: 18px; border-radius: 50%;
   top: 3px; left: 4px; background: white;
 }
-.toggle.on { background: rgba(32,214,188,0.34); }
+.toggle.on { background: rgba(0,194,199,0.34); }
 .toggle.on::after { left: 20px; background: var(--teal); }
 .mini-status.pass, .rule-status, .playbook-rule.pass .rule-status { background: rgba(69,212,131,0.12); color: #bdf4d2; }
 .mini-status.gap, .playbook-rule.gap .rule-status { background: rgba(255,107,107,0.12); color: #ffd0d0; }
@@ -426,7 +426,7 @@ p {
 .compare-card-highlight,
 .before-after-card.highlight,
 .category-card-proof {
-  border-color: rgba(32,214,188,0.2);
+  border-color: rgba(0,194,199,0.2);
   background: linear-gradient(180deg, rgba(19,33,38,0.98), rgba(11,24,29,0.95));
 }
 .two-col-feature {
@@ -513,7 +513,7 @@ p {
 }
 .cred-points strong { display: block; margin-bottom: 6px; }
 .cta-band {
-  background: radial-gradient(circle at top, rgba(32,214,188,0.10), transparent 35%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  background: radial-gradient(circle at top, rgba(0,194,199,0.10), transparent 35%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
 }
 .cta-grid { grid-template-columns: minmax(0, 1fr) minmax(360px, 440px); align-items: start; }
 .cta-points {
@@ -552,8 +552,8 @@ p {
 .early-access-form input:focus,
 .early-access-form select:focus,
 .early-access-form textarea:focus {
-  border-color: rgba(32,214,188,0.34);
-  box-shadow: 0 0 0 4px rgba(32,214,188,0.12);
+  border-color: rgba(0,194,199,0.34);
+  box-shadow: 0 0 0 4px rgba(0,194,199,0.12);
 }
 .form-note, .form-success { font-size: 0.87rem; }
 .form-success { color: #b9f2ea; min-height: 1.2em; }
@@ -621,8 +621,8 @@ p {
   border-radius: 999px;
   color: #071015;
   font-weight: 800;
-  background: linear-gradient(180deg, #3cf1d4, #1ed0b6);
-  box-shadow: 0 12px 36px rgba(32,214,188,0.25);
+  background: linear-gradient(180deg, #1ae0d4, #00adb2);
+  box-shadow: 0 12px 36px rgba(0,194,199,0.25);
 }
 
 .reveal {
