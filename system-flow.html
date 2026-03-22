@@ -528,7 +528,7 @@
 
 <div class="demo-nav">
   <div class="demo-nav-left">
-    <a href="/" class="demo-nav-logo"><img src="/logo-light.svg" alt="PROOF" style="height:22px;width:auto;" /></a>
+    <a href="/" class="demo-nav-logo"><img src="/logo-dark.svg" alt="PROOF" style="height:22px;width:auto;" /></a>
     <a href="/" class="demo-nav-back">&larr; Back to site</a>
   </div>
   <div class="demo-nav-right">
@@ -542,7 +542,7 @@
   <!-- Top bar -->
   <div class="sf-topbar">
     <div class="sf-topbar-left">
-      <img src="/logo-light.svg" alt="PROOF" style="height:20px;width:auto;" />
+      <img src="/logo-dark.svg" alt="PROOF" style="height:20px;width:auto;" />
       <span class="sf-badge"><span class="sf-badge-dot"></span> System Flow</span>
     </div>
     <div style="display:flex;gap:6px;">
@@ -778,12 +778,14 @@
     <div class="sf-prog-seg" data-phase="1"><div class="sf-prog-fill"></div></div>
     <div class="sf-prog-seg" data-phase="2"><div class="sf-prog-fill"></div></div>
     <div class="sf-prog-seg" data-phase="3"><div class="sf-prog-fill"></div></div>
+    <div class="sf-prog-seg" data-phase="4"><div class="sf-prog-fill"></div></div>
   </div>
   <div class="sf-prog-labels">
-    <span class="sf-prog-label active" data-phase="0">Sources</span>
-    <span class="sf-prog-label" data-phase="1">Engine</span>
-    <span class="sf-prog-label" data-phase="2">Delivery</span>
-    <span class="sf-prog-label" data-phase="3">Write-back</span>
+    <span class="sf-prog-label active" data-phase="0">Playbook</span>
+    <span class="sf-prog-label" data-phase="1">Sources</span>
+    <span class="sf-prog-label" data-phase="2">Engine</span>
+    <span class="sf-prog-label" data-phase="3">Delivery</span>
+    <span class="sf-prog-label" data-phase="4">Write-back</span>
   </div>
 
   <div class="sf-footer-controls">
@@ -802,7 +804,7 @@ let pt = null;
 function showPhase(n) {
   cp = n;
   const phases = document.querySelectorAll('.sf-phase');
-  const conns = ['conn1','conn2','conn3'];
+  const conns = ['conn0','conn1','conn2','conn3'];
 
   phases.forEach((p, i) => {
     if (i <= n) p.classList.add('visible');
@@ -810,11 +812,11 @@ function showPhase(n) {
   });
   conns.forEach((id, i) => {
     const el = document.getElementById(id);
-    if (i < n) el.classList.add('visible');
-    else el.classList.remove('visible');
+    if (el && i < n) el.classList.add('visible');
+    else if (el) el.classList.remove('visible');
   });
 
-  const phase = document.getElementById('phase' + (n + 1));
+  const phase = document.getElementById('phase' + n);
   if (!phase) return;
 
   // Animate children
@@ -845,7 +847,7 @@ function showPhase(n) {
   });
 
   const replay = document.getElementById('sfReplay');
-  if (n === 3) setTimeout(() => replay.classList.add('show'), 3200);
+  if (n === 4) setTimeout(() => replay.classList.add('show'), 3200);
   else replay.classList.remove('show');
 }
 
@@ -867,7 +869,7 @@ document.querySelectorAll('.sf-prog-seg, .sf-prog-label').forEach(el => {
     const p = parseInt(el.dataset.phase);
     clearTimeout(pt);
     showPhase(p);
-    if (p < 3) pt = setTimeout(nextPhase, PD);
+    if (p < 4) pt = setTimeout(nextPhase, PD);
   });
 });
 
