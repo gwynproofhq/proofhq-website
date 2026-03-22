@@ -48,8 +48,7 @@ button, input, select, textarea { font: inherit; }
   position: relative;
 }
 .muted-band {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-  border-block: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
 }
 .eyebrow {
   display: inline-flex;
