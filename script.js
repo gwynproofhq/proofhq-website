@@ -1,107 +1,137 @@
-// ═══ NAV TOGGLE ═══
-const toggle = document.querySelector('.nav-toggle');
-const mobileNav = document.getElementById('mobile-nav');
-if (toggle && mobileNav) {
-  toggle.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  // Close on link click
-  mobileNav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-    });
-  });
-}
+document.addEventListener('DOMContentLoaded', function () {
 
-// ═══ DROPDOWN (desktop) ═══
-document.querySelectorAll('.dropdown').forEach(d => {
-  const btn = d.querySelector('.dropdown-toggle');
-  if (btn) {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      d.classList.toggle('open');
+  // ═══ NAV TOGGLE ═══
+  var toggle = document.querySelector('.nav-toggle');
+  var mobileNav = document.getElementById('mobile-nav');
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', function () {
+      var open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    mobileNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      });
     });
   }
-});
-document.addEventListener('click', () => {
-  document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-});
 
-// ═══ SCROLL REVEAL ═══
-const reveals = document.querySelectorAll('.reveal');
-if (reveals.length) {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => io.observe(el));
-}
-
-// ═══ TAB CONTROLS ═══
-document.querySelectorAll('.tab-button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const shell = btn.closest('.tab-shell');
-    if (!shell) return;
-    shell.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-    shell.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    const panel = shell.querySelector('#' + btn.dataset.tab);
-    if (panel) panel.classList.add('active');
+  // ═══ DROPDOWN (desktop) ═══
+  document.querySelectorAll('.dropdown').forEach(function (d) {
+    var btn = d.querySelector('.dropdown-toggle');
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        d.classList.toggle('open');
+      });
+    }
   });
-});
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown.open').forEach(function (d) { d.classList.remove('open'); });
+  });
 
-// ═══ FORM SUBMISSIONS ═══
-document.querySelectorAll('.js-form').forEach(form => {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  // ═══ SCROLL REVEAL ═══
+  var reveals = document.querySelectorAll('.reveal');
 
-    const endpoint = form.dataset.endpoint;
-    const status = form.querySelector('.form-status');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    if (!endpoint) {
-      if (status) status.textContent = 'Form endpoint not configured.';
-      return;
+  // Immediately show everything above the fold
+  reveals.forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      el.classList.add('in-view');
     }
+  });
 
-    // Collect form data
-    const data = {};
-    new FormData(form).forEach((val, key) => { data[key] = val; });
+  // Observe the rest for scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    reveals.forEach(function (el) {
+      if (!el.classList.contains('in-view')) {
+        io.observe(el);
+      }
+    });
+  } else {
+    // No IntersectionObserver support — reveal everything
+    reveals.forEach(function (el) { el.classList.add('in-view'); });
+  }
 
-    // Disable button
-    const originalText = submitBtn ? submitBtn.textContent : '';
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-    }
-    if (status) status.textContent = '';
+  // ═══ TAB CONTROLS ═══
+  document.querySelectorAll('.tab-button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var shell = btn.closest('.tab-shell');
+      if (!shell) return;
+      shell.querySelectorAll('.tab-button').forEach(function (b) { b.classList.remove('active'); });
+      shell.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      var panel = shell.querySelector('#' + btn.dataset.tab);
+      if (panel) panel.classList.add('active');
+    });
+  });
 
-    try {
-      const res = await fetch(endpoint, {
+  // ═══ FORM SUBMISSIONS ═══
+  document.querySelectorAll('.js-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var endpoint = form.dataset.endpoint;
+      var status = form.querySelector('.form-status');
+      var submitBtn = form.querySelector('button[type="submit"]');
+
+      if (!endpoint) {
+        if (status) status.textContent = 'Form endpoint not configured.';
+        return;
+      }
+
+      var data = {};
+      new FormData(form).forEach(function (val, key) { data[key] = val; });
+
+      var originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending\u2026';
+      }
+      if (status) status.textContent = '';
+
+      fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      });
-
-      if (res.ok) {
-        if (status) status.textContent = 'Received — we'll be in touch within 48 hours.';
-        status.style.color = '#45d483';
-        form.reset();
-      } else {
-        const err = await res.json().catch(() => ({}));
-        if (status) status.textContent = err.error || 'Something went wrong. Please try again.';
-        status.style.color = '#ff6b6b';
-      }
-    } catch (err) {
-      if (status) status.textContent = 'Network error. Please try again.';
-      status.style.color = '#ff6b6b';
-    }
-
-    // Re-enable button
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
-    }
+      })
+        .then(function (res) {
+          if (res.ok) {
+            if (status) {
+              status.textContent = 'Received \u2014 we\u2019ll be in touch within 48 hours.';
+              status.style.color = '#45d483';
+            }
+            form.reset();
+          } else {
+            res.json().catch(function () { return {}; }).then(function (err) {
+              if (status) {
+                status.textContent = err.error || 'Something went wrong. Please try again.';
+                status.style.color = '#ff6b6b';
+              }
+            });
+          }
+        })
+        .catch(function () {
+          if (status) {
+            status.textContent = 'Network error. Please try again.';
+            status.style.color = '#ff6b6b';
+          }
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        });
+    });
   });
+
 });
