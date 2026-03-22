@@ -641,6 +641,30 @@ p {
 .reveal { animation: reveal-fallback 0s 2s forwards; }
 .reveal.in-view { animation: none; }
 
+/* ═══ HERO META ═══ */
+.hero-meta {
+  margin-top: 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.02em;
+}
+.hero-context {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+.hero-context a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-decoration-color: rgba(0,194,199,0.3);
+  text-underline-offset: 3px;
+}
+.hero-context a:hover {
+  text-decoration-color: var(--teal);
+}
+
 /* ═══ KPI STRIP ═══ */
 .kpi-strip {
   display: flex;
