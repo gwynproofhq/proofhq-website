@@ -425,18 +425,23 @@ p {
 .compare-card-highlight,
 .before-after-card.highlight,
 .category-card-proof {
-  border-color: rgba(0,194,199,0.2);
-  background: linear-gradient(180deg, rgba(19,33,38,0.98), rgba(11,24,29,0.95));
+  border-color: rgba(0,194,199,0.22);
+  border-left: 3px solid var(--teal);
+  background: rgba(0,194,199,0.03);
 }
 .compare-card-highlight h3 { color: var(--teal); }
-.compare-card-highlight ul { color: var(--text); }
-.compare-card-highlight li::before { color: var(--teal); }
-.compare-card-dim {
-  opacity: 0.6;
-  border-color: rgba(255,255,255,0.04);
+.compare-card-muted {
+  border-color: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.01);
 }
-.compare-card-dim h3 { color: var(--dim); }
-.compare-card-dim li::before { color: var(--red); }
+.compare-card-muted h3 { color: var(--dim); }
+.compare-card-muted ul { color: var(--dim); }
+.compare-card ul {
+  padding-left: 16px;
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+}
 .two-col-feature {
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
