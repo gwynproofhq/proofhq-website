@@ -181,7 +181,7 @@ p {
   margin: 4px auto;
 }
 
-.hero { padding-top: 70px; }
+.hero { padding-top: 100px; }
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(460px, 560px);
@@ -654,6 +654,7 @@ p {
   font-size: 0.88rem;
   color: var(--dim);
   line-height: 1.6;
+  white-space: nowrap;
 }
 .hero-context a {
   color: var(--teal);
