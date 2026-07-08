@@ -1,0 +1,28 @@
+/* ===== Option 1a+ — lighter, but with energy =====
+   Additive layer over reveal.css. Keeps the light theme; adds
+   a cyan-lit hero, a gradient CTA (marketing-sanctioned), and
+   floats the evidence table up as the hero object. */
+
+/* cyan-lit hero backdrop */
+.hero{background:linear-gradient(180deg,#E4F5F5 0%,var(--paper) 70%);padding-bottom:124px}
+.hero::before{width:1180px;height:760px;background:radial-gradient(50% 60% at 50% 36%,rgba(0,194,199,.22),rgba(0,194,199,0) 70%)}
+.hero::after{background-image:radial-gradient(rgba(10,139,142,.07) 1px,transparent 1px)}
+
+/* interior-page hero (Method / Partners) gets the same cyan-lit treatment */
+.phero{position:relative;overflow:hidden;background:linear-gradient(180deg,#E4F5F5 0%,var(--paper) 78%);padding-top:80px;padding-bottom:60px}
+.phero>.wrap{position:relative;z-index:2}
+.phero::before{content:"";position:absolute;top:-160px;left:6%;width:900px;height:640px;background:radial-gradient(50% 60% at 40% 42%,rgba(0,194,199,.18),rgba(0,194,199,0) 70%);pointer-events:none;z-index:1}
+.phero::after{content:"";position:absolute;inset:0;z-index:0;background-image:radial-gradient(rgba(10,139,142,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-mask:radial-gradient(80% 70% at 30% 0%,#000,transparent 76%);mask:radial-gradient(80% 70% at 30% 0%,#000,transparent 76%);pointer-events:none}
+
+/* cyan-gradient primary CTA + glow (brand marketing treatment) */
+.btn-primary{background:#00C2C7;color:#04322f;box-shadow:0 8px 22px -10px rgba(0,194,199,.42)}
+.btn-primary:hover{background:#03B2B6;color:#04322f}
+.nav .btn-primary{box-shadow:0 5px 14px -8px rgba(0,194,199,.42)}
+
+/* float the evidence table up over the hero seam — the centrepiece */
+.ev-float{margin-top:-88px;position:relative;z-index:5;padding-top:0}
+.ev-float .sec-head{margin-bottom:18px}
+.ev-float .evtable{box-shadow:0 44px 96px -46px rgba(15,37,64,.42),0 3px 0 rgba(15,37,64,.03) !important}
+
+@media(max-width:900px){.hero{padding-bottom:104px}.ev-float{margin-top:-70px}}
+@media(max-width:560px){.hero{padding-bottom:84px}.ev-float{margin-top:-52px}}

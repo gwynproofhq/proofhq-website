@@ -1,0 +1,42 @@
+/* ===== PROOF — motion & polish (shared across all pages) ===== */
+
+/* Scroll reveal — selector-based (hidden under .js-anim, which is set in <head>
+   before first paint) so there is never a flash of visible-then-hidden. */
+.js-anim .hero>.wrap>*, .js-anim .phero>.wrap>*, .js-anim .steps>*, .js-anim .grid>*{opacity:0;transform:translateY(16px);transition:opacity .55s cubic-bezier(.22,.61,.36,1),transform .55s cubic-bezier(.22,.61,.36,1)}
+.hero>.wrap.in>*, .phero>.wrap.in>*, .steps.in>*, .grid.in>*{opacity:1;transform:none}
+
+.js-anim :is(.sec-head,.evtable,.ladder,.band .inner,.split,.principles,.benefits,.wrap>.card,.final>.wrap){opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+:is(.sec-head,.evtable,.ladder,.band .inner,.split,.principles,.benefits,.wrap>.card,.final>.wrap).in{opacity:1;transform:none}
+
+/* Hero depth: soft cyan glow + fading dot grid */
+.hero{position:relative;overflow:hidden}
+.hero>.wrap{position:relative;z-index:2}
+.hero::before{content:"";position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:1000px;height:640px;background:radial-gradient(50% 60% at 50% 42%,rgba(0,194,199,.13),rgba(0,194,199,0) 70%);pointer-events:none;z-index:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;background-image:radial-gradient(rgba(15,37,64,.055) 1px,transparent 1px);background-size:24px 24px;-webkit-mask:radial-gradient(92% 72% at 50% 0%,#000,transparent 74%);mask:radial-gradient(92% 72% at 50% 0%,#000,transparent 74%);pointer-events:none}
+
+/* Evidence table — the signature moment */
+.js-anim .evtable .row{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.evtable.in .row{opacity:1;transform:none}
+.js-anim .evtable .status{opacity:0;transform:scale(.9);transition:opacity .42s ease,transform .42s ease}
+.evtable.in .status{opacity:1;transform:none}
+.evtable .thead{position:relative;overflow:hidden}
+.evtable.in .thead::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,194,199,.38),transparent);transform:translateX(-120%);animation:evsweep 1.15s ease .2s 1 forwards}
+@keyframes evsweep{to{transform:translateX(120%)}}
+
+/* Micro-interactions */
+.btn .arr{transition:transform .14s ease}
+.btn:hover .arr{transform:translateX(3px)}
+.feat.card{transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
+.feat.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-float);border-color:var(--slate-300)}
+.nav-links a{position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--proof-cyan);transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
+.nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
+@media(max-width:900px){.nav-links a::after{display:none}}
+
+@media (prefers-reduced-motion: reduce){
+  .js-anim .hero>.wrap>*, .js-anim .phero>.wrap>*, .js-anim .steps>*, .js-anim .grid>*,
+  .js-anim :is(.sec-head,.evtable,.ladder,.band .inner,.split,.principles,.benefits,.wrap>.card,.final>.wrap),
+  .js-anim .evtable .row, .js-anim .evtable .status{opacity:1 !important;transform:none !important;transition:none !important}
+  .evtable.in .thead::after{display:none}
+  html{scroll-behavior:auto}
+}
